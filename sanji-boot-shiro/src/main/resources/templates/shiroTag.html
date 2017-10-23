@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <title>首页</title>
+
+</head>
+<body>
+Hello, <shiro:principal/>, how are you today?
+<shiro:hasRole name="ADMIN">
+    <br />I'm fine, 我拥有管理员角色--<span th:text="${username}"></span>
+</shiro:hasRole>
+<shiro:authenticated>用户已经登录显示此内容<br/></shiro:authenticated><br/>
+<shiro:hasRole name="manager">manager角色登录显示此内容<br/></shiro:hasRole>
+<shiro:hasRole name="admin">admin角色登录显示此内容<br/></shiro:hasRole>
+<shiro:hasRole name="normal">normal角色登录显示此内容<br/></shiro:hasRole><br/>
+
+<shiro:hasAnyRoles name="manager,admin">manager or admin 角色用户登录显示此内容<br/></shiro:hasAnyRoles><br/>
+<shiro:principal/>-显示当前登录用户名<br/><br/>
+<shiro:hasPermission name="add">add权限用户显示此内容<br/></shiro:hasPermission>
+<shiro:hasPermission name="user:query">user:query权限用户显示此内容<br/></shiro:hasPermission>
+<shiro:lacksPermission name="user:query">不具有user:query权限的用户显示此内容 <br/></shiro:lacksPermission>
+</body>
+</html>

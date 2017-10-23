@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <title th:text="${title}">404</title>
+    <!-- 新 Bootstrap 核心 CSS 文件 -->
+    <link th:href="@{/plugins/bootstrap/css/bootstrap-theme.css}" rel="stylesheet"/>
+    <style>
+        .wrap {
+            margin-top: 30px;
+        }
+
+        .box {
+            padding: 6px;
+            margin-bottom: 30px;
+        }
+
+        .box-shares {
+            padding: 16px;
+            background-color: #fcf8e3;
+            border: 1px solid #fbeed5;
+            border-radius: 3px;
+        }
+
+        .error {
+            margin: 0 auto;
+            text-align: center;
+            max-width: 360px;
+        }
+    </style>
+</head>
+<body>
+<div class="wrap">
+    <div class="container">
+        <div class="row ">
+            <div class=" col-sm-12 ">
+                <div class="box   error">
+                    <div class="box-shares">
+
+                        <p th:text="'当前页面路径：'+${url}"></p>
+                        <br />
+                        <p th:text="'错误消息：'+${exception.message}"></p>
+                        <br />
+                        <p>⁽⁽٩(๑˃̶͈̀ ᗨ ˂̶͈́)۶⁾⁾</p>
+                        <br />
+                        该页面不存在 <a href="javascript:history.go(-1);">点击回家</a> <br />
+                        <br />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

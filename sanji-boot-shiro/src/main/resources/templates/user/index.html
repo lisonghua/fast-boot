@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <title>用户管理</title>
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport"/>
+    <link rel="stylesheet" href="/plugins/bootstrap/css/bootstrap.css"/>
+    <link href="//cdn.bootcss.com/bootstrap-select/1.10.0/css/bootstrap-select.min.css" rel="stylesheet"/>
+    <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet"/>
+    <link href="//cdn.bootcss.com/ionicons/2.0.1/css/ionicons.min.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="/plugins/adminLTE/css/AdminLTE.css"/>
+    <link rel="stylesheet" href="/plugins/adminLTE/css/skins/skin-blue.css"/>
+    <style>
+        th {
+            background-color: #f1f1f1;
+        }
+
+        th, td {
+            font-size: 12px;
+        }
+
+        .box-body {
+            padding: 10px 0px;
+        }
+    </style>
+</head>
+<body>
+<div  id="app">
+<form @submit.prevent="search" class="form-inline">
+    <div class="form-group">
+        <input id="loginName" type="text" class="form-control" name="loginName" placeholder="用户名">
+    </div>
+    <button type="submit" class="btn btn-primary">搜索</button>
+</form>
+<div class="box-body table-responsive">
+    <table class="table table-bordered table-hover" id="userTable">
+        <thead>
+        <tr>
+            <th>序号</th>
+            <th>用户名</th>
+            <th>昵称</th>
+            <th>角色</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr v-for="(item,index) in result">
+            <td>{{index+1}}</td>
+            <td>{{item.loginName}}</td>
+            <td>{{item.nickname}}</td>
+            <td>{{transRoles(item.roleSet)}}</td>
+        </tr>
+        </tbody>
+    </table>
+    <nav class="pull-right">
+        <ul class="pagination">
+            <li v-if="showFirst">
+                <a @click.prevent="pageIndexClick(--pageCurrent)" href="#" aria-label="Previous">
+                    <span aria-hidden="true">&laquo;</span>
+                </a>
+            </li>
+            <li v-for="page in pages" :class="{'active':page==pageCurrent}">
+                <a @click.prevent="pageIndexClick(page)" href="#">{{page}}
+                </a>
+            </li>
+            <li v-if="showLast">
+                <a @click.prevent="pageIndexClick(++pageCurrent)" href="#" aria-label="Next">
+                    <span aria-hidden="true">&raquo;</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</div>
+</div>
+<script src="/plugins/jQuery/jquery-2.2.3.min.js"></script>
+<script src="/plugins/bootstrap/js/bootstrap.js"></script>
+<script src="//cdn.bootcss.com/bootstrap-select/1.10.0/js/bootstrap-select.min.js"></script>
+<script src="//cdn.bootcss.com/bootstrap-select/1.10.0/js/i18n/defaults-zh_CN.min.js"></script>
+<script src="/plugins/vue/vue.min.js"></script>
+<script>
+    (function () {
+        var vm = new Vue({
+            el: "#app",
+            data: {
+                result: [],
+                //分页
+                pageTotal: 1,//总页数
+                pageCurrent: 1,//当前页
+                pageSize: 15,//每页数
+            },
+            created: function () {
+                this.search();
+            },
+            methods: {
+                pageIndexClick: function (index) {
+                    var _this = this;
+                    _this.pageCurrent = index;
+                    vm.search();
+                },
+                search: function () {
+                    var _this = this;
+                    var loginName = $("#loginName").val();
+                    var param = {
+                        loginName: loginName,
+                        pageCurrent: _this.pageCurrent,
+                        pageSize: _this.pageSize
+                    };
+                    $.get("/api/sys/user", param, function (data) {
+                        _this.pageTotal = data.totalPages;
+                        _this.result = data.content;
+                    })
+
+                },
+                transRoles: function (roleSet) {
+                    var name = '';
+                    for (var i = 0; i < roleSet.length; i++) {
+                        name = name + roleSet[i].name + ',';
+                    }
+                    return name.substring(0, name.length - 1);
+                }
+            },
+            computed: {
+                pages: function () {
+                    var left = 1;
+                    var right = this.pageTotal;
+                    var ar = [];
+                    if (this.pageTotal >= 11) {
+                        if (this.pageCurrent > 5
+                            && this.pageCurrent < this.pageTotal - 4) {
+                            left = this.pageCurrent - 5;
+                            right = this.pageCurrent + 4;
+                        } else {
+                            if (this.pageCurrent <= 5) {
+                                left = 1;
+                                right = 10;
+                            } else {
+                                right = this.pageTotal;
+                                left = this.pageTotal - 9;
+                            }
+                        }
+                    }
+                    while (left <= right) {
+                        ar.push(left);
+                        left++;
+                    }
+                    return ar;
+                },
+                showLast: function () {
+                    if (this.pageCurrent == this.pageTotal) {
+                        return false;
+                    }
+                    return true;
+                },
+                showFirst: function () {
+                    if (this.pageCurrent == 1) {
+                        return false;
+                    }
+                    return true;
+                }
+            }
+        })
+    })();
+</script>
+</body>
+</html>

@@ -1,0 +1,108 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta content="IE=edge" http-equiv="X-UA-Compatible" />
+    <title>角色管理</title>
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport" />
+    <link href="/plugins/bootstrap/css/bootstrap.css " rel="stylesheet" />
+    <link href="/plugins/bootstrap/css/bootstrap-theme.css" rel="stylesheet" />
+    <link href="/plugins/layui/css/layui.css" rel="stylesheet" />
+    <link href="/plugins/adminLTE/css/AdminLTE.css" rel="stylesheet" />
+    <link href="/plugins/adminLTE/css/skins/_all-skins.css" rel="stylesheet" />
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css"/>
+    <link href="/dists/css/default.css" rel="stylesheet" />
+</head>
+<body>
+<div class="container-fluid" id="app">
+
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="btn-groups">
+
+                <button class="layui-btn layui-btn-normal layui-btn-small layui-btn-radius glyphicon glyphicon-refresh" v-on:click="load">&nbsp;刷新
+                </button>
+
+                <shiro:hasPermission name="sys:role:add">
+                <button class="layui-btn  layui-btn-small  layui-btn-radius glyphicon glyphicon-plus" v-on:click="add">
+                    &nbsp;添加
+                </button>
+                </shiro:hasPermission>
+                <shiro:hasPermission name="sys:role:edit">
+                <button class="layui-btn  layui-btn-small layui-btn-radius glyphicon glyphicon-edit" v-on:click="edit">
+                    &nbsp;编辑
+                </button>
+                </shiro:hasPermission>
+                <shiro:hasPermission name="sys:role:delete">
+                <button class="layui-btn layui-btn-danger  layui-btn-small layui-btn-radius glyphicon glyphicon-trash" v-on:click="deleteObj">
+                    &nbsp;刪除
+                </button>
+                </shiro:hasPermission>
+                <div class="box-tools pull-right">
+                    <form v-on:submit.prevent="search" class="input-group " style="width: 180px;">
+                        <input v-model="name" :name="name" type="text" class="form-control pull-right" placeholder="请输入角色名称" />
+                        <div class="input-group-btn">
+                            <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="box">
+                <div class="box-body table-responsive">
+                    <table class="table table-bordered">
+                        <thead>
+                        <tr>
+                            <th>序号</th>
+                            <th>角色</th>
+                            <th>角色描述</th>
+                            <th>关联人员</th>
+                            <th>创建日期</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr :id="role.id" v-for="(role, index) in roles" v-on:click="select(role)">
+                            <td>{{index+1}}</td>
+                            <td>{{role.name}}</td>
+                            <td>{{role.description}}</td>
+                            <td><a :href="'/page/sys/role/'+role.id+'/user'">查看关联人员</a></td>
+                            <td>{{ role.createTime | date-formatter }}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <nav class="pull-right">
+                    <ul class="pagination">
+                        <li v-if="showFirst">
+                            <a aria-label="Previous" href="#" v-on:click.prevent="pageIndexClick(--pageCurrent)">
+                                <span aria-hidden="true">&laquo;</span>
+                            </a>
+                        </li>
+                        <li :class="{'active':index==pageCurrent}" v-for="index in indexs"><a href="#" v-on:click.prevent="pageIndexClick(index)">{{index}}</a></li>
+                        <li v-if="showLast">
+                            <a aria-label="Next" href="#" v-on:click.prevent="pageIndexClick(++pageCurrent)">
+                                <span aria-hidden="true">&raquo;</span>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+
+        </div>
+    </div>
+</div>
+<script src="/plugins/jQuery/jquery-2.2.3.min.js"></script>
+<script src="/plugins/vue/vue.min.js"></script>
+<script src="/plugins/layer/layer.js"></script>
+<script src="/plugins/moment/moment.min.js"></script>
+<script src="/dists/js/config.js"></script>
+<script src="/dists/js/pages/role_page.js"></script>
+</body>
+</html>

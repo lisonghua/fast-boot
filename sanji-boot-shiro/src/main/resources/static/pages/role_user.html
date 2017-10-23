@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>title</title>
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <link href="/plugins/bootstrap/css/bootstrap.css " rel="stylesheet"/>
+    <link href="/plugins/bootstrap/css/bootstrap-theme.css" rel="stylesheet"/>
+    <link href="/plugins/layui/css/layui.css" rel="stylesheet"/>
+    <link href="/plugins/adminLTE/dist/css/AdminLTE.css" rel="stylesheet"/>
+    <link href="/plugins/adminLTE/dist/css/skins/_all-skins.css" rel="stylesheet"/>
+    <style>
+        .box-body {
+            padding: 0;
+        }
+
+        .btn-groups {
+            min-width: 0;
+            box-sizing: border-box;
+            text-align: left;
+            text-overflow: ellipsis;
+            vertical-align: middle;
+            white-space: nowrap;
+            overflow: hidden;
+            background-color: #f5f7f9;
+            border: 1px solid #e3e8ee;
+            height: 50px;
+            padding: 8px;
+        }
+
+        tbody tr.select {
+            background-color: #f5f7f9;
+        }
+    </style>
+</head>
+<body>
+<div id="app" class="container-fluid">
+    <div class="btn-groups" style="margin-bottom: 10px;">
+        <button class="layui-btn layui-btn-normal layui-btn-small layui-btn-radius glyphicon glyphicon-refresh"
+                @click="load">&nbsp;刷新
+        </button>
+        <button class="layui-btn layui-btn-danger  layui-btn-small layui-btn-radius glyphicon glyphicon-trash"
+                @click="deleteObj">&nbsp;刪除
+        </button>
+        <form @submit.prevent="search" class="form-inline pull-right">
+            <input v-model="name" :name="name" type="text" class="form-control" placeholder="请输入角色名称"/>
+            <button type="submit" class="btn btn-default">搜索</button>
+        </form>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="box">
+                <div class="box-body table-responsive">
+                    <table class="table table-bordered">
+                        <thead>
+                        <tr>
+                            <th>序号</th>
+                            <th>配置人员</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr v-for="(user, index) in users" @click="select(user)" :id="user.id">
+                            <td>{{index+1}}</td>
+                            <td>{{user.loginName}}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <nav class="pull-right">
+                    <ul class="pagination">
+                        <li v-if="showFirst">
+                            <a @click.prevent="pageIndexClick(--pageCurrent)" href="#" aria-label="Previous">
+                                <span aria-hidden="true">&laquo;</span>
+                            </a>
+                        </li>
+                        <li v-for="index in indexs" :class="{'active':index==pageCurrent}"><a
+                                @click.prevent="pageIndexClick(index)" href="#">{{index}}</a></li>
+                        <li v-if="showLast">
+                            <a @click.prevent="pageIndexClick(++pageCurrent)" href="#" aria-label="Next">
+                                <span aria-hidden="true">&raquo;</span>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+
+        </div>
+    </div>
+</div>
+<script src="/plugins/jQuery/jquery-2.2.3.min.js"></script>
+<script src="/plugins/vue/vue.min.js"></script>
+<script src="/plugins/layer/layer.js"></script>
+<script src="/dist/js/config.js"></script>
+<script src="/dist/js/pages/role_user_page.js">
+</script>
+</body>
+</html>

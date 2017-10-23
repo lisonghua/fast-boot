@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta content="IE=edge" http-equiv="X-UA-Compatible"/>
+    <title>后台日志监控</title>
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport"/>
+    <link href="/plugins/bootstrap/css/bootstrap.css " rel="stylesheet"/>
+    <link href="/plugins/bootstrap/css/bootstrap-theme.css" rel="stylesheet"/>
+    <link href="/plugins/layui/css/layui.css" rel="stylesheet"/>
+    <link href="/plugins/adminLTE/css/AdminLTE.css" rel="stylesheet"/>
+    <link href="/plugins/adminLTE/css/skins/_all-skins.css" rel="stylesheet"/>
+
+    <link rel="stylesheet" href="/plugins/daterangepicker/daterangepicker.css"/>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css"/>
+    <link href="/dists/css/default.css" rel="stylesheet"/>
+    <style>
+        .btn-groups {
+            padding-bottom: 0;
+        }
+    </style>
+</head>
+<body>
+<div class="container-fluid" id="app">
+
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="btn-groups ">
+
+                <div class="row">
+                    <div class="col-md-2">
+                        <div class="form-group input-group date ">
+                            <div class="input-group-addon">
+                                <i class="fa fa-calendar"></i>
+                            </div>
+                            <input type="text" class="form-control pull-right" id="datepicker" :value="dataShow"/>
+                        </div>
+                    </div>
+
+                    <div class="col-md-2">
+                        <div class="form-group input-group">
+                            <div class="input-group-addon">
+                                <i class="fa  fa-link"></i>
+                            </div>
+                            <select class="form-control" v-model="requestMethod">
+                                <option value="GET">GET</option>
+                                <option value="POST">POST</option>
+                                <option value="PUT">PUT</option>
+                                <option value="DELETE">DELETE</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="col-md-2">
+                        <form v-on:submit.prevent="search" class="form-group input-group ">
+                            <input v-model="name" :name="name" type="text" class="form-control pull-right"
+                                   placeholder="请输入用戶名称"/>
+                            <div class="input-group-btn">
+                                <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
+                            </div>
+                        </form>
+                    </div>
+                    <shiro:hasPermission name="sys:log:export">
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <a :href="'/'+export_excel" class="btn btn-default " ><i class="fa fa-cloud-download"></i>&nbsp;excel导出</a>
+                        </div>
+                    </div>
+                    </shiro:hasPermission>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="box">
+                <div class="box-body table-responsive no-padding">
+                    <table class="table table-hover">
+                        <thead>
+                        <tr>
+                            <th>序号</th>
+                            <th>请求路径</th>
+                            <th>请求方法类型</th>
+                            <th>请求参数</th>
+                            <th>请求权限验证</th>
+                            <th>请求用户</th>
+                            <th>请求ip</th>
+                            <th>请求发生时间</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr :id="obj.id" v-for="(obj, index) in results" v-on:click="select(obj)">
+                            <td>{{index+1}}</td>
+                            <td>{{obj.requestUri}}</td>
+                            <td>{{obj.requestMethod}}</td>
+                            <td>{{obj.requestParams}}</td>
+                            <td>{{obj.permissions}}</td>
+                            <td>{{obj.userLoginName}}</td>
+                            <td>{{obj.remoteAddr}}</td>
+                            <td>{{obj.requestTime | date-formatter }}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <nav class="pull-right">
+                    <ul class="pagination">
+                        <li v-if="showFirst">
+                            <a aria-label="Previous" href="#" v-on:click.prevent="pageIndexClick(--pageCurrent)">
+                                <span aria-hidden="true">&laquo;</span>
+                            </a>
+                        </li>
+                        <li :class="{'active':index==pageCurrent}" v-for="index in indexs"><a href="#"
+                                                                                              v-on:click.prevent="pageIndexClick(index)">{{index}}</a>
+                        </li>
+                        <li v-if="showLast">
+                            <a aria-label="Next" href="#" v-on:click.prevent="pageIndexClick(++pageCurrent)">
+                                <span aria-hidden="true">&raquo;</span>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+
+        </div>
+    </div>
+</div>
+<script src="/plugins/jQuery/jquery-2.2.3.min.js"></script>
+<script src="/plugins/vue/vue.min.js"></script>
+<script src="/plugins/layer/layer.js"></script>
+<script src="/plugins/moment/moment.min.js"></script>
+<script src="/dists/js/config.js"></script>
+
+<script src="//cdn.bootcss.com/moment.js/2.14.1/moment.min.js"></script>
+<script src="//cdn.bootcss.com/moment.js/2.14.1/locale/zh-cn.js"></script>
+<script src="/plugins/daterangepicker/daterangepicker.js"></script>
+<script src="/dists/js/pages/log_page.js"></script>
+<script>
+
+</script>
+
+</body>
+</html>

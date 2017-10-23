@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>TreeTable</title>
+    <link href="/plugins/treeTable/jquery.treetable.min.css" rel="stylesheet">
+    <link href="/plugins/treeTable/jquery.treetable.theme.default.min.css"
+          rel="stylesheet">
+    <link href="/plugins/bootstrap/css/bootstrap.css " rel="stylesheet"/>
+    <link href="/plugins/bootstrap/css/bootstrap-theme.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="/plugins/layui/css/layui.css" media="all">
+
+    <style>
+        table, tbody, table.treetable thead tr th {
+            border: 1px solid #e3e8ee;
+        }
+
+        th, td, .btn-groups {
+            min-width: 0;
+            box-sizing: border-box;
+            text-align: left;
+            text-overflow: ellipsis;
+            vertical-align: middle;
+            border-bottom: 1px solid #e3e8ee;
+            height: 40px;
+            white-space: nowrap;
+            overflow: hidden;
+            background-color: #f5f7f9;
+        }
+
+        th {
+            font-size: 15px;
+        }
+
+        td {
+            background-color: #FbFBFB;
+        }
+
+        .btn-groups {
+            border: 1px solid #e3e8ee;
+            height: 50px;
+            padding: 8px;
+        }
+
+        tbody tr.select td {
+            background-color: #f5f7f9;
+        }
+    </style>
+
+</head>
+<body>
+<div id="app" class="container-fluid">
+    <div class="btn-groups">
+        <button class="layui-btn layui-btn-normal layui-btn-small layui-btn-radius glyphicon glyphicon-refresh"
+                @click="load">&nbsp;刷新
+        </button>
+        <button class="layui-btn layui-btn-normal layui-btn-small layui-btn-radius glyphicon glyphicon-refresh"
+                @click="reload">&nbsp;刷新结构
+        </button>
+        <button class="layui-btn  layui-btn-small  layui-btn-radius glyphicon glyphicon-plus" @click="add">&nbsp;添加子菜单
+        </button>
+        <button class="layui-btn  layui-btn-small layui-btn-radius glyphicon glyphicon-edit" @click="edit">&nbsp;编辑
+        </button>
+        <button class="layui-btn layui-btn-danger  layui-btn-small layui-btn-radius glyphicon glyphicon-trash"
+                @click="deleteMenu">&nbsp;刪除
+        </button>
+    </div>
+
+    <table id="example-advanced">
+        <thead>
+        <tr>
+            <th>菜单名称</th>
+            <th>地址链接</th>
+            <th>描述</th>
+            <th>图标</th>
+            <th>排序数字</th>
+            <th>权限标识</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr v-for="menu in menus" :id="menu.id" :data-tt-id="menu.id" :data-tt-parent-id="menu.parentId"
+            @click="select(menu)">
+            <td>{{menu.name}}</td>
+            <td>{{menu.url}}</td>
+            <td>{{menu.description}}</td>
+            <td>{{menu.icon}}</td>
+            <td>{{menu.sort}}</td>
+            <td>{{menu.permission}}</td>
+        </tr>
+
+        </tbody>
+
+    </table>
+</div>
+
+
+<script src="/plugins/jQuery/jquery-2.2.3.min.js"></script>
+<script src="/plugins/treeTable/jquery.treetable.min.js"></script>
+<script src="/plugins/vue/vue.min.js"></script>
+<script src="/plugins/layer/layer.js"></script>
+<script src="/dist/js/config.js"></script>
+<script src="/dist/js/pages/menu_page.js">
+</script>
+</body>
+</html>

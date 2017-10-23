@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>title</title>
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport" />
+    <link href="/plugins/bootstrap/css/bootstrap.css " rel="stylesheet"/>
+    <link href="/plugins/bootstrap/css/bootstrap-theme.css" rel="stylesheet"/>
+    <link href="/plugins/layui/css/layui.css" rel="stylesheet"/>
+    <link href="/plugins/adminLTE/css/AdminLTE.css" rel="stylesheet"/>
+    <link href="/plugins/adminLTE/css/skins/_all-skins.css" rel="stylesheet"/>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css"/>
+
+    <link href="/dists/css/default.css" rel="stylesheet"/>
+</head>
+<body>
+<div id="app" class="container-fluid">
+
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="btn-groups">
+                <button class="layui-btn layui-btn-normal layui-btn-small layui-btn-radius glyphicon glyphicon-refresh"
+                        v-on:click="load">&nbsp;刷新
+                </button>
+                <button class="layui-btn layui-btn-danger  layui-btn-small layui-btn-radius glyphicon glyphicon-trash"
+                        v-on:click="deleteObj">&nbsp;刪除
+                </button>
+                <div class="box-tools pull-right">
+                    <form v-on:submit.prevent="search" class="input-group " style="width: 180px;">
+                        <input v-model="name" :name="name" type="text" class="form-control pull-right" placeholder="请输入名称" />
+                        <div class="input-group-btn">
+                            <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div th:text="${'角色：'+role.name}" style="font-size: 15px;padding:5px;"></div>
+    <div id="role_id" th:text="${role.id}" style="display: none"></div>
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="box">
+                <div class="box-body table-responsive">
+                    <table class="table table-bordered">
+                        <thead>
+                        <tr>
+                            <th>序号</th>
+                            <th>配置人员</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr v-for="(user, index) in users" v-on:click="select(user)" :id="user.id">
+                            <td>{{index+1}}</td>
+                            <td>{{user.loginName}}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <nav class="pull-right">
+                    <ul class="pagination">
+                        <li v-if="showFirst">
+                            <a v-on:click.prevent="pageIndexClick(--pageCurrent)" href="#" aria-label="Previous">
+                                <span aria-hidden="true">&laquo;</span>
+                            </a>
+                        </li>
+                        <li v-for="index in indexs" :class="{'active':index==pageCurrent}"><a
+                                v-on:click.prevent="pageIndexClick(index)" href="#">{{index}}</a></li>
+                        <li v-if="showLast">
+                            <a v-on:click.prevent="pageIndexClick(++pageCurrent)" href="#" aria-label="Next">
+                                <span aria-hidden="true">&raquo;</span>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+
+        </div>
+    </div>
+</div>
+<script src="/plugins/jQuery/jquery-2.2.3.min.js"></script>
+<script>
+    //    var roleId = 2;
+    var roleId = $("#role_id").text();
+</script>
+<script src="/plugins/vue/vue.min.js"></script>
+<script src="/plugins/layer/layer.js"></script>
+<script src="/dists/js/config.js"></script>
+<script src="/dists/js/pages/role_user_page.js">
+</script>
+</body>
+</html>

@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>菜单管理</title>
+    <link href="/plugins/treeTable/jquery.treetable.min.css" rel="stylesheet" />
+    <link href="/plugins/treeTable/jquery.treetable.theme.default.min.css"
+          rel="stylesheet" />
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css"/>
+    <link href="/plugins/bootstrap/css/bootstrap.css " rel="stylesheet"/>
+    <link href="/plugins/bootstrap/css/bootstrap-theme.css" rel="stylesheet"/>
+    <link href="/plugins/layui/css/layui.css" rel="stylesheet" />
+    <link href="/dists/css/default.css" rel="stylesheet" />
+    <style>
+        table, tbody, table.treetable thead tr th {
+            border: 1px solid #e3e8ee;
+        }
+
+        th, td, .btn-groups {
+            min-width: 0;
+            box-sizing: border-box;
+            text-align: left;
+            text-overflow: ellipsis;
+            vertical-align: middle;
+            border-bottom: 1px solid #e3e8ee;
+            height: 40px;
+            white-space: nowrap;
+            overflow: hidden;
+            background-color: #f5f7f9;
+            margin-bottom: 10px;
+            margin-top: 10px;
+        }
+
+        th {
+            font-size: 15px;
+        }
+
+        td {
+            background-color: #FbFBFB;
+        }
+
+        tbody tr.select td {
+            background-color: #f5f7f9;
+        }
+    </style>
+
+</head>
+<body>
+<div id="app" class="container-fluid">
+    <div class="btn-groups">
+        <button class="layui-btn layui-btn-normal layui-btn-small layui-btn-radius glyphicon glyphicon-refresh"
+                v-on:click="load">&nbsp;刷新
+        </button>
+        <button class="layui-btn layui-btn-normal layui-btn-small layui-btn-radius glyphicon glyphicon-refresh"
+                v-on:click="reload">&nbsp;刷新结构
+        </button>
+        <shiro:hasPermission name="sys:menu:add">
+        <button class="layui-btn  layui-btn-small  layui-btn-radius glyphicon glyphicon-plus" v-on:click="add">
+            &nbsp;添加子菜单
+        </button>
+        </shiro:hasPermission>
+        <shiro:hasPermission name="sys:menu:edit">
+        <button class="layui-btn  layui-btn-small layui-btn-radius glyphicon glyphicon-edit" v-on:click="edit">
+            &nbsp;编辑
+        </button>
+        </shiro:hasPermission>
+        <shiro:hasPermission name="sys:menu:delete">
+        <button class="layui-btn layui-btn-danger  layui-btn-small layui-btn-radius glyphicon glyphicon-trash"
+                v-on:click="deleteMenu">&nbsp;刪除
+        </button>
+        </shiro:hasPermission>
+    </div>
+    <table id="example-advanced">
+        <thead>
+        <tr>
+            <th>菜单名称</th>
+            <th>地址链接</th>
+            <th>描述</th>
+            <th>排序数字</th>
+            <th>对用户可见</th>
+            <th>权限标识</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr v-for="menu in menus" :id="menu.id" :data-tt-id="menu.id" :data-tt-parent-id="menu.parentId"
+            v-on:click="select(menu)">
+            <td><i :class="menu.icon"></i>&nbsp;{{menu.name}}</td>
+            <td>{{menu.url}}</td>
+            <td>{{menu.description}}</td>
+            <td>{{menu.sort}}</td>
+            <td>{{menu.visible| visible-formatter }}</td>
+            <td>{{menu.permission}}</td>
+        </tr>
+
+        </tbody>
+
+    </table>
+</div>
+
+
+<script src="/plugins/jQuery/jquery-2.2.3.min.js"></script>
+<script src="/plugins/treeTable/jquery.treetable.min.js"></script>
+<script src="/plugins/vue/vue.min.js"></script>
+<script src="/plugins/layer/layer.js"></script>
+<script src="/dists/js/config.js"></script>
+<script src="/dists/js/pages/menu_page.js">
+</script>
+</body>
+</html>
