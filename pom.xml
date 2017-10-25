@@ -3,12 +3,12 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<groupId>com.sj</groupId>
-	<artifactId>sanji-boot</artifactId>
+	<groupId>com.lish</groupId>
+	<artifactId>fast-boot</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>pom</packaging>
 
-	<name>sanji-boot</name>
+	<name>fast-boot</name>
 	<description>based Spring Boot</description>
 
 	<parent>
@@ -19,9 +19,9 @@
 	</parent>
 
 	<modules>
-		<module>sanji-boot-shiro</module>
-		<module>sanji-boot-security</module>
-        <module>utils</module>
+		<module>fast-boot-shiro</module>
+		<module>fast-boot-security</module>
+        <module>fast-utils</module>
     </modules>
 
 	<properties>

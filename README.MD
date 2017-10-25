@@ -1,10 +1,10 @@
-# SanJi Boot
+# Fast Boot
 
 基于Spring Boot 集成一些常用的功能，你只需要基于它做些简单的修改即可，下面是一个功能列表：
 
 [MENU]
 
-## SanJi Boot Security:
+## Fast Boot Security:
 
 **整合 Spring Security 提供一下功能：**
 
@@ -45,7 +45,7 @@
 [查看详情](sanji-boot-security)
 
 
-## SanJi Boot Shiro
+## Fast Boot Shiro
 
 **整合 Apache Shiro 提供一下功能：**
 
@@ -66,7 +66,7 @@
 [查看详情](sanji-boot-shiro)
 
 
-## utils
+## Fast Utils
 
 一些小工具 后期会逐渐壮大
 
