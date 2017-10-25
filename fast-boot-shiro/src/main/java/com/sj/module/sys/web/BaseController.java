@@ -21,7 +21,7 @@ public class BaseController<D extends JpaRepository<T, PK>, T extends BaseEntity
     @Transactional
     protected Result<String> save(T t) {
         Date now = new Date();
-        t.setCreateTime(now);
+        t.setCreatedTime(now);
         return updateTime(t, now);
     }
 
@@ -43,7 +43,7 @@ public class BaseController<D extends JpaRepository<T, PK>, T extends BaseEntity
 
     private Result<String> updateTime(T t, Date now) {
         try {
-            t.setUpdateTime(now);
+            t.setModifiedTime(now);
             repository.save(t);
             return Result.ok();
         } catch (Exception e) {

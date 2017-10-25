@@ -1,0 +1,21 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>com.lish</groupId>
+    <artifactId>fast-boot</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+  </parent>
+  <artifactId>vote-app</artifactId>
+  <name>vote-app</name>
+  <description>vote web application</description>
+  <dependencies>
+  	<dependency>
+  		<groupId>com.lish</groupId>
+  		<artifactId>fast-boot-security</artifactId>
+  		<version>0.0.1-SNAPSHOT</version>
+  	</dependency>
+  </dependencies>
+  <properties>
+  	<start-class>com.lish.dongfang.vote.DongFangVoteApplication</start-class>
+  </properties>
+</project>

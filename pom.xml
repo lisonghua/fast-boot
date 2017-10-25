@@ -22,7 +22,8 @@
 		<module>fast-boot-shiro</module>
 		<module>fast-boot-security</module>
         <module>fast-utils</module>
-    </modules>
+        <module>vote-app</module>
+	</modules>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

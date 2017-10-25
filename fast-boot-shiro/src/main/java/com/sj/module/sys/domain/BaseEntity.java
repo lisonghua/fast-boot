@@ -15,34 +15,34 @@ import java.util.Date;
 public abstract class BaseEntity<PK extends Serializable> extends AbstractPersistable<PK> {
 
     @Temporal(TemporalType.TIMESTAMP)
-    private Date createTime;
+    private Date createdTime;
 
     @Temporal(TemporalType.TIMESTAMP)
-    private Date updateTime;
+    private Date modifiedTime;
 
-    private String mark;
+    private String remark;
 
-    public Date getCreateTime() {
-        return createTime;
+    public Date getCreatedTime() {
+        return createdTime;
     }
 
-    public void setCreateTime(Date createTime) {
-        this.createTime = createTime;
+    public void setCreatedTime(Date createdTime) {
+        this.createdTime = createdTime;
     }
 
-    public Date getUpdateTime() {
-        return updateTime;
+    public Date getModifiedTime() {
+        return modifiedTime;
     }
 
-    public void setUpdateTime(Date updateTime) {
-        this.updateTime = updateTime;
+    public void setModifiedTime(Date modifiedTime) {
+        this.modifiedTime = modifiedTime;
     }
 
-    public String getMark() {
-        return mark;
+    public String getRemark() {
+        return remark;
     }
 
-    public void setMark(String mark) {
-        this.mark = mark;
+    public void setRemark(String remark) {
+        this.remark = remark;
     }
 }

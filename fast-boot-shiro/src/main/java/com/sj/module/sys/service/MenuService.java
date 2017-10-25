@@ -39,8 +39,8 @@ public class MenuService {
         menu.setSort(null != menu.getSort() ? menu.getSort() : 0L);
         menu.setVisible(null != menu.getVisible() ? menu.getVisible() : false);
         Date now = new Date();
-        menu.setCreateTime(now);
-        menu.setUpdateTime(now);
+        menu.setCreatedTime(now);
+        menu.setModifiedTime(now);
         if (menu.getSort() == 0L) {
             Menu brothers = repository.findFirstByParentOrderBySortDesc(parent);
             if (Objects.nonNull(brothers)) {
