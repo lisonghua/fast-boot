@@ -1,9 +1,17 @@
 package com.lish.dongfang.vote.model;
 
 import java.io.Serializable;
-import javax.persistence.*;
-import java.util.Date;
 import java.math.BigInteger;
+import java.util.Date;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.NamedQuery;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
+import com.lish.dongfang.common.core.FastBaseEntity;
 
 
 /**
@@ -13,7 +21,7 @@ import java.math.BigInteger;
 @Entity
 @Table(name="vote_history")
 @NamedQuery(name="VoteHistory.findAll", query="SELECT v FROM VoteHistory v")
-public class VoteHistory extends com.sj.common.base.domain.BaseEntity<VoteHistory> implements Serializable {
+public class VoteHistory extends FastBaseEntity<VoteHistory> implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Column(name="action_type")
@@ -24,11 +32,14 @@ public class VoteHistory extends com.sj.common.base.domain.BaseEntity<VoteHistor
 
 	@Column(name="candidate_id")
 	private BigInteger candidateId;
-
+	
+	@Column(length=50)
 	private String host;
-
+	
+	@Column(length=50)
 	private String ip;
-
+	
+	@Column(length=10)
 	private String port;
 
 	private byte status;

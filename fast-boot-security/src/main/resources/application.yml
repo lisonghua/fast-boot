@@ -40,3 +40,6 @@ sanji:
   config:
 #  显示异常
     show-exception: true
+logging:
+  level:
+    root: debug

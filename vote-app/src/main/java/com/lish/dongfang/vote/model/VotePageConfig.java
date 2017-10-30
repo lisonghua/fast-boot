@@ -1,7 +1,15 @@
 package com.lish.dongfang.vote.model;
 
 import java.io.Serializable;
-import javax.persistence.*;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.NamedQuery;
+import javax.persistence.Table;
+
+import com.lish.dongfang.common.core.FastBaseEntity;
 
 
 /**
@@ -11,13 +19,13 @@ import javax.persistence.*;
 @Entity
 @Table(name="vote_page_config")
 @NamedQuery(name="VotePageConfig.findAll", query="SELECT v FROM VotePageConfig v")
-public class VotePageConfig extends com.sj.common.base.domain.BaseEntity<VotePageConfig> implements Serializable {
+public class VotePageConfig extends FastBaseEntity<VotePageConfig> implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * 选手排序规则：1按参与时间倒序；2票数从高到底；3编号从低到高
 	 */
-	@Column(name="candidate_order_type")
+	@Column(name="candidate_order_type",length=5)
 	private String candidateOrderType;
 
 	/**
@@ -77,7 +85,7 @@ public class VotePageConfig extends com.sj.common.base.domain.BaseEntity<VotePag
 	/**
 	 * 投票次数限制：1一个账号仅限一票；2一个账号每天一票；3一个账号每天3票
 	 */
-	@Column(name="vote_count_limit")
+	@Column(name="vote_count_limit",length=5)
 	private String voteCountLimit;
 
 	/**

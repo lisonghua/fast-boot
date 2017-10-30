@@ -11,7 +11,7 @@ import java.util.Date;
 /**
  * Created by yangrd on 2017/7/1.
  */
-public abstract class BaseService<D extends CrudRepository<T, Long>, T extends BaseEntity> {
+public abstract class BaseService<D extends CrudRepository<T, Long>, T extends BaseEntity<T>> {
 
     @Autowired
     protected D repository;

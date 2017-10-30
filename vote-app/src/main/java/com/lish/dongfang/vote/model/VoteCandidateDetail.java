@@ -3,12 +3,15 @@ package com.lish.dongfang.vote.model;
 import java.io.Serializable;
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import com.lish.dongfang.common.core.FastBaseEntity;
 
 
 /**
@@ -18,17 +21,20 @@ import javax.persistence.Table;
 @Entity
 @Table(name="vote_candidate_detail")
 @NamedQuery(name="VoteCandidateDetail.findAll", query="SELECT v FROM VoteCandidateDetail v")
-public class VoteCandidateDetail extends com.sj.common.base.domain.BaseEntity<VoteCandidateDetail> implements Serializable {
+public class VoteCandidateDetail extends FastBaseEntity<VoteCandidateDetail> implements Serializable {
 	private static final long serialVersionUID = 1L;
-
+	
+	@Column(length=200)
 	private String address;
-
+	
+	@Column(length=500)
 	private String description;
-
+	
+	@Column(length=20)
 	private String tel;
 
 	//bi-directional many-to-one association to VoteCandidateCustomize
-	@OneToMany(mappedBy="vote_candidate_detail")
+	@OneToMany(mappedBy="voteCandidateDetail")
 	private List<VoteCandidateCustomize> voteCandidateCustomizes;
 
 	//bi-directional many-to-one association to VoteCandidate

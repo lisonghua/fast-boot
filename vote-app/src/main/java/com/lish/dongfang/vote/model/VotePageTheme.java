@@ -1,7 +1,15 @@
 package com.lish.dongfang.vote.model;
 
 import java.io.Serializable;
-import javax.persistence.*;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.NamedQuery;
+import javax.persistence.Table;
+
+import com.lish.dongfang.common.core.FastBaseEntity;
 
 
 /**
@@ -11,28 +19,31 @@ import javax.persistence.*;
 @Entity
 @Table(name="vote_page_theme")
 @NamedQuery(name="VotePageTheme.findAll", query="SELECT v FROM VotePageTheme v")
-public class VotePageTheme extends com.sj.common.base.domain.BaseEntity<VotePageTheme> implements Serializable {
+public class VotePageTheme extends FastBaseEntity<VotePageTheme> implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * 背景图片
 	 */
+	@Column(length=100)
 	private String background;
 
 	/**
 	 * 边框
 	 */
+	@Column(length=100)
 	private String border;
 
 	/**
 	 * 颜色
 	 */
+	@Column(length=100)
 	private String color;
 
 	/**
 	 * 样式类型
 	 */
-	@Column(name="theme_type")
+	@Column(name="theme_type",length=50)
 	private String themeType;
 
 	//bi-directional many-to-one association to VoteActivity

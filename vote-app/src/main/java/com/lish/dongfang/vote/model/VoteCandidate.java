@@ -1,7 +1,6 @@
 package com.lish.dongfang.vote.model;
 
 import java.io.Serializable;
-import java.math.BigInteger;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -13,6 +12,8 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.lish.dongfang.common.core.FastBaseEntity;
+
 
 /**
  * 候选人信息
@@ -21,16 +22,16 @@ import javax.persistence.Table;
 @Entity
 @Table(name="vote_candidate")
 @NamedQuery(name="VoteCandidate.findAll", query="SELECT v FROM VoteCandidate v")
-public class VoteCandidate extends com.sj.common.base.domain.BaseEntity<VoteCandidate> implements Serializable {
+public class VoteCandidate extends FastBaseEntity<VoteCandidate> implements Serializable {
 	private static final long serialVersionUID = 1L;
-
+	
+	@Column(length=500)
 	private String cover;
-
-	private BigInteger createUser;
 
 	@Lob
 	private String description;
-
+	
+	@Column(length=20)
 	private String name;
 
 	/**
@@ -39,9 +40,6 @@ public class VoteCandidate extends com.sj.common.base.domain.BaseEntity<VoteCand
 	private String number;
 
 	private byte status;
-
-	@Column(name="update_user")
-	private BigInteger updateUser;
 
 	@Column(name="vote_count")
 	private int voteCount;
@@ -64,14 +62,6 @@ public class VoteCandidate extends com.sj.common.base.domain.BaseEntity<VoteCand
 
 	public void setCover(String cover) {
 		this.cover = cover;
-	}
-
-	public BigInteger getCreateUser() {
-		return this.createUser;
-	}
-
-	public void setCreateUser(BigInteger createUser) {
-		this.createUser = createUser;
 	}
 
 	public String getDescription() {
@@ -104,14 +94,6 @@ public class VoteCandidate extends com.sj.common.base.domain.BaseEntity<VoteCand
 
 	public void setStatus(byte status) {
 		this.status = status;
-	}
-
-	public BigInteger getUpdateUser() {
-		return this.updateUser;
-	}
-
-	public void setUpdateUser(BigInteger updateUser) {
-		this.updateUser = updateUser;
 	}
 
 	public int getVoteCount() {

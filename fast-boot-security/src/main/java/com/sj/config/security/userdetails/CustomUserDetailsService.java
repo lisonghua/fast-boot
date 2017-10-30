@@ -1,21 +1,20 @@
 package com.sj.config.security.userdetails;
 
-import com.sj.modules.sys.domain.Role;
-import com.sj.modules.sys.domain.User;
-import com.sj.modules.sys.repository.UserRepository;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.authentication.AuthenticationServiceException;
-import org.springframework.security.authentication.DisabledException;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Set;
+import com.sj.modules.sys.domain.Role;
+import com.sj.modules.sys.domain.User;
+import com.sj.modules.sys.repository.UserRepository;
 
 /**
  * Created by yangrd on 2017/7/3.

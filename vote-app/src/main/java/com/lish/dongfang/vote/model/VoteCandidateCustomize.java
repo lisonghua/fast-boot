@@ -1,8 +1,17 @@
 package com.lish.dongfang.vote.model;
 
 import java.io.Serializable;
-import javax.persistence.*;
 import java.math.BigInteger;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
+import javax.persistence.ManyToOne;
+import javax.persistence.NamedQuery;
+import javax.persistence.Table;
+
+import com.lish.dongfang.common.core.FastBaseEntity;
 
 
 /**
@@ -12,7 +21,7 @@ import java.math.BigInteger;
 @Entity
 @Table(name="vote_candidate_customize")
 @NamedQuery(name="VoteCandidateCustomize.findAll", query="SELECT v FROM VoteCandidateCustomize v")
-public class VoteCandidateCustomize extends com.sj.common.base.domain.BaseEntity<VoteCandidateCustomize> implements Serializable {
+public class VoteCandidateCustomize extends FastBaseEntity<VoteCandidateCustomize> implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	/**

@@ -1,10 +1,19 @@
 package com.lish.dongfang.vote.model;
 
 import java.io.Serializable;
-import javax.persistence.*;
 import java.util.Date;
-import java.math.BigInteger;
 import java.util.List;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Lob;
+import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
+import com.lish.dongfang.common.core.FastBaseEntity;
 
 
 /**
@@ -14,11 +23,8 @@ import java.util.List;
 @Entity
 @Table(name="vote_activity")
 @NamedQuery(name="VoteActivity.findAll", query="SELECT v FROM VoteActivity v")
-public class VoteActivity extends com.sj.common.base.domain.BaseEntity<VoteActivity> implements Serializable {
+public class VoteActivity extends FastBaseEntity<VoteActivity> implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Column(name="create_user")
-	private BigInteger createUser;
 
 	@Lob
 	private String description;
@@ -26,7 +32,8 @@ public class VoteActivity extends com.sj.common.base.domain.BaseEntity<VoteActiv
 	@Temporal(TemporalType.DATE)
 	@Column(name="end_date")
 	private Date endDate;
-
+	
+	@Column(length=100)
 	private String name;
 
 	@Temporal(TemporalType.DATE)
@@ -34,9 +41,6 @@ public class VoteActivity extends com.sj.common.base.domain.BaseEntity<VoteActiv
 	private Date startDate;
 
 	private byte status;
-
-	@Column(name="update_user")
-	private BigInteger updateUser;
 
 	//bi-directional many-to-one association to VoteCandidate
 	@OneToMany(mappedBy="voteActivity")
@@ -63,14 +67,6 @@ public class VoteActivity extends com.sj.common.base.domain.BaseEntity<VoteActiv
 	private List<VotePageTheme> votePageThemes;
 
 	public VoteActivity() {
-	}
-
-	public BigInteger getCreateUser() {
-		return this.createUser;
-	}
-
-	public void setCreateUser(BigInteger createUser) {
-		this.createUser = createUser;
 	}
 
 	public String getDescription() {
@@ -111,14 +107,6 @@ public class VoteActivity extends com.sj.common.base.domain.BaseEntity<VoteActiv
 
 	public void setStatus(byte status) {
 		this.status = status;
-	}
-
-	public BigInteger getUpdateUser() {
-		return this.updateUser;
-	}
-
-	public void setUpdateUser(BigInteger updateUser) {
-		this.updateUser = updateUser;
 	}
 
 	public List<VoteCandidate> getVoteCandidates() {

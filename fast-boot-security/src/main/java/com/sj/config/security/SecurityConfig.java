@@ -41,8 +41,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/reg", "/login", "/app/**", "/plugins/**").permitAll()//访问：无需登录认证权限
                 .anyRequest().authenticated() //其他所有资源都需要认证，登陆后访问
                 .and()
-            .headers()
-                .addHeaderWriter(new XFrameOptionsHeaderWriter(XFrameOptionsHeaderWriter.XFrameOptionsMode.SAMEORIGIN))
+            .headers().frameOptions().sameOrigin() //默认spring security不允许在iframe中打开页面，这里关闭
                 .and()
             .csrf()
                 .ignoringAntMatchers("/druid/**").disable()

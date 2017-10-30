@@ -1,8 +1,17 @@
 package com.lish.dongfang.vote.model;
 
 import java.io.Serializable;
-import javax.persistence.*;
 import java.util.List;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
+import com.lish.dongfang.common.core.FastBaseEntity;
 
 
 /**
@@ -12,7 +21,7 @@ import java.util.List;
 @Entity
 @Table(name="vote_page_enroll_config")
 @NamedQuery(name="VotePageEnrollConfig.findAll", query="SELECT v FROM VotePageEnrollConfig v")
-public class VotePageEnrollConfig extends com.sj.common.base.domain.BaseEntity<VotePageEnrollConfig> implements Serializable {
+public class VotePageEnrollConfig extends FastBaseEntity<VotePageEnrollConfig> implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	/**
@@ -54,7 +63,7 @@ public class VotePageEnrollConfig extends com.sj.common.base.domain.BaseEntity<V
 	/**
 	 * 设置报名页面姓名字段显示名
 	 */
-	@Column(name="name_label")
+	@Column(name="name_label",length=20)
 	private String nameLabel;
 
 	/**
