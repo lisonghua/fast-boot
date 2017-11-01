@@ -41,6 +41,11 @@ sanji:
 #  显示异常
     show-exception: true
     
+#关闭安全验证
+security:
+  basic:
+    enabled: false
+    
 logging:
   level:
     root: warn

@@ -1,9 +1,7 @@
 package com.sj.config.security;
 
-import com.sj.config.security.handler.AuthenticationFailureHandler;
-import com.sj.config.security.handler.AuthenticationLogoutSuccessHandler;
-import com.sj.config.security.handler.AuthenticationSuccessHandler;
-import com.sj.config.security.userdetails.CustomUserDetailsService;
+import javax.sql.DataSource;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -18,17 +16,19 @@ import org.springframework.security.web.authentication.SimpleUrlAuthenticationSu
 import org.springframework.security.web.authentication.logout.SimpleUrlLogoutSuccessHandler;
 import org.springframework.security.web.authentication.rememberme.JdbcTokenRepositoryImpl;
 import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
-import org.springframework.security.web.header.writers.frameoptions.XFrameOptionsHeaderWriter;
 
-import javax.sql.DataSource;
+import com.sj.config.security.handler.AuthenticationFailureHandler;
+import com.sj.config.security.handler.AuthenticationLogoutSuccessHandler;
+import com.sj.config.security.handler.AuthenticationSuccessHandler;
+import com.sj.config.security.userdetails.CustomUserDetailsService;
 
 
 /**
  * Created by yangrd on 2017/7/3.
  */
-@Configuration
-@EnableWebSecurity
-@EnableGlobalMethodSecurity(prePostEnabled = true)
+//@Configuration
+//@EnableWebSecurity
+//@EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired

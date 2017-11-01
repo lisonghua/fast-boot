@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Example;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
@@ -15,6 +16,16 @@ public abstract class FastBaseService<T extends FastBaseRepository<E, P>, E exte
 	protected T repository;
 	
 	/**
+	 * 根据主键获得实体
+	 * @param pk
+	 * @return
+	 */
+	@Transactional(readOnly=true)
+	public E getOneById(P pk) {
+		return repository.findOne(pk);
+	}
+	
+	/**
 	 * 获得所有记录
 	 * @return
 	 */
@@ -24,14 +35,25 @@ public abstract class FastBaseService<T extends FastBaseRepository<E, P>, E exte
 	}
 	
 	/**
-	 * 根据查询条件和翻页信息获得当前页数据
+	 * 根据Specification查询条件和翻页信息获得当前页数据
 	 * @param spec
 	 * @param pageable
 	 * @return
 	 */
 	@Transactional(readOnly=true)
-	public Page<E> getAllByPage(Specification<E> spec,Pageable pageable){
+	public Page<E> getPageBySpeci(Specification<E> spec,Pageable pageable){
 		return repository.findAll(spec, pageable);
+	}
+	
+	/**
+	 * 根据Example查询条件和翻页信息获得当前页数据
+	 * @param example
+	 * @param pageable
+	 * @return
+	 */
+	@Transactional(readOnly=true)
+	public Page<E> getPageByExamp(Example<E> example,Pageable pageable){
+		return repository.findAll(example, pageable);
 	}
 	
 	@Transactional
@@ -47,5 +69,10 @@ public abstract class FastBaseService<T extends FastBaseRepository<E, P>, E exte
 	@Transactional
 	public void delete(E entity) {
 		repository.delete(entity);
+	}
+	
+	@Transactional
+	public void delete(P pk) {
+		repository.delete(pk);
 	}
 }

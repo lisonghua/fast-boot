@@ -31,7 +31,7 @@ spring:
 
   jpa:
     hibernate:
-      ddl-auto: update
+      ddl-auto: none
     show-sql: true
 server:
   port: 8081
@@ -43,5 +43,5 @@ sanji:
     
 logging:
   level:
-    root: debug
+    root: warn
 #    org.springframework.root.security: debug

@@ -65,7 +65,7 @@ public class Result<T> {
         return this;
     }
 
-    enum Status {
+    public enum Status {
         SUCCESS, ERROR
     }
 
