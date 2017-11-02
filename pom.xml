@@ -23,6 +23,7 @@
 		<module>fast-boot-security</module>
         <module>fast-utils</module>
         <module>vote-app</module>
+        <module>vote-web</module>
 	</modules>
 
 	<properties>

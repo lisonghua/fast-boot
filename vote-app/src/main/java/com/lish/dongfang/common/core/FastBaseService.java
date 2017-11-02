@@ -1,6 +1,7 @@
 package com.lish.dongfang.common.core;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,14 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.transaction.annotation.Transactional;
 
+/**
+ * service的基类
+ * @author lisong
+ *
+ * @param <T> 模块对应repository
+ * @param <E> 模块对应实体
+ * @param <P> 实体的主键
+ */
 public abstract class FastBaseService<T extends FastBaseRepository<E, P>, E extends FastBaseEntity<E>, P extends Serializable> {
 	
 	@Autowired
@@ -58,11 +67,16 @@ public abstract class FastBaseService<T extends FastBaseRepository<E, P>, E exte
 	
 	@Transactional
 	public E create(E entity) {
+		Date now = new Date();
+		entity.setCreatedTime(now);
+		entity.setModifiedTime(now);
 		return repository.save(entity);
 	}
 	
 	@Transactional
 	public E update(E entity) {
+		Date now = new Date();
+		entity.setModifiedTime(now);
 		return repository.saveAndFlush(entity);
 	}
 	
@@ -74,5 +88,10 @@ public abstract class FastBaseService<T extends FastBaseRepository<E, P>, E exte
 	@Transactional
 	public void delete(P pk) {
 		repository.delete(pk);
+	}
+	
+	@Transactional
+	public void deleteInBatch(List<P> pks) {
+		pks.forEach((id)->repository.delete(id));
 	}
 }

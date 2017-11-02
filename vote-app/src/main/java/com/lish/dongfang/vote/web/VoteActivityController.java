@@ -25,6 +25,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.lish.dongfang.vote.model.VoteActivity;
@@ -44,6 +45,11 @@ public class VoteActivityController {
 	@Autowired
 	private VoteActivityService activityService;
 	
+	@GetMapping("{id}")
+	public Result<VoteActivity> getOne(@PathVariable long id){
+		return ResultGenerator.ok(activityService.getOneById(id));
+	}
+	
 	@GetMapping
 	public Result<Page<VoteActivity>> getAll(VoteActivity activity, Pageable pageable){
 		Page<VoteActivity> page = activityService.getPageBySpeci(new Specification<VoteActivity>() {
@@ -51,7 +57,7 @@ public class VoteActivityController {
 			@Override
 			public Predicate toPredicate(Root<VoteActivity> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
 				List<Predicate> list = new ArrayList<Predicate>();
-				if(StringUtils.isEmpty(activity.getName())) {
+				if(!StringUtils.isEmpty(activity.getName())) {
 					list.add(cb.like(root.get("name").as(String.class), "%" + activity.getName() + "%"));
 				}
 				if(activity.getStartDate()!=null) {
@@ -73,13 +79,18 @@ public class VoteActivityController {
 	}
 	
 	@PutMapping("{id}")
-	public Result<VoteActivity> update(@PathVariable("id") VoteActivity old,@RequestBody VoteActivity self){
-		return ResultGenerator.ok(activityService.update(self));
+	public Result<VoteActivity> update(@PathVariable("id") long id,@RequestBody VoteActivity newEntity){
+		VoteActivity old = activityService.getOneById(id);
+		old.setName(newEntity.getName());
+		old.setStartDate(newEntity.getStartDate());
+		old.setEndDate(newEntity.getEndDate());
+		old.setStatus(newEntity.getStatus());
+		return ResultGenerator.ok(activityService.update(old));
 	}
 	
 	@DeleteMapping
-	public Result<String> delete(@RequestBody Long[] ids){
-		Arrays.asList(ids).forEach(activityService::delete);
+	public Result<String> delete(@RequestBody List<Long> ids){
+		activityService.deleteInBatch(ids);
         return ResultGenerator.ok();
 	}
 }
