@@ -57,7 +57,7 @@ Vue.component('admin-sidebar', {
 var data = {
     system_skin: 'skin-green',
     //header
-    system_title: '权限管理系统',
+    system_title: '管理系统',
     //system_list.name对应主题名称
     system_list: [
         {id: '1', skin: 'skin-green', title: '权限管理系统', icon: 'zmdi-shield-security'},
@@ -80,24 +80,24 @@ var data = {
         {title: '首页', icon: 'zmdi-home', url: 'home', isOpenTab: true},
         {
             title: '系统组织管理', icon: 'zmdi-accounts-list', children: [
-            {title: '系统管理', icon: 'zmdi-account', url: 'crud.html', isOpenTab: true}
-        ]
+            	{title: '系统管理', icon: 'zmdi-account', url: 'crud.html', isOpenTab: true}
+            ]
         },
         {
             title: ' 角色用户管理', icon: 'zmdi-accounts', children: [
-            {title: '用户管理', icon: '', url: 'page/sys/user/table.html', isOpenTab: true},
-            {title: '角色管理', icon: '', url: 'page/sys/role/table.html', isOpenTab: true}
-        ]
+	            {title: '用户管理', icon: '', url: 'page/sys/user/table.html', isOpenTab: true},
+	            {title: '角色管理', icon: '', url: 'page/sys/role/table.html', isOpenTab: true}
+            ]
         },
         {
             title: ' 权限资源管理', icon: 'zmdi-lock-outline', children: [
-            {title: '权限管理', icon: '', url: 'page/sys/menu/menus.html', isOpenTab: true},
-        ]
+            	{title: '权限管理', icon: '', url: 'page/sys/menu/menus.html', isOpenTab: true},
+            ]
         },
         {
             title: '其他数据管理', icon: 'zmdi-more', children: [
-            {title: '百度', icon: 'zmdi-lock-outline', url: 'https://www.baidu.com/', isOpenTab: true},
-        ]
+            	{title: '百度', icon: 'zmdi-lock-outline', url: 'https://www.baidu.com/', isOpenTab: true},
+            ]
         }
     ]
 }

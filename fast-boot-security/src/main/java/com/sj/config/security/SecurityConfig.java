@@ -26,9 +26,9 @@ import com.sj.config.security.userdetails.CustomUserDetailsService;
 /**
  * Created by yangrd on 2017/7/3.
  */
-//@Configuration
-//@EnableWebSecurity
-//@EnableGlobalMethodSecurity(prePostEnabled = true)
+@Configuration
+@EnableWebSecurity
+@EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired

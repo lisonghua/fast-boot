@@ -41,7 +41,7 @@ sanji:
 #  显示异常
     show-exception: true
     
-logging:
-  level:
-    root: warn
+#logging:
+#  level:
+#    root: warn
 #    org.springframework.root.security: debug
