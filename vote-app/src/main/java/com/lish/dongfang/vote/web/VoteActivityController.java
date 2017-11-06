@@ -1,10 +1,7 @@
 package com.lish.dongfang.vote.web;
 
-import static com.sj.common.ResultGenerator.ok;
-
 import java.sql.Date;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import javax.persistence.criteria.CriteriaBuilder;
@@ -25,13 +22,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.lish.dongfang.core.web.Result;
+import com.lish.dongfang.core.web.ResultGenerator;
 import com.lish.dongfang.vote.model.VoteActivity;
 import com.lish.dongfang.vote.service.VoteActivityService;
-import com.sj.common.Result;
-import com.sj.common.ResultGenerator;
 
 /**
  * 投票活动rest服务接口类

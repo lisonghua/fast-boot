@@ -2,8 +2,8 @@ package com.sj.config.security.handler;
 
 
 import com.alibaba.fastjson.JSON;
-import com.sj.common.Result;
-import com.sj.common.ResultGenerator;
+import com.lish.dongfang.core.web.Result;
+import com.lish.dongfang.core.web.ResultGenerator;
 import com.sj.config.security.handler.utils.RequestUtils;
 import com.sj.config.security.handler.utils.ResponseUtils;
 import org.springframework.security.authentication.AuthenticationServiceException;

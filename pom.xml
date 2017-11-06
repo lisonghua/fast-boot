@@ -24,6 +24,7 @@
         <module>fast-utils</module>
         <module>vote-app</module>
         <module>vote-web</module>
+        <module>fast-boot-core</module>
 	</modules>
 
 	<properties>

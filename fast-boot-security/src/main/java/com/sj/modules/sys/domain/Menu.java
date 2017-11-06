@@ -2,7 +2,7 @@ package com.sj.modules.sys.domain;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.sj.common.base.domain.BaseEntity;
+import com.lish.dongfang.core.BaseEntity;
 
 import javax.persistence.*;
 import java.util.List;

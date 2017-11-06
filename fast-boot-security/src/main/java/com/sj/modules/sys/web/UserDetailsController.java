@@ -1,6 +1,6 @@
 package com.sj.modules.sys.web;
 
-import com.sj.common.Result;
+import com.lish.dongfang.core.web.Result;
 import com.sj.modules.sys.domain.Role;
 import com.sj.modules.sys.domain.UserDetails;
 import com.sj.modules.sys.repository.UserDetailsRepository;
@@ -17,12 +17,13 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import javax.persistence.criteria.Predicate;
+
+import static com.lish.dongfang.core.web.ResultGenerator.error;
+import static com.lish.dongfang.core.web.ResultGenerator.ok;
+
 import java.security.Principal;
 import java.util.*;
 import java.util.function.Supplier;
-
-import static com.sj.common.ResultGenerator.error;
-import static com.sj.common.ResultGenerator.ok;
 
 /**
  * Created by yangrd on 2017/7/14.

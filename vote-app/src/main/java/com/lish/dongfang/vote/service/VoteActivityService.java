@@ -2,7 +2,7 @@ package com.lish.dongfang.vote.service;
 
 import org.springframework.stereotype.Service;
 
-import com.lish.dongfang.common.core.FastBaseService;
+import com.lish.dongfang.core.FastBaseService;
 import com.lish.dongfang.vote.model.VoteActivity;
 import com.lish.dongfang.vote.repository.VoteActivityRepository;
 

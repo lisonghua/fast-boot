@@ -1,6 +1,6 @@
 package com.sj.modules.sys.service;
 
-import com.sj.common.utils.mapper.BeanMapper;
+import com.lish.dongfang.common.utils.mapper.BeanMapper;
 import com.sj.modules.sys.domain.Menu;
 import com.sj.modules.sys.domain.User;
 import com.sj.modules.sys.repository.MenuRepository;

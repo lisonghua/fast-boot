@@ -8,11 +8,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import java.io.UnsupportedEncodingException;
-import java.util.Collection;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
-import java.util.Map.Entry;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -28,11 +25,10 @@ import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
-import org.springframework.util.MultiValueMap;
 
 import com.alibaba.fastjson.JSONObject;
-import com.lish.dongfang.common.core.FastBaseEntity;
-import com.sj.common.Result;
+import com.lish.dongfang.core.FastBaseEntity;
+import com.lish.dongfang.core.web.Result;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes=DongFangVoteTestApplication.class)

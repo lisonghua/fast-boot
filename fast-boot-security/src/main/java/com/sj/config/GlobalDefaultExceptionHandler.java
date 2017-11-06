@@ -1,7 +1,7 @@
 package com.sj.config;
 
-import com.sj.common.Result;
-import com.sj.common.ResultGenerator;
+import com.lish.dongfang.core.web.Result;
+import com.lish.dongfang.core.web.ResultGenerator;
 import com.sj.exception.SanJiException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

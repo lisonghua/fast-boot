@@ -1,7 +1,8 @@
 package com.sj.modules.sys.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.sj.common.base.domain.BaseEntity;
+import com.lish.dongfang.core.BaseEntity;
+
 import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.validator.constraints.NotEmpty;
 

@@ -1,6 +1,6 @@
 package com.sj.modules.sys.web;
 
-import com.sj.common.Result;
+import com.lish.dongfang.core.web.Result;
 import com.sj.modules.sys.domain.Role;
 import com.sj.modules.sys.repository.RoleRepository;
 import com.sj.modules.sys.repository.UserRepository;
@@ -11,13 +11,13 @@ import org.springframework.http.MediaType;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
+import static com.lish.dongfang.core.web.ResultGenerator.error;
+import static com.lish.dongfang.core.web.ResultGenerator.ok;
+
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
-
-import static com.sj.common.ResultGenerator.error;
-import static com.sj.common.ResultGenerator.ok;
 
 /**
  * Created by yangrd on 2017/7/17.

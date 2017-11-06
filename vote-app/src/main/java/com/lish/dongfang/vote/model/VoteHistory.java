@@ -11,7 +11,7 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-import com.lish.dongfang.common.core.FastBaseEntity;
+import com.lish.dongfang.core.FastBaseEntity;
 
 
 /**

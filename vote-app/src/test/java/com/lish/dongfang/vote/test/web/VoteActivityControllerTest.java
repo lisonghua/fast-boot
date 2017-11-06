@@ -17,10 +17,10 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 
 import com.alibaba.fastjson.JSONObject;
+import com.lish.dongfang.core.web.Result;
 import com.lish.dongfang.vote.model.VoteActivity;
 import com.lish.dongfang.vote.test.BaseVoteTest;
 import com.lish.dongfang.vote.web.VoteActivityController;
-import com.sj.common.Result;
 
 public class VoteActivityControllerTest extends BaseVoteTest {
 	@Autowired
