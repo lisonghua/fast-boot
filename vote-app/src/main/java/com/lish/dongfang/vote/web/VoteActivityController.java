@@ -13,7 +13,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
-import org.springframework.http.MediaType;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -35,7 +34,7 @@ import com.lish.dongfang.vote.service.VoteActivityService;
  *
  */
 @RestController
-@RequestMapping(value="/api/vote/activity",consumes=MediaType.APPLICATION_JSON_UTF8_VALUE)
+@RequestMapping(value="/api/vote/activity")
 public class VoteActivityController {
 	
 	@Autowired
@@ -81,12 +80,17 @@ public class VoteActivityController {
 		old.setStartDate(newEntity.getStartDate());
 		old.setEndDate(newEntity.getEndDate());
 		old.setStatus(newEntity.getStatus());
+		old.setRemark(newEntity.getRemark());
 		return ResultGenerator.ok(activityService.update(old));
 	}
 	
 	@DeleteMapping
 	public Result<String> delete(@RequestBody List<Long> ids){
-		activityService.deleteInBatch(ids);
+		ids.forEach(id->{
+			VoteActivity old = activityService.getOneById(id);
+			old.setDeleteFlag(new Byte("0"));
+			activityService.update(old);
+		});
         return ResultGenerator.ok();
 	}
 }

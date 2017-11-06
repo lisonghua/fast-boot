@@ -1,6 +1,9 @@
 package com.lish.dongfang.vote.service;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.lish.dongfang.core.FastBaseService;
 import com.lish.dongfang.vote.model.VoteActivity;
@@ -13,5 +16,5 @@ import com.lish.dongfang.vote.repository.VoteActivityRepository;
  */
 @Service
 public class VoteActivityService extends FastBaseService<VoteActivityRepository,VoteActivity, Long> {
-
+	
 }

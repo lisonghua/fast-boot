@@ -1,8 +1,7 @@
-package com.sj.config;
+package com.lish.dongfang.core.exception;
 
-import com.lish.dongfang.core.web.Result;
-import com.lish.dongfang.core.web.ResultGenerator;
-import com.sj.exception.SanJiException;
+import javax.servlet.http.HttpServletRequest;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -11,7 +10,8 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
-import javax.servlet.http.HttpServletRequest;
+import com.lish.dongfang.core.web.Result;
+import com.lish.dongfang.core.web.ResultGenerator;
 
 /**
  * Created by yangrd on 2017/7/7.

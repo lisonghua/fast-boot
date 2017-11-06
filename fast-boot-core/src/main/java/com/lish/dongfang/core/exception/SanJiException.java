@@ -1,4 +1,4 @@
-package com.sj.exception;
+package com.lish.dongfang.core.exception;
 
 /**
  * Created by yangrd on 2017/7/15.

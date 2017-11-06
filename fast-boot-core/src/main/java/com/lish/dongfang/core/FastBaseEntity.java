@@ -11,6 +11,9 @@ public class FastBaseEntity<T> extends BaseEntity<T> {
 	
 	@Column(name="update_user")
 	private Long updateUser;
+	
+	@Column(name="delete_flag")
+	private byte deleteFlag;
 
 	public Long getCreateUser() {
 		return createUser;
@@ -26,5 +29,13 @@ public class FastBaseEntity<T> extends BaseEntity<T> {
 
 	public void setUpdateUser(Long updateUser) {
 		this.updateUser = updateUser;
+	}
+
+	public byte getDeleteFlag() {
+		return deleteFlag;
+	}
+
+	public void setDeleteFlag(byte deleteFlag) {
+		this.deleteFlag = deleteFlag;
 	}
 }

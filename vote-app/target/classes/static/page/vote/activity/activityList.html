@@ -4,8 +4,8 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>通用增删改查</title>
-
+    <title>活动列表</title>
+	
     <link href="/plugins/bootstrap-3.3.0/css/bootstrap.min.css" rel="stylesheet"/>
     <link href="/plugins/material-design-iconic-font-2.2.0/css/material-design-iconic-font.min.css"
           rel="stylesheet"/>
@@ -19,6 +19,7 @@
     <link href="https://cdn.bootcss.com/select2/4.0.3/css/select2.min.css" rel="stylesheet"/>
 
     <link href="/app/css/common.css" rel="stylesheet"/>
+
 </head>
 <body>
 <div id="main">
@@ -92,7 +93,7 @@ $(function () {
             {field: 'state', checkbox: true},
             {field: 'name', title: '名称', sortable: true, align: 'center'},
             {field: 'startDate', title: '开始时间', sortable: true, formatter: 'dateFormatter',align: 'center'},
-            {field: 'endData', title: '结束时间', sortable: true, formatter: 'dateFormatter',align: 'center'},
+            {field: 'endDate', title: '结束时间', sortable: true, formatter: 'dateFormatter',align: 'center'},
             {field: 'status', title: '状态', sortable: true, formatter: 'statusFormatter', align: 'center'},
             {
                 field: 'action',
@@ -141,21 +142,24 @@ $(function () {
 });
 //格式化日期列
 function dateFormatter(date) {
-    return date ? moment(date).format("YYYY-MM-DD, HH:mm:ss") : '-';
+    return date ? moment(date).format("YYYY-MM-DD") : '-';
 }
 //格式化操作按钮列
 function actionFormatter(value, row, index) {
     return [
         '<a class="edit ml10" href="javascript:void(0)" data-toggle="tooltip" title="编辑"><i class="glyphicon glyphicon-edit"></i></a>　',
-        '<a class="close ml10" href="javascript:void(0)" data-toggle="tooltip" title="关闭"><i class="glyphicon glyphicon-lock"></i></a>   ',
-        '<a class="remove ml10" href="javascript:void(0)" data-toggle="tooltip" title="删除"><i class="glyphicon glyphicon-remove"></i></a>',
-
+        '<a class="edit ml10" href="javascript:void(0)" data-toggle="tooltip" title="关闭"><i class="glyphicon glyphicon-off"></i></a>　',
+        '<a class="remove ml10" href="javascript:void(0)" data-toggle="tooltip" title="删除"><i class="glyphicon glyphicon-remove"></i></a>'
     ].join('');
 }
 //格式化状态列
 function statusFormatter(status) {
-    if (status == '1') {
-        return '<span class="label label-success">开放</span>';
+	if(status == '3'){
+		return '<span class="label label-success">已结束</span>';
+	}else if(status == '2'){
+		return '<span class="label label-success">已开始</span>';
+	}else if (status == '1') {
+        return '<span class="label label-success">未开始</span>';
     } else if (status == '0') {
         return '<span class="label label-danger">关闭</span>';
     }
@@ -168,6 +172,7 @@ function createAction() {
     location.href = href + "#"
     createDialog = $.dialog({
         animationSpeed: 300,
+        columnClass: 'col-md-8',
         title: '新增活动',
         content: 'url:/page/vote/activity/activityAdd.html',
         onContentReady: function () {
@@ -196,6 +201,7 @@ function updateActAction(rows) {
         createDialog = $.dialog({
             animationSpeed: 300,
             title: '编辑活动',
+            columnClass: 'col-md-8',
             content: 'url:/page/vote/activity/activityAdd.html',
             onContentReady: function () {
                 initMaterialInput();
@@ -203,9 +209,17 @@ function updateActAction(rows) {
         });
     }
 }
+//校验活动是否已开始
+function validateActStart(rows){
+	for (var i in rows) {
+        if(rows[i].status=='2'){
+        	return true;
+        }
+    }
+}
 //删除
 function deleteActAction(rows) {
-    if (rows.length == 0) {
+	if (rows.length == 0) {
         $.confirm({
             title: false,
             content: '请至少选择一条记录！',
@@ -218,7 +232,20 @@ function deleteActAction(rows) {
                 }
             }
         });
-    } else {
+    } else if(validateActStart(rows)){
+		$.confirm({
+			title: false,
+            content: '已开始的活动不能删除！',
+            autoClose: 'cancel|3000',
+            backgroundDismiss: true,
+            buttons: {
+                cancel: {
+                    text: '取消',
+                    btnClass: 'waves-effect waves-button'
+                }
+            }
+		});
+	} else {
         $.confirm({
             type: 'red',
             animationSpeed: 300,
@@ -266,7 +293,7 @@ function deleteActAction(rows) {
 }
 //执行删除
 function deleteAct(ids, cb, ecb) {
-    iDelete('/api/vote/activty', ids, null, cb, ecb);
+    iDelete('/api/vote/activity', ids, null, cb, ecb);
 }
 //删除多条
 function deleteAction() {
