@@ -4,6 +4,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.patch;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -158,6 +159,14 @@ public class BaseVoteTest {
 		return sendRequest(builder);
 	}
 	
+	protected Result<?> sendPutReq4Rest(String url,String json)throws Exception{
+		MockHttpServletRequestBuilder builder = put(url)
+				.accept(MediaType.APPLICATION_JSON_UTF8)
+				.contentType(MediaType.APPLICATION_JSON_UTF8);
+		builder.content(json);
+		return sendRequest(builder);
+	}
+	
 	/**
 	 * 模拟rest调用测试delete请求
 	 * @param url
@@ -170,6 +179,14 @@ public class BaseVoteTest {
 				.accept(MediaType.APPLICATION_JSON_UTF8)
 				.contentType(MediaType.APPLICATION_JSON_UTF8);
 		builder.content(JSONObject.toJSONString(ids));
+		return sendRequest(builder);
+	}
+	
+	protected <T extends FastBaseEntity<?>> Result<?> sendPatchReq4Rest(String url,String jsonStr)throws Exception{
+		MockHttpServletRequestBuilder builder = patch(url)
+				.accept(MediaType.APPLICATION_JSON_UTF8)
+				.contentType(MediaType.APPLICATION_JSON_UTF8);
+		builder.content(jsonStr);
 		return sendRequest(builder);
 	}
 

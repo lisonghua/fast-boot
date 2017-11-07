@@ -13,7 +13,7 @@ public class FastBaseEntity<T> extends BaseEntity<T> {
 	private Long updateUser;
 	
 	@Column(name="delete_flag")
-	private byte deleteFlag;
+	private byte deleteFlag=1;
 
 	public Long getCreateUser() {
 		return createUser;

@@ -1,7 +1,8 @@
 package com.lish.dongfang.vote.web;
 
-import java.sql.Date;
+
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.criteria.CriteriaBuilder;
@@ -16,6 +17,7 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -25,8 +27,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.lish.dongfang.core.web.Result;
 import com.lish.dongfang.core.web.ResultGenerator;
+import com.lish.dongfang.vote.common.VoteActivityStatus;
 import com.lish.dongfang.vote.model.VoteActivity;
 import com.lish.dongfang.vote.service.VoteActivityService;
+import com.lish.dongfang.vote.utils.DateUtils;
 
 /**
  * 投票活动rest服务接口类
@@ -53,13 +57,14 @@ public class VoteActivityController {
 			public Predicate toPredicate(Root<VoteActivity> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
 				List<Predicate> list = new ArrayList<Predicate>();
 				if(!StringUtils.isEmpty(activity.getName())) {
-					list.add(cb.like(root.get("name").as(String.class), "%" + activity.getName() + "%"));
-				}
-				if(activity.getStartDate()!=null) {
-					list.add(cb.greaterThan(root.get("startDate").as(Date.class), activity.getStartDate()));
-				}
-				if(activity.getEndDate()!=null) {
-					list.add(cb.lessThan(root.get("endDate").as(Date.class), activity.getEndDate()));
+					if(!DateUtils.isValidShortDate(activity.getName())) {
+						list.add(cb.like(root.get("name").as(String.class), "%" + activity.getName() + "%"));
+					}else {
+						//是日期类型则按照开始时间和结束时间查询
+						Date searchDate = DateUtils.formatShortDate(activity.getName());
+						list.add(cb.lessThanOrEqualTo(root.get("startDate").as(Date.class), searchDate));
+						list.add(cb.greaterThanOrEqualTo(root.get("endDate").as(Date.class), searchDate));
+					}
 				}
 				Predicate[] p = new Predicate[list.size()];
 				return cb.and(list.toArray(p));
@@ -70,6 +75,7 @@ public class VoteActivityController {
 	
 	@PostMapping
 	public Result<VoteActivity> add(@RequestBody VoteActivity activity){
+		activity.setStatus((byte)VoteActivityStatus.calculateStatus(activity.getStartDate(), activity.getEndDate()));
 		return ResultGenerator.ok(activityService.create(activity));
 	}
 	
@@ -79,7 +85,7 @@ public class VoteActivityController {
 		old.setName(newEntity.getName());
 		old.setStartDate(newEntity.getStartDate());
 		old.setEndDate(newEntity.getEndDate());
-		old.setStatus(newEntity.getStatus());
+		old.setStatus((byte)VoteActivityStatus.calculateStatus(newEntity.getStartDate(), newEntity.getEndDate()));
 		old.setRemark(newEntity.getRemark());
 		return ResultGenerator.ok(activityService.update(old));
 	}
@@ -88,9 +94,27 @@ public class VoteActivityController {
 	public Result<String> delete(@RequestBody List<Long> ids){
 		ids.forEach(id->{
 			VoteActivity old = activityService.getOneById(id);
-			old.setDeleteFlag(new Byte("0"));
+			old.setDeleteFlag((byte)0);
 			activityService.update(old);
 		});
         return ResultGenerator.ok();
+	}
+	
+	/**
+	 * 更新活动状态
+	 * @param id
+	 * @param newEntity
+	 * @return
+	 */
+	@PutMapping("{id}/status")
+	public Result<VoteActivity> updateStatus(@PathVariable("id") long id,@RequestBody VoteActivity act){
+		VoteActivity old = activityService.getOneById(id);
+		if(act.getStatus()==VoteActivityStatus.CLOSED.getStatus()) {
+			old.setStatus(act.getStatus());
+		}else {
+			old.setStatus((byte)VoteActivityStatus.calculateStatus(old.getStartDate(),old.getEndDate()));
+		}
+		activityService.update(old);
+		return ResultGenerator.ok(activityService.update(old));
 	}
 }

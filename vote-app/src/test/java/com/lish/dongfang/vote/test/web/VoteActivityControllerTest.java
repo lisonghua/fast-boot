@@ -101,6 +101,28 @@ public class VoteActivityControllerTest extends BaseVoteTest {
 		Result<?> resultObj = sendDeleteReq4Rest("/api/vote/activity/",ids);
 		assertEquals("SUCCESS", resultObj.getStatus().name());
 		resultObj = sendGetReq4Rest("/api/vote/activity/"+id);
-		assertNull(resultObj.getContent());
+		assertEquals(0,((JSONObject)resultObj.getContent()).get("deleteFlag"));
+	}
+	
+	@Test
+	public void testUpdateStatusRestApi() throws Exception {
+		//准备数据
+		VoteActivity activity = new VoteActivity();
+		activity.setName("测试活动");
+		activity.setStartDate(new Date());
+		activity.setEndDate(new Date());
+		activity.setStatus(new Byte("1"));
+		Result<VoteActivity> result = activityController.add(activity);
+		long id = result.getContent().getId();
+		//修改状态
+		activity.setStatus((byte)2);
+		Result<?> resultObj = sendPutReq4Rest("/api/vote/activity/"+id+"/status/","{\"deleteFlag\":1,\"new\":true,\"status\":99}");
+		assertEquals("SUCCESS", resultObj.getStatus().name());
+	}
+	
+	public static void main(String[] args) {
+		VoteActivity activity = new VoteActivity();
+		
+		System.out.println(JSONObject.toJSONString(activity));
 	}
 }

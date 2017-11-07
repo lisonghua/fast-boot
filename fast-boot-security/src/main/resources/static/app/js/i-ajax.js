@@ -3,6 +3,8 @@
  */
 // jQuery 3.0
 var iAjax = function (url, data, methodType, beforeSend, cb, ecb) {
+	console.log("ajax send data:");
+	console.log(data);
     if (data == null) {
         return $.ajax({
             url: url,
@@ -48,4 +50,8 @@ var iPut = function (url, data, beforeSend, cb, ecb) {
 
 var iGet = function (url, cb, ecb) {
     return iAjax(url, null, "GET", null, cb, ecb)
+}
+
+var iPatch = function (url, data, beforeSend, cb, ecb) {
+    return iAjax(url, data, "PATCH", beforeSend, cb, ecb)
 }
