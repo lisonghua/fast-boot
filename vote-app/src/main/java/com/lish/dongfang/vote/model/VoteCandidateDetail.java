@@ -6,9 +6,9 @@ import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.lish.dongfang.core.FastBaseEntity;
@@ -33,12 +33,10 @@ public class VoteCandidateDetail extends FastBaseEntity<VoteCandidateDetail> imp
 	@Column(length=20)
 	private String tel;
 
-	//bi-directional many-to-one association to VoteCandidateCustomize
-	@OneToMany(mappedBy="voteCandidateDetail")
-	private List<VoteCandidateCustomize> voteCandidateCustomizes;
+	
 
 	//bi-directional many-to-one association to VoteCandidate
-	@ManyToOne
+	@OneToOne
 	@JoinColumn(name="vote_candidate_id")
 	private VoteCandidate voteCandidate;
 
@@ -67,28 +65,6 @@ public class VoteCandidateDetail extends FastBaseEntity<VoteCandidateDetail> imp
 
 	public void setTel(String tel) {
 		this.tel = tel;
-	}
-
-	public List<VoteCandidateCustomize> getVoteCandidateCustomizes() {
-		return this.voteCandidateCustomizes;
-	}
-
-	public void setVoteCandidateCustomizes(List<VoteCandidateCustomize> voteCandidateCustomizes) {
-		this.voteCandidateCustomizes = voteCandidateCustomizes;
-	}
-
-	public VoteCandidateCustomize addVoteCandidateCustomize(VoteCandidateCustomize voteCandidateCustomize) {
-		getVoteCandidateCustomizes().add(voteCandidateCustomize);
-		voteCandidateCustomize.setVoteCandidateDetail(this);
-
-		return voteCandidateCustomize;
-	}
-
-	public VoteCandidateCustomize removeVoteCandidateCustomize(VoteCandidateCustomize voteCandidateCustomize) {
-		getVoteCandidateCustomizes().remove(voteCandidateCustomize);
-		voteCandidateCustomize.setVoteCandidateDetail(null);
-
-		return voteCandidateCustomize;
 	}
 
 	public VoteCandidate getVoteCandidate() {

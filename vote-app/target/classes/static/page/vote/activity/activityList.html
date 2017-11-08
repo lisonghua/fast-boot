@@ -349,13 +349,11 @@ function closeActAction(rows){
                     action: function () {
                     	var data={};
                     	var id = rows[0].id;
-                    	var beforeSend = function(){
-                    		if(rows[0].status=='0'){//如果关闭的活动则打开
-                    			data['status']='99';
-                    		}else{
-                    			data['status']='0';//其他直接关闭
-                    		}
-                    	};
+                    	if(rows[0].status=='0'){//如果关闭的活动则打开
+                			data['status']=99;
+                		}else{
+                			data['status']=0;//其他直接关闭
+                		}
                     	var success = function(result){
                     		if (result.status != 'SUCCESS') {
                 				$.confirm({
@@ -390,7 +388,7 @@ function closeActAction(rows){
                 				}
                 			});
                     	};
-                    	iPut('/api/vote/activity/' + id +'/status', data, beforeSend, success, error);
+                    	iPut('/api/vote/activity/' + id +'/status', data, null, success, error);
                     }
             	},
             	cancel:{

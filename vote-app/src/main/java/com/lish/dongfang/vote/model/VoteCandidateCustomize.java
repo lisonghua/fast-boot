@@ -34,10 +34,10 @@ public class VoteCandidateCustomize extends FastBaseEntity<VoteCandidateCustomiz
 	@Column(name="enroll_customize_id")
 	private BigInteger enrollCustomizeId;
 
-	//bi-directional many-to-one association to VoteCandidateDetail
+	//bi-directional many-to-one association to VoteCandidate
 	@ManyToOne
-	@JoinColumn(name="vote_candidate_detail_id")
-	private VoteCandidateDetail voteCandidateDetail;
+	@JoinColumn(name="vote_candidate_id")
+	private VoteCandidate voteCandidate;
 
 	public VoteCandidateCustomize() {
 	}
@@ -58,12 +58,12 @@ public class VoteCandidateCustomize extends FastBaseEntity<VoteCandidateCustomiz
 		this.enrollCustomizeId = enrollCustomizeId;
 	}
 
-	public VoteCandidateDetail getVoteCandidateDetail() {
-		return this.voteCandidateDetail;
+	public VoteCandidate getVoteCandidate() {
+		return this.voteCandidate;
 	}
 
-	public void setVoteCandidateDetail(VoteCandidateDetail voteCandidateDetail) {
-		this.voteCandidateDetail = voteCandidateDetail;
+	public void setVoteCandidate(VoteCandidate voteCandidate) {
+		this.voteCandidate = voteCandidate;
 	}
 
 }

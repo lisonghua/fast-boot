@@ -10,6 +10,7 @@ import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.lish.dongfang.core.FastBaseEntity;
@@ -50,8 +51,12 @@ public class VoteCandidate extends FastBaseEntity<VoteCandidate> implements Seri
 	private VoteActivity voteActivity;
 
 	//bi-directional many-to-one association to VoteCandidateDetail
+	@OneToOne(mappedBy="voteCandidate")
+	private VoteCandidateDetail voteCandidateDetail;
+	
+	//bi-directional many-to-one association to VoteCandidateCustomize
 	@OneToMany(mappedBy="voteCandidate")
-	private List<VoteCandidateDetail> voteCandidateDetails;
+	private List<VoteCandidateCustomize> voteCandidateCustomizes;
 
 	public VoteCandidate() {
 	}
@@ -112,26 +117,33 @@ public class VoteCandidate extends FastBaseEntity<VoteCandidate> implements Seri
 		this.voteActivity = voteActivity;
 	}
 
-	public List<VoteCandidateDetail> getVoteCandidateDetails() {
-		return this.voteCandidateDetails;
+	public VoteCandidateDetail getVoteCandidateDetail() {
+		return this.voteCandidateDetail;
 	}
 
-	public void setVoteCandidateDetails(List<VoteCandidateDetail> voteCandidateDetails) {
-		this.voteCandidateDetails = voteCandidateDetails;
+	public void setVoteCandidateDetail(VoteCandidateDetail voteCandidateDetail) {
+		this.voteCandidateDetail = voteCandidateDetail;
+	}
+	
+	public List<VoteCandidateCustomize> getVoteCandidateCustomizes() {
+		return this.voteCandidateCustomizes;
 	}
 
-	public VoteCandidateDetail addVoteCandidateDetail(VoteCandidateDetail voteCandidateDetail) {
-		getVoteCandidateDetails().add(voteCandidateDetail);
-		voteCandidateDetail.setVoteCandidate(this);
+	public void setVoteCandidateCustomizes(List<VoteCandidateCustomize> voteCandidateCustomizes) {
+		this.voteCandidateCustomizes = voteCandidateCustomizes;
+	}
+	
+	public VoteCandidateCustomize addVoteCandidateCustomize(VoteCandidateCustomize voteCandidateCustomize) {
+		getVoteCandidateCustomizes().add(voteCandidateCustomize);
+		voteCandidateCustomize.setVoteCandidate(this);
 
-		return voteCandidateDetail;
+		return voteCandidateCustomize;
 	}
 
-	public VoteCandidateDetail removeVoteCandidateDetail(VoteCandidateDetail voteCandidateDetail) {
-		getVoteCandidateDetails().remove(voteCandidateDetail);
-		voteCandidateDetail.setVoteCandidate(null);
+	public VoteCandidateCustomize removeVoteCandidateCustomize(VoteCandidateCustomize voteCandidateCustomize) {
+		getVoteCandidateCustomizes().remove(voteCandidateCustomize);
+		voteCandidateCustomize.setVoteCandidate(null);
 
-		return voteCandidateDetail;
+		return voteCandidateCustomize;
 	}
-
 }
