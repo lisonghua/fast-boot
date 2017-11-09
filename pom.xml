@@ -25,6 +25,10 @@
         <module>vote-app</module>
         <module>vote-web</module>
         <module>fast-boot-core</module>
+        <module>fast-register-server</module>
+        <module>vote-service</module>
+        <module>user-service</module>
+        <module>vote-mobile</module>
 	</modules>
 
 	<properties>

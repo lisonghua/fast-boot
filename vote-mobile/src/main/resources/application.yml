@@ -1,0 +1,21 @@
+spring:
+  application:
+    name: vote-mobile
+    
+server:
+  port: 8055
+  
+eureka:
+  instance:
+    #eureka server服务列表显示ip+port
+    instance-id: ${spring.cloud.client.ipAddress}:${server.port}
+  client:
+    service-url:
+      defaultZone: http://localhost:1111/eureka/
+      
+security:
+  basic:
+    enabled: false
+  user:
+    name: test
+    password: test

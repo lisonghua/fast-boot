@@ -6,7 +6,7 @@ import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.boot.web.servlet.ServletComponentScan;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
-import com.lish.dongfang.DongFangApplication;
+import com.lish.dongfang.core.DongFangApplication;
 import com.sj.SanjiBootSecurityApplication;
 
 @SpringBootApplication(scanBasePackageClasses= {SanjiBootSecurityApplication.class,DongFangVoteApplication.class})

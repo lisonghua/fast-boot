@@ -1,0 +1,14 @@
+#服务注册端口
+server:
+  port: 1111
+  
+#服务发现server配置
+eureka:
+  instance:
+    hostname: localhost
+  client:
+    #关闭注册服务器的注册自身
+    register-with-eureka: false
+    fetch-registry: false
+    service-url: 
+      defaultZone: http://localhost:${server.port}/eureka/
