@@ -29,6 +29,9 @@
         <module>vote-service</module>
         <module>user-service</module>
         <module>vote-mobile</module>
+        <module>fast-cloud-dependencies</module>
+        <module>fast-api-gateway</module>
+        <module>vote-service-interface</module>
 	</modules>
 
 	<properties>

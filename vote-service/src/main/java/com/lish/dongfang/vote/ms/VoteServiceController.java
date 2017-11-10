@@ -1,9 +1,7 @@
 package com.lish.dongfang.vote.ms;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.lish.dongfang.core.FastBaseController;
@@ -18,14 +16,13 @@ import com.lish.dongfang.vote.service.VoteActivityService;
  *
  */
 @RestController
-@RequestMapping(value="/api/vote")
-public class VoteServiceController extends FastBaseController {
+public class VoteServiceController extends FastBaseController implements IVoteServiceController{
 	
 	@Autowired
 	private VoteActivityService actService;
 	
-	@GetMapping("activity/{id}")
-	public Result<VoteActivity> getActById(@PathVariable long id){
+	@Override
+	public Result<VoteActivity> getActById(@PathVariable("id") long id){
 		logger.info("调用服务提供者：VoteServiceController->getActById");
 		return ResultGenerator.ok(actService.getOneById(id));
 	}

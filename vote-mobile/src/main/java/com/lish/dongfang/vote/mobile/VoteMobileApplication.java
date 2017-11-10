@@ -7,13 +7,17 @@ import org.springframework.boot.autoconfigure.jdbc.DataSourceTransactionManagerA
 import org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfiguration;
 import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
+import org.springframework.cloud.netflix.feign.EnableFeignClients;
 import org.springframework.context.annotation.Bean;
 import org.springframework.web.client.RestTemplate;
 
-@SpringBootApplication(exclude={DataSourceAutoConfiguration.class,
+@SpringBootApplication(
+		scanBasePackages= {"com.lish.dongfang.cloud.core","com.lish.dongfang.vote.mobile"},
+		exclude={DataSourceAutoConfiguration.class,
 		DataSourceTransactionManagerAutoConfiguration.class,
 		HibernateJpaAutoConfiguration.class})
 @EnableEurekaClient
+@EnableFeignClients
 public class VoteMobileApplication {
 
 	public static void main(String[] args) {

@@ -1,0 +1,22 @@
+spring:
+  application:
+    name: api-gateway
+
+server:
+  port: 1101
+  
+eureka:
+  instance:
+    prefer-ip-address: true
+    #eureka server服务列表显示ip+port
+    instance-id: ${spring.cloud.client.ipAddress}:${server.port}
+  client:
+    service-url:
+      defaultZone: http://localhost:1111/eureka/
+
+#路由配置
+zuul:
+  routes:
+    vote:
+      path: /vote/**
+      service-id: vote-mobile
