@@ -51,13 +51,13 @@ eureka:
     service-url:
       defaultZone: http://localhost:1111/eureka/
       
-#配置spring security默认用户名和密码
+#关闭security，否则actuator接口需要用户名密码
+management:
+  security:
+    enabled: false
 security:
   basic:
     enabled: false
-  user:
-    name: test
-    password: test
     
 sanji:
   config:

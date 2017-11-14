@@ -9,8 +9,10 @@ import org.springframework.web.client.RestTemplate;
 
 import com.lish.dongfang.core.FastBaseController;
 import com.lish.dongfang.core.web.Result;
+import com.lish.dongfang.core.web.ResultGenerator;
 import com.lish.dongfang.vote.mobile.client.VoteRemoteServiceClient;
 import com.lish.dongfang.vote.model.VoteActivity;
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 
 /**
  * vote服务的消费者
@@ -36,4 +38,26 @@ public class VoteConsumerController extends FastBaseController {
 	public Result<VoteActivity> getActivityByIdV2(@PathVariable long id){
 		return voteClient.getActById(id);
 	}
+	
+	@GetMapping("activity/v3/{id}")
+	@HystrixCommand(fallbackMethod = "fallback")//需要hystrix监控的方法可以添加此注解
+	public Result<VoteActivity> getActivityByIdV3(@PathVariable long id){
+		try {
+			//模拟服务调用超时
+			Thread.sleep(5000L);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		return voteClient.getActById(id);
+	}
+	
+	/**
+	 * 断路器回调方法，服务降级使用，方法签名必须与getActivityByIdV3方法相同
+	 * @param id
+	 * @return
+	 */
+	private Result<VoteActivity> fallback(long id) {
+		VoteActivity act = new VoteActivity();
+        return ResultGenerator.error(act);
+    }
 }

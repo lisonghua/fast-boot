@@ -1,0 +1,21 @@
+spring:
+  application:
+    name: fast-hystrix
+
+server:
+  port: 8120
+  
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:1111/eureka/
+  instance:
+    #eureka server服务列表显示ip+port
+    instance-id: ${spring.cloud.client.ipAddress}:${server.port}
+
+security:
+  basic:
+    enabled: false
+  user:
+    name: test
+    password: test

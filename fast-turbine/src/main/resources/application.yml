@@ -1,0 +1,29 @@
+spring:
+  application:
+    name: fast-turbine
+
+server:
+  port: 8100
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:1111/eureka/
+  instance:
+    #eureka server服务列表显示ip+port
+    instance-id: ${spring.cloud.client.ipAddress}:${server.port} 
+     
+turbine:
+  #配置监控的服务名
+  app-config: vote-mobile
+  #配置聚合信息名称
+  cluster-name-expression: new String("default")
+  #配置通过主机名和端口区分服务
+  combine-host-port: true
+
+security:
+  basic:
+    enabled: false
+  user:
+    name: test
+    password: test

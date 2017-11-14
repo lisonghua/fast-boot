@@ -5,7 +5,7 @@ Built-By: lisong
 Implementation-Vendor-Id: com.lish.dongfang.cloud
 Build-Jdk: 1.8.0_144
 Implementation-URL: http://projects.spring.io/spring-boot/fast-boot/fa
- st-cloud-dependencies/fast-cloud-core/
+ st-cloud-core/
 Created-By: Maven Integration for Eclipse
 Implementation-Vendor: Pivotal Software, Inc.
 

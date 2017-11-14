@@ -37,9 +37,17 @@ public class ResultGenerator {
     public static <T> Result<T> ok(T content) {
         return ok(SUCCESS_MSG, content);
     }
+    
+    public static <T> Result<T> error(T content) {
+        return error(ERROR_MSG, content);
+    }
 
     public static <T> Result<T> ok(String msg, T content) {
         return genResult(Result.Status.SUCCESS, content, msg);
+    }
+    
+    public static <T> Result<T> error(String msg, T content) {
+        return genResult(Result.Status.ERROR, content, msg);
     }
 
     public static Result<String> error() {

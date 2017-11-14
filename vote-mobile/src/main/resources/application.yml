@@ -3,7 +3,7 @@ spring:
     name: vote-mobile
     
 server:
-  port: 8055
+  port: 8066
   
 eureka:
   instance:
@@ -16,6 +16,6 @@ eureka:
 security:
   basic:
     enabled: false
-  user:
-    name: test
-    password: test
+management:
+  security:
+    enabled: false
