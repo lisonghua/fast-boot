@@ -1,9 +1,26 @@
 spring:
   application:
     name: fast-monitor
+  #设置邮件通知服务器
+#  mail:
+#    host: smtp.qq.com
+  boot:
+    admin:
+      #turbine配置
+      turbine:
+        clusters:
+        - default
+        #turbine service的id
+        location: fast-turbine
+        #设置Notifier
+#      notify:
+#        mail:
+#          to: 1581361@qq.com
+#          subject: Service is Down
+#          from: Moniter Server Admin@lish-dongfang.com
 
 server:
-  port: 8130
+  port: 8888
   
 eureka:
   client:
@@ -16,14 +33,19 @@ eureka:
 management:
   security:
     enabled: false
-#配置monitor登录用户名和密码
+#fast monitor server配置
 fast:
   boot:
     monitor:
+      #开启/关闭monitor server安全登录验证
       security: true
+      #开启/关闭monitor通知
+      notifier: false
+#关闭security默认的安全保护
 security:
   basic:
     enabled: false
+  #配置monitor登录用户名和密码
   user:
     name: test
     password: test

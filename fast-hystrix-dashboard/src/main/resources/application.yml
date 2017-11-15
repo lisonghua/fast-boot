@@ -3,7 +3,7 @@ spring:
     name: fast-hystrix
 
 server:
-  port: 8120
+  port: 7777
   
 eureka:
   client:

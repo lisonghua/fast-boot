@@ -40,7 +40,7 @@ public class VoteConsumerController extends FastBaseController {
 	}
 	
 	@GetMapping("activity/v3/{id}")
-	@HystrixCommand(fallbackMethod = "fallback")//需要hystrix监控的方法可以添加此注解
+	@HystrixCommand(fallbackMethod = "fallback")//需要hystrix和turbine监控的方法可以添加此注解
 	public Result<VoteActivity> getActivityByIdV3(@PathVariable long id){
 		try {
 			//模拟服务调用超时

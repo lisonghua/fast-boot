@@ -27,6 +27,15 @@
 			<version>1.5.4</version>
 		</dependency>
 		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-mail</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>de.codecentric</groupId>
+			<artifactId>spring-boot-admin-server-ui-turbine</artifactId>
+			<version>1.5.4</version>
+		</dependency>
+		<dependency>
 			<groupId>com.lish.dongfang.cloud</groupId>
 			<artifactId>fast-cloud-core</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
