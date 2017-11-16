@@ -5,7 +5,9 @@ spring:
     config:
       server:
         git:
-          uri: 
+          uri: http://github.com/lisonghua/fast-boot
+          search-paths:
+          - fast-config-server/src/main/resources
           
 server:
   port: 6666
