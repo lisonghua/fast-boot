@@ -12,9 +12,14 @@
 	<description>use turbine to monitor status</description>
 	<dependencies>
 		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-turbine</artifactId>
+		</dependency>
+		<dependency>
 			<groupId>com.lish.dongfang.cloud</groupId>
-			<artifactId>fast-cloud-core</artifactId>
+			<artifactId>fast-cloud-dependencies</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
+			<type>pom</type>
 		</dependency>
 	</dependencies>
 </project>

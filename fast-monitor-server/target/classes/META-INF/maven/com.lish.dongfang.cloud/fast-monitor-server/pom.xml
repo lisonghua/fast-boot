@@ -10,35 +10,43 @@
 	<artifactId>fast-monitor-server</artifactId>
 	<name>fast-monitor-server</name>
 	<description>monitor service's  status server</description>
+	<properties>
+		<spring.boot.admin.version>1.5.4</spring.boot.admin.version>
+	</properties>
 	<dependencies>
 		<dependency>
 			<groupId>de.codecentric</groupId>
 			<artifactId>spring-boot-admin-server</artifactId>
-			<version>1.5.4</version>
+			<version>${spring.boot.admin.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>de.codecentric</groupId>
 			<artifactId>spring-boot-admin-server-ui</artifactId>
-			<version>1.5.4</version>
+			<version>${spring.boot.admin.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>de.codecentric</groupId>
 			<artifactId>spring-boot-admin-server-ui-login</artifactId>
-			<version>1.5.4</version>
+			<version>${spring.boot.admin.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>de.codecentric</groupId>
+			<artifactId>spring-boot-admin-server-ui-turbine</artifactId>
+			<version>${spring.boot.admin.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-mail</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>de.codecentric</groupId>
-			<artifactId>spring-boot-admin-server-ui-turbine</artifactId>
-			<version>1.5.4</version>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-security</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>com.lish.dongfang.cloud</groupId>
-			<artifactId>fast-cloud-core</artifactId>
+			<artifactId>fast-cloud-dependencies</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
+			<type>pom</type>
 		</dependency>
 	</dependencies>
 </project>

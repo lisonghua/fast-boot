@@ -15,26 +15,30 @@
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
 		<version>1.5.6.RELEASE</version>
-		<relativePath/> <!-- lookup parent from repository -->
+		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
 
 	<modules>
 		<module>fast-boot-shiro</module>
 		<module>fast-boot-security</module>
-        <module>fast-utils</module>
-        <module>vote-app</module>
-        <module>vote-web</module>
-        <module>fast-boot-core</module>
-        <module>fast-register-server</module>
-        <module>vote-service</module>
-        <module>user-service</module>
-        <module>vote-mobile</module>
-        <module>fast-cloud-dependencies</module>
-        <module>fast-api-gateway</module>
-        <module>vote-service-interface</module>
-        <module>fast-turbine</module>
-        <module>fast-hystrix-dashboard</module>
-        <module>fast-monitor-server</module>
+		<module>fast-utils</module>
+		<module>vote-app</module>
+		<module>vote-web</module>
+		<module>fast-boot-core</module>
+		<module>fast-register-server</module>
+		<module>vote-service</module>
+		<module>user-service</module>
+		<module>vote-mobile</module>
+		<!-- 基于spring cloud应用基本依赖 -->
+		<module>fast-cloud-dependencies</module>
+		<module>fast-api-gateway</module>
+		<module>vote-service-interface</module>
+		<module>fast-turbine</module>
+		<module>fast-hystrix-dashboard</module>
+		<module>fast-monitor-server</module>
+		<module>fast-config-server</module>
+		<!-- 开发微服务基本依赖 -->
+		<module>fast-cloud-core</module>
 	</modules>
 
 	<properties>
@@ -54,7 +58,24 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-actuator</artifactId>
+		</dependency>
 	</dependencies>
+
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>org.springframework.cloud</groupId>
+				<artifactId>spring-cloud-dependencies</artifactId>
+				<version>Dalston.SR3</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
 
 	<build>
 		<plugins>

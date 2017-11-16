@@ -3,7 +3,7 @@ spring:
     name: api-gateway
 
 server:
-  port: 1101
+  port: 9999
   
 eureka:
   instance:

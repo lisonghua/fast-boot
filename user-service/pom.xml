@@ -6,11 +6,4 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<name>user-service</name>
 	<description>user micro-service app</description>
-	<dependencies>
-		<dependency>
-			<groupId>com.lish.dongfang.cloud</groupId>
-			<artifactId>fast-cloud-core</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
-		</dependency>
-	</dependencies>
 </project>

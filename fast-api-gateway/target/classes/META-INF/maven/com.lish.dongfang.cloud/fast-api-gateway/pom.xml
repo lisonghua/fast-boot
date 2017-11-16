@@ -16,19 +16,10 @@
 			<artifactId>spring-cloud-starter-zuul</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>org.springframework.cloud</groupId>
-			<artifactId>spring-cloud-starter-eureka</artifactId>
+			<groupId>com.lish.dongfang.cloud</groupId>
+			<artifactId>fast-cloud-dependencies</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+			<type>pom</type>
 		</dependency>
 	</dependencies>
-	<dependencyManagement>
-		<dependencies>
-			<dependency>
-				<groupId>org.springframework.cloud</groupId>
-				<artifactId>spring-cloud-dependencies</artifactId>
-				<version>Dalston.SR1</version>
-				<type>pom</type>
-				<scope>import</scope>
-			</dependency>
-		</dependencies>
-	</dependencyManagement>
 </project>

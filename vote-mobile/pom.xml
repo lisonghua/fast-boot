@@ -8,11 +8,6 @@
 	<dependencies>
 		<dependency>
 			<groupId>com.lish.dongfang.vote</groupId>
-			<artifactId>vote-app</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
-		</dependency>
-		<dependency>
-			<groupId>com.lish.dongfang.vote</groupId>
 			<artifactId>vote-service-interface</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>

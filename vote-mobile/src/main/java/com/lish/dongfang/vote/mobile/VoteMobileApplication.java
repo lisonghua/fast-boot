@@ -8,7 +8,6 @@ import org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfigurat
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 import org.springframework.cloud.netflix.feign.EnableFeignClients;
 import org.springframework.cloud.netflix.hystrix.EnableHystrix;
-import org.springframework.cloud.netflix.hystrix.dashboard.EnableHystrixDashboard;
 
 /**
  * "com.lish.dongfang.cloud.core"必须扫描目录
