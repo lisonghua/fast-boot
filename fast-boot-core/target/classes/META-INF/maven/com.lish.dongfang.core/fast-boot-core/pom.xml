@@ -10,6 +10,7 @@
 	<artifactId>fast-boot-core</artifactId>
 	<name>fast-boot-core</name>
 	<description>framework</description>
+	
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>

@@ -3,7 +3,6 @@
 	<modelVersion>4.0.0</modelVersion>
 	<artifactId>vote-service</artifactId>
 	<groupId>com.lish.dongfang.vote.ms</groupId>
-	<version>0.0.1-SNAPSHOT</version>
 	<parent>
 		<groupId>com.lish</groupId>
 		<artifactId>fast-boot</artifactId>

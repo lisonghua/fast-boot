@@ -1,13 +1,20 @@
 spring:
   application:
     name: config-server
+  #需要从本地获取配置，请打开此配置
+#  profiles:
+#    active:
+#    - native
+  #需要从git获取配置，请打开此配置
   cloud:
     config:
       server:
         git:
-          uri: http://github.com/lisonghua/fast-boot
-          search-paths:
-          - fast-config-server/src/main/resources
+          uri: https://gitee.com/sngh_lee/config-repo
           
 server:
-  port: 6666
+  port: 1112
+  
+logging:
+  level:
+    root: info
