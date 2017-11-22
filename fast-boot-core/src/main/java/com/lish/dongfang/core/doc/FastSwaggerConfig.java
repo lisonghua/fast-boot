@@ -1,12 +1,22 @@
 package com.lish.dongfang.core.doc;
 
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 
+/**
+ * PropertySource来指定自定义的资源目录
+ * encoding = "utf-8"属性防止中文乱码,不能为大写的"UTF-8"
+ * @author lisong
+ *
+ */
 @Configuration
+@ConditionalOnProperty("fast.boot.swagger.enable")
 @ConfigurationProperties(prefix="fast.boot.swagger")
-@PropertySource("classpath:config/fast-swagger.yml")//@PropertySource来指定自定义的资源目录
+@PropertySource(value="classpath:config/fast-swagger.yml",
+	ignoreResourceNotFound=true,
+	encoding="utf-8")
 public class FastSwaggerConfig {
 	private String title;
 

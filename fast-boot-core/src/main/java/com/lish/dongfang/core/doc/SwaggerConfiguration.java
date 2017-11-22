@@ -3,13 +3,11 @@ package com.lish.dongfang.core.doc;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import com.lish.dongfang.core.adapter.SwaggerAdapter;
-
+import io.swagger.annotations.ApiOperation;
 import springfox.documentation.builders.ApiInfoBuilder;
 import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
@@ -29,8 +27,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @EnableSwagger2
 public class SwaggerConfiguration {
 	private static Logger logger = LoggerFactory.getLogger(SwaggerConfiguration.class);
-	@Autowired  
-	private SwaggerAdapter swaggerAdapter;
+
 	@Autowired  
 	private FastSwaggerConfig swaggerConfig;
 	
@@ -40,12 +37,12 @@ public class SwaggerConfiguration {
         ApiSelectorBuilder builder = new Docket(DocumentationType.SWAGGER_2)
                 .apiInfo(apiInfo())
                 .select()
-//                .apis(RequestHandlerSelectors.basePackage("com.lish.dongfang.vote.ms"))
+                .apis(RequestHandlerSelectors.withMethodAnnotation(ApiOperation.class))
                 .paths(PathSelectors.any());
-		return swaggerAdapter.addScanBasePackages(builder).build();
-//        return builder.build();
+        return builder.build();
     }
     private ApiInfo apiInfo() {
+    	logger.info("----------------获得ApiInfo------------------");
         return new ApiInfoBuilder()
                 .title(swaggerConfig.getTitle())
                 .description(swaggerConfig.getDescription())

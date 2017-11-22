@@ -10,6 +10,10 @@ import com.lish.dongfang.core.web.ResultGenerator;
 import com.lish.dongfang.vote.model.VoteActivity;
 import com.lish.dongfang.vote.service.VoteActivityService;
 
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
+import io.swagger.annotations.ApiOperation;
+
 /**
  * 投票系统微服务
  * @author lisong

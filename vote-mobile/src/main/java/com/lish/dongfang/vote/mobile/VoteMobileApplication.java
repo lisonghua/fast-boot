@@ -15,10 +15,18 @@ import org.springframework.cloud.netflix.hystrix.EnableHystrix;
  *
  */
 @SpringBootApplication(
-		scanBasePackages= {"com.lish.dongfang.cloud.core","com.lish.dongfang.vote.mobile"},
+		scanBasePackages= {
+				"com.lish.dongfang.core",
+				"com.lish.dongfang.cloud.core",
+				"com.lish.dongfang.vote.mobile"}
+		,
 		exclude={DataSourceAutoConfiguration.class,
 		DataSourceTransactionManagerAutoConfiguration.class,
-		HibernateJpaAutoConfiguration.class})
+		HibernateJpaAutoConfiguration.class
+		}
+		)
+//@EntityScan(basePackages= {"com.lish.dongfang.vote"})
+//@EnableJpaRepositories(basePackages= {"com.lish.dongfang.vote"})
 @EnableEurekaClient
 @EnableFeignClients//打开feign客户端
 @EnableHystrix//打开hystrix熔断机制

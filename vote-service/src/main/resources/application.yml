@@ -62,20 +62,7 @@ security:
 sanji:
   config:
 #  显示异常
-    show-exception: true
+    show-exception: false
 logging:
   level:
     root: info
-    
-fast:
-  boot:
-    #打开/关闭swagger功能
-    swagger: 
-      enable: true
-#      title: Spring Boot中使用Swagger2构建RESTful APIs
-#      description: 更多Spring Boot相关文章请关注：http://blog.didispace.com/
-#      serviceUrl: http://blog.didispace.com/
-#      contact: 程序猿DD
-#      version: 1.0
-#      license: 
-#      licenseUrl: 
