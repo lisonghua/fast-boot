@@ -1,0 +1,4 @@
+com\lish\dongfang\vote\test\DongFangVoteTestApplication.class
+com\lish\dongfang\vote\test\web\VoteActivityControllerTest.class
+com\lish\dongfang\vote\test\BaseVoteTest.class
+com\lish\dongfang\vote\test\BaseVoteTest$Config.class

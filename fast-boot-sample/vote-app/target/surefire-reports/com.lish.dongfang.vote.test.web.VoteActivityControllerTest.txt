@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: com.lish.dongfang.vote.test.web.VoteActivityControllerTest
+-------------------------------------------------------------------------------
+Tests run: 7, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 4.867 sec - in com.lish.dongfang.vote.test.web.VoteActivityControllerTest

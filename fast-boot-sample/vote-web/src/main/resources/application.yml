@@ -35,6 +35,14 @@ spring:
     show-sql: true
 server:
   port: 8081
+  session:
+    timeout: 1800
+  tomcat:
+    basedir: c:\tomcat\log
+    uri-encoding: UTF-8
+    accesslog:
+      enabled: true
+      directory: access
 
 sanji:
   config:
@@ -43,5 +51,7 @@ sanji:
     
 logging:
   level:
-    root: debug
+    root: info
+  file: c:\vote\log\vote-web.log
+  
 #    org.springframework.root.security: debug

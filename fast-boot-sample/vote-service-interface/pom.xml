@@ -4,7 +4,6 @@
     <groupId>com.lish.dongfang.fast</groupId>
     <artifactId>fast-boot-sample</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <relativePath>../fast-boot-sample</relativePath>
   </parent>
   <groupId>com.lish.dongfang.vote</groupId>
   <artifactId>vote-service-interface</artifactId>

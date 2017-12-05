@@ -19,20 +19,20 @@
 	</parent>
 
 	<modules>
-		<module>fast-boot-shiro</module>
 		
-		<module>fast-utils</module>
+		
+		
 		
 		
 		<module>fast-boot-core</module>
 		<module>fast-register-server</module>
-		
-		
-		
+
+
+
 		<!-- 基于spring cloud应用基本依赖 -->
 		<module>fast-cloud-dependencies</module>
 		<module>fast-api-gateway</module>
-		
+
 		<module>fast-turbine</module>
 		<module>fast-hystrix-dashboard</module>
 		<module>fast-monitor-server</module>
@@ -91,15 +91,4 @@
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
-
-	<build>
-		<plugins>
-			<plugin>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-maven-plugin</artifactId>
-			</plugin>
-		</plugins>
-	</build>
-
-
 </project>
