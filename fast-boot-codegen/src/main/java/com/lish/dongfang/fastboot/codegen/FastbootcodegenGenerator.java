@@ -1,26 +1,18 @@
 package com.lish.dongfang.fastboot.codegen;
 
 import io.swagger.codegen.*;
+import io.swagger.codegen.languages.SpringCodegen;
 import io.swagger.models.properties.*;
 
 import java.util.*;
 import java.io.File;
 
-public class FastbootcodegenGenerator extends DefaultCodegen implements CodegenConfig {
+public class FastbootcodegenGenerator extends SpringCodegen {
 
   // source folder where to write the files
   protected String sourceFolder = "src";
   protected String apiVersion = "1.0.0";
 
-  /**
-   * Configures the type of generator.
-   * 
-   * @return  the CodegenType for this generator
-   * @see     io.swagger.codegen.CodegenType
-   */
-  public CodegenType getTag() {
-    return CodegenType.CLIENT;
-  }
 
   /**
    * Configures a friendly name for the generator.  This will be used by the generator
@@ -54,24 +46,24 @@ public class FastbootcodegenGenerator extends DefaultCodegen implements CodegenC
      * for multiple files for model, just put another entry in the `modelTemplateFiles` with
      * a different extension
      */
-    modelTemplateFiles.put(
-      "model.mustache", // the template to use
-      ".sample");       // the extension for each file to write
+//    modelTemplateFiles.put(
+//      "model.mustache", // the template to use
+//      ".java");       // the extension for each file to write
 
     /**
      * Api classes.  You can write classes for each Api file with the apiTemplateFiles map.
      * as with models, add multiple entries with different extensions for multiple files per
      * class
      */
-    apiTemplateFiles.put(
-      "api.mustache",   // the template to use
-      ".sample");       // the extension for each file to write
+//    apiTemplateFiles.put(
+//      "api.mustache",   // the template to use
+//      ".java");       // the extension for each file to write
 
     /**
      * Template Location.  This is the location which templates will be read from.  The generator
      * will use the resource stream to attempt to read the templates.
      */
-    templateDir = "fastBootCodegen";
+//    templateDir = "fastBootCodegen";
 
     /**
      * Api Package.  Optional, if needed, this can be used in templates
@@ -86,11 +78,11 @@ public class FastbootcodegenGenerator extends DefaultCodegen implements CodegenC
     /**
      * Reserved words.  Override this with reserved words specific to your language
      */
-    reservedWords = new HashSet<String> (
-      Arrays.asList(
-        "sample1",  // replace with static values
-        "sample2")
-    );
+//    reservedWords = new HashSet<String> (
+//      Arrays.asList(
+//        "sample1",  // replace with static values
+//        "sample2")
+//    );
 
     /**
      * Additional Properties.  These values can be passed to the templates and
@@ -103,20 +95,20 @@ public class FastbootcodegenGenerator extends DefaultCodegen implements CodegenC
      * entire object tree available.  If the input file has a suffix of `.mustache
      * it will be processed by the template engine.  Otherwise, it will be copied
      */
-    supportingFiles.add(new SupportingFile("myFile.mustache",   // the input template or file
-      "",                                                       // the destination folder, relative `outputFolder`
-      "myFile.sample")                                          // the output file
-    );
+//    supportingFiles.add(new SupportingFile("myFile.mustache",   // the input template or file
+//      "",                                                       // the destination folder, relative `outputFolder`
+//      "myFile.sample")                                          // the output file
+//    );
 
     /**
      * Language Specific Primitives.  These types will not trigger imports by
      * the client generator
      */
-    languageSpecificPrimitives = new HashSet<String>(
-      Arrays.asList(
-        "Type1",      // replace these with your types
-        "Type2")
-    );
+//    languageSpecificPrimitives = new HashSet<String>(
+//      Arrays.asList(
+//        "Type1",      // replace these with your types
+//        "Type2")
+//    );
   }
 
   /**
@@ -153,20 +145,20 @@ public class FastbootcodegenGenerator extends DefaultCodegen implements CodegenC
    *
    * @return a string value used as the `dataType` field for model templates, `returnType` for api templates
    */
-  @Override
-  public String getTypeDeclaration(Property p) {
-    if(p instanceof ArrayProperty) {
-      ArrayProperty ap = (ArrayProperty) p;
-      Property inner = ap.getItems();
-      return getSwaggerType(p) + "[" + getTypeDeclaration(inner) + "]";
-    }
-    else if (p instanceof MapProperty) {
-      MapProperty mp = (MapProperty) p;
-      Property inner = mp.getAdditionalProperties();
-      return getSwaggerType(p) + "[String, " + getTypeDeclaration(inner) + "]";
-    }
-    return super.getTypeDeclaration(p);
-  }
+//  @Override
+//  public String getTypeDeclaration(Property p) {
+//    if(p instanceof ArrayProperty) {
+//      ArrayProperty ap = (ArrayProperty) p;
+//      Property inner = ap.getItems();
+//      return getSwaggerType(p) + "[" + getTypeDeclaration(inner) + "]";
+//    }
+//    else if (p instanceof MapProperty) {
+//      MapProperty mp = (MapProperty) p;
+//      Property inner = mp.getAdditionalProperties();
+//      return getSwaggerType(p) + "[String, " + getTypeDeclaration(inner) + "]";
+//    }
+//    return super.getTypeDeclaration(p);
+//  }
 
   /**
    * Optional - swagger type conversion.  This is used to map swagger types in a `Property` into 
@@ -175,17 +167,17 @@ public class FastbootcodegenGenerator extends DefaultCodegen implements CodegenC
    * @return a string value of the type or complex model for this property
    * @see io.swagger.models.properties.Property
    */
-  @Override
-  public String getSwaggerType(Property p) {
-    String swaggerType = super.getSwaggerType(p);
-    String type = null;
-    if(typeMapping.containsKey(swaggerType)) {
-      type = typeMapping.get(swaggerType);
-      if(languageSpecificPrimitives.contains(type))
-        return toModelName(type);
-    }
-    else
-      type = swaggerType;
-    return toModelName(type);
-  }
+//  @Override
+//  public String getSwaggerType(Property p) {
+//    String swaggerType = super.getSwaggerType(p);
+//    String type = null;
+//    if(typeMapping.containsKey(swaggerType)) {
+//      type = typeMapping.get(swaggerType);
+//      if(languageSpecificPrimitives.contains(type))
+//        return toModelName(type);
+//    }
+//    else
+//      type = swaggerType;
+//    return toModelName(type);
+//  }
 }

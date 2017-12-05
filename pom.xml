@@ -20,25 +20,28 @@
 
 	<modules>
 		<module>fast-boot-shiro</module>
-		<module>fast-boot-security</module>
+		
 		<module>fast-utils</module>
-		<module>vote-app</module>
-		<module>vote-web</module>
+		
+		
 		<module>fast-boot-core</module>
 		<module>fast-register-server</module>
-		<module>vote-service</module>
-		<module>user-service</module>
-		<module>vote-mobile</module>
+		
+		
+		
 		<!-- 基于spring cloud应用基本依赖 -->
 		<module>fast-cloud-dependencies</module>
 		<module>fast-api-gateway</module>
-		<module>vote-service-interface</module>
+		
 		<module>fast-turbine</module>
 		<module>fast-hystrix-dashboard</module>
 		<module>fast-monitor-server</module>
 		<module>fast-config-server</module>
 		<!-- 开发微服务基本依赖 -->
 		<module>fast-cloud-core</module>
+		<module>fast-boot-security-app</module>
+		<module>fast-boot-security-web</module>
+		<module>fast-boot-sample</module>
 	</modules>
 
 	<properties>
