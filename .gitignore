@@ -1,4 +1,4 @@
 #忽略所有class文件
-#*.class
+*.class
 #忽略所有jar文件
-#*.jar
+*.jar

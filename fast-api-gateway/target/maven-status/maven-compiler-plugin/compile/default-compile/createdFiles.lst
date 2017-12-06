@@ -1,9 +1,0 @@
-com\lish\dongfang\cloud\gateway\filter\BaseZuulFilter$FILTER_TYPE.class
-com\lish\dongfang\cloud\gateway\filter\BaseZuulFilter.class
-com\lish\dongfang\cloud\gateway\filter\RoutingFilter.class
-com\lish\dongfang\cloud\gateway\conf\FilterConfiguration.class
-com\lish\dongfang\cloud\gateway\filter\ErrorFilter.class
-com\lish\dongfang\cloud\gateway\ApiGatewayApplication.class
-com\lish\dongfang\cloud\gateway\filter\AccessControlFilter.class
-com\lish\dongfang\cloud\gateway\filter\PostFilter.class
-com\lish\dongfang\cloud\gateway\filter\PreZuulFilter.class
