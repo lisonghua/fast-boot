@@ -1,0 +1,259 @@
+<style>
+
+    .select2-container--default.select2-container--focus .select2-selection--multiple {
+        border: solid #FFF 0px;
+        border-bottom: 2px solid #eee;
+        outline: 0;
+    }
+
+    .select2-container--default .select2-selection--multiple {
+        margin-top: 5px;
+        background-color: white;
+        border-radius: 4px;
+        border: solid #FFF 0px;
+        border-bottom: 2px solid #eee;
+        cursor: text;
+    }
+
+    .select2-container--default .select2-selection--multiple .select2-selection__choice {
+        background-color: #FFFFFF;
+        border: 2px solid #eee;
+        border-radius: 4px;
+        cursor: default;
+        float: left;
+        margin-right: 5px;
+        margin-top: 5px;
+        padding: 0 5px;
+    }
+</style>
+<div id="createDialog" class="crudDialog">
+    <form id="createForm" method="post">
+        <div id="add" class="form-group">
+            <label for="loginName">帐号</label>
+            <input id="loginName" type="text" class="form-control" name="loginName" maxlength="20"/>
+        </div>
+        <div id="update" class="form-group">
+            <label for="nickname">昵称</label>
+            <input id="nickname" type="text" class="form-control" name="nickname" maxlength="20"/>
+        </div>
+        <div class="form-group">
+            <label for="avatar">头像</label>
+            <input id="avatar" type="text" class="form-control" name="avatar" maxlength="50"/>
+        </div>
+        <div class="form-group">
+            <label for="role" class="active">角色</label>
+            <select id="role" name="roleSet" class=" select2" multiple="multiple" data-placeholder="选择角色"
+                    style="width: 100%;">
+
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="birthday">生日</label>
+            <input id="birthday" type="text" name="birthday" class="form-control" data-inputmask="'alias': 'yyyy-mm-dd'"
+                   data-mask/>
+            <!-- /.input group -->
+        </div>
+        <div class="form-group">
+            <label for="phone">电话</label>
+            <input id="phone" type="text" class="form-control" name="phone" maxlength="20" maxlength="12"
+                   data-inputmask='"mask": "(999) 9999-9999"' data-mask/>
+        </div>
+        <div class="form-group">
+            <label for="email">邮箱</label>
+            <input id="email" type="text" class="form-control" name="email" maxlength="50"/>
+        </div>
+        <div>
+            <label style="color:#999">性别: &nbsp;</label>
+            <div class="radio radio-inline radio-info">
+                <input id="sex_1" type="radio" name="sex" value="MAN">
+                <label for="sex_1">男 </label>
+            </div>
+            <div class="radio radio-inline radio-danger">
+                <input id="sex_0" type="radio" name="sex" value="WO_MAN">
+                <label for="sex_0">女 </label>
+            </div>
+        </div>
+        <br/>
+        <div>
+            <label style="color:#999">状态: &nbsp;</label>
+            <div class="radio radio-inline radio-success">
+                <input id="status_0" type="radio" name="status" value="NORMAL">
+                <label for="status_0">正常 </label>
+            </div>
+            <div class="radio radio-inline radio-danger">
+                <input id="status_1" type="radio" name="status" value="ABNORMAL">
+                <label for="status_1">异常 </label>
+            </div>
+            <div class="radio radio-inline">
+                <input id="status_2" type="radio" name="status" value="FROZEN">
+                <label for="status_2">冻结 </label>
+            </div>
+        </div>
+        <div class="form-group text-right dialog-buttons">
+            <a class="waves-effect waves-button" href="javascript:;" onclick="createSubmit();">保存</a>
+            <a class="waves-effect waves-button" href="javascript:;" onclick="createDialog.close();">取消</a>
+        </div>
+
+    </form>
+</div>
+<script>
+
+    function getUser(id, fc) {
+        iGet('/api/user/' + id, fc)
+    }
+
+    function getRoles(fc) {
+        iGet("/api/role", fc);
+    }
+
+    var id = 0;
+
+
+    //select2
+    $(".select2").select2({
+        maximumSelectionLength: 10,
+        language: "zh-CN",
+    });
+
+    //选中某个标签
+    function selectTag(value) {
+        $(".select2").val(value).trigger('change');
+    }
+
+
+    setTimeout(function () {
+        if (location.href.indexOf('#') > 0) {
+            id = location.href.split("#")[1];
+        }
+        //判断是否是更新操作
+        if (id == 0) {
+            $('#update').remove();
+        } else {
+            $('#add').remove();
+        }
+        //更新获取用户数据
+        if (id != 0) {
+            getUser(id, function (data) {
+                console.log(data);
+                var user = data.content;
+                //设置input 此处没有用vue vue与inputmask有兼容性问题
+                for (var p in user) {
+                    if (p == 'status' || p == 'sex') {
+                        try {
+                            $("input:radio[value=" + user[p] + "]").attr('checked', 'true');
+                        } catch (e) {
+                            console.log("radio")
+                        }
+                    } else {
+                        $("input[name=" + p + "]").val(user[p]);
+                    }
+                }
+                getRoles(function (data) {
+                    var roles = []
+                    data.content.content.forEach(function (role) {
+                        roles.push({text: role.name, id: role.id});
+                    })
+                    $(".select2").select2({
+                        data: roles
+                    });
+                    var userRoles = []
+                    user.roleSet.forEach(function (role) {
+                        userRoles.push(role.id);
+                    })
+                    selectTag(userRoles);
+                })
+            });
+        } else {
+            getRoles(function (data) {
+                console.log("------", data);
+                var roles = []
+                data.content.content.forEach(function (role) {
+                    roles.push({text: role.name, id: role.id});
+                })
+                $(".select2").select2({
+                    data: roles
+                });
+            })
+        }
+        //去掉有值的input标题效果
+        var inputs = $("#createForm input[type=text]");
+        for (var i = 0; i < inputs.length; i++) {
+            if ($(inputs[i]).val() != '') {
+                $(inputs[i]).parent().find('label').addClass('active');
+            }
+        }
+        //Money Euro
+        $("[data-mask]").inputmask();
+    }, 300)
+
+
+    function createSubmit() {
+        var data = {};
+        $('#createForm').serializeArray().map(function (x) {
+            data[x.name] = x.value;
+        });
+        var beforeSend = function () {
+            if (id == 0) {
+                if ($('#loginName').val() == '') {
+                    $('#loginName').focus();
+                    return false;
+                }
+            } else {
+                if ($('#nickname').val() == '') {
+                    $('#nickname').focus();
+                    return false;
+                }
+            }
+
+        }
+        var roleIds = $(".select2").val();
+        var roles = []
+        if (roleIds) {
+            roleIds.forEach(function (role) {
+                roles.push({id: parseInt(role)});
+            });
+        }
+        data.roleSet = roles;
+        var success = function (result) {
+            if (result.status != 'SUCCESS') {
+                $.confirm({
+                    theme: result.status == 'SUCCESS' ? 'light' : 'dark',
+                    animation: 'rotateX',
+                    closeAnimation: 'rotateX',
+                    title: false,
+                    content: result.msg.indexOf('constraint') > 0 ? '请尝试换一个新的用户名' : result.msg,
+                    buttons: {
+                        confirm: {
+                            text: '确认',
+                            btnClass: 'waves-effect waves-button waves-light',
+                        }
+                    }
+                });
+            } else {
+                createDialog.close();
+                $table.bootstrapTable('refresh');
+            }
+        }
+        var error = function (jqXHR, textStatus) {
+            $.confirm({
+                theme: 'dark',
+                animation: 'rotateX',
+                closeAnimation: 'rotateX',
+                title: false,
+                content: textStatus != 'canceled' ? '系统异常' : '请检查密码与用户名',
+                buttons: {
+                    confirm: {
+                        text: '确认',
+                        btnClass: 'waves-effect waves-button waves-light'
+                    }
+                }
+            });
+        }
+        if (id == 0) {
+            iPost('/api/user', data, beforeSend, success, error);
+        } else {
+            iPut('/api/user/' + id, data, beforeSend, success, error);
+        }
+
+    }
+</script>

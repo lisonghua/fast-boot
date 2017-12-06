@@ -1,0 +1,30 @@
+/** skins **/
+/*綠色*/
+.radio-skin-green input[type="radio"] + label::after , .skin-green ,
+#skin-green #header {background: #29A176;}
+#skin-green .content_tab{background: #29A176;}
+#skin-green .s-profile>a{background: url(../img/zheng-upms.png) left top no-repeat;}
+
+/*深藍*/
+.radio-skin-dark-blue input[type="radio"] + label::after , .skin-dark-blue ,
+#skin-dark-blue #header {background: #455EC5;}
+#skin-dark-blue .content_tab{background: #455EC5;}
+#skin-dark-blue .s-profile>a{background: url(../img/zheng-cms.png) left top no-repeat;}
+
+/*粉紅*/
+.radio-skin-pink input[type="radio"] + label::after , .skin-pink ,
+#skin-pink #header {background: #F06292;}
+#skin-pink .content_tab{background: #F06292;}
+#skin-pink .s-profile>a{background: url(../img/zheng-pay.png) left top no-repeat;}
+
+/*紫色*/
+.radio-skin-purple input[type="radio"] + label::after , .skin-purple ,
+#skin-purple #header {background: #6539B4;}
+#skin-purple .content_tab{background: #6539B4;}
+#skin-purple .s-profile>a{background: url(../img/zheng-ucenter.png) left top no-repeat;}
+
+/*藍色*/
+.radio-skin-blue input[type="radio"] + label::after , .skin-blue ,
+#skin-blue #header {background: #0B8DE5;}
+#skin-blue .content_tab{background: #0B8DE5;}
+#skin-blue .s-profile>a{background: url(../img/zheng-oss.png) left top no-repeat;}
