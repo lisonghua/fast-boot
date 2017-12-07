@@ -20,11 +20,11 @@ import com.alibaba.fastjson.JSONObject;
 import com.lish.dongfang.core.web.Result;
 import com.lish.dongfang.vote.model.VoteActivity;
 import com.lish.dongfang.vote.test.BaseVoteTest;
-import com.lish.dongfang.vote.web.VoteActivityController;
+import com.lish.dongfang.vote.web.IVoteActivityController;
 
 public class VoteActivityControllerTest extends BaseVoteTest {
 	@Autowired
-	private VoteActivityController activityController;
+	private IVoteActivityController activityController;
 	
 	@Test
 	public void testGetAll() {

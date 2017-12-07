@@ -1,0 +1,151 @@
+<!DOCTYPE HTML>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>活动列表</title>
+	
+    <link href="/plugins/bootstrap-3.3.0/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="/plugins/bootstrap-datepicker/bootstrap-datepicker3.min.css" rel="stylesheet"/>
+    <link href="/plugins/material-design-iconic-font-2.2.0/css/material-design-iconic-font.min.css"
+          rel="stylesheet"/>
+    <link href="/plugins/awesome-bootstrap-checkbox/awesome-bootstrap-checkbox.css" rel="stylesheet"/>
+
+    <link href="/plugins/bootstrap-table-1.11.0/bootstrap-table.min.css" rel="stylesheet"/>
+    <link href="/plugins/bootstrap-table-1.11.0/extends/bootstrap-table-filter-control.css" rel="stylesheet"/>
+    <link href="/plugins/waves-0.7.5/waves.min.css" rel="stylesheet"/>
+    <link href="/plugins/jquery-confirm/jquery-confirm.min.css" rel="stylesheet"/>
+
+    <!--select2-->
+    <link href="https://cdn.bootcss.com/select2/4.0.3/css/select2.min.css" rel="stylesheet"/>
+
+    <link href="/app/css/common.css" rel="stylesheet"/>
+
+</head>
+<body>
+<div id="main">
+    <div id="toolbar">
+        <a class="waves-effect waves-button" href="javascript:;" onclick="createAction()"><i class="zmdi zmdi-plus"></i>
+            新增候选人</a>
+
+        <a class="waves-effect waves-button" href="javascript:;" onclick="deleteAction()"><i
+                class="zmdi zmdi-close"></i> 删除候选人</a>
+    </div>
+    <table id="table"></table>
+</div>
+</body>
+<script src="/plugins/jquery.1.12.4.min.js"></script>
+<script src="/plugins/bootstrap-3.3.0/js/bootstrap.min.js"></script>
+<script src="/plugins/bootstrap-datepicker/bootstrap-datepicker.min.js"></script>
+<script src="/plugins/bootstrap-table-1.11.0/bootstrap-table.min.js"></script>
+<script src="/plugins/bootstrap-table-1.11.0/locale/bootstrap-table-zh-CN.min.js"></script>
+<script src="/plugins/bootstrap-table-1.11.0/extends/bootstrap-table-filter-control.js"></script>
+<script src="/plugins/waves-0.7.5/waves.min.js"></script>
+<script src="/plugins/jquery-confirm/jquery-confirm.min.js"></script>
+<script src="https://cdn.bootcss.com/moment.js/2.18.1/moment.min.js"></script>
+
+<!--给form使用-->
+<!-- select2 -->
+<script src="https://cdn.bootcss.com/select2/4.0.3/js/select2.min.js"></script>
+<script src="https://cdn.bootcss.com/select2/4.0.3/js/i18n/zh-CN.js"></script>
+
+<!-- InputMask -->
+<script src="/plugins/input-mask/jquery.inputmask.js"></script>
+<script src="/plugins/input-mask/jquery.inputmask.date.extensions.js"></script>
+<script src="/plugins/input-mask/jquery.inputmask.extensions.js"></script>
+
+<script src="/app/js/common.js"></script>
+<script src="/app/js/i-ajax.js"></script>
+<script type="text/javascript">
+var $table = $('#table');
+$(function () {
+	jconfirm.defaults = {
+	        theme: 'material',
+	};
+	// bootstrap table初始化
+    // http://bootstrap-table.wenzhixin.net.cn/zh-cn/documentation/
+    $table.bootstrapTable({
+        url: '',
+        height: getHeight(),
+        striped: true,
+        search: true,
+//         filterControl: true,
+//         filterShowClear: true,
+        searchOnEnterKey: true,
+        showRefresh: true,
+        showToggle: true,
+        showColumns: true,
+        minimumCountColumns: 2,
+//        showPaginationSwitch: true,
+        clickToSelect: true,
+        pageSize: 20,
+        pageList: [10, 20, 25, 50, 100],
+//        detailView: true,
+//        detailFormatter: 'detailFormatter',
+        pagination: true,
+        paginationLoop: false,
+        classes: 'table table-hover table-no-bordered',
+        sidePagination: "server",
+        silentSort: false,
+        smartDisplay: false,
+        idField: 'id',
+        sortName: 'id',
+        sortOrder: 'desc',
+        escape: true,
+        maintainSelected: true,
+        toolbar: '#toolbar',
+        columns: [
+            {field: 'state', checkbox: true},
+            {field: 'name', title: '姓名', sortable: true, align: 'center'},
+            {field: 'birthday', title: '生日',sortable: true, align: 'center'},
+            {field: 'age', title: '年龄',sortable: true, align: 'center'},
+            {field: 'sex', title: '性别',sortable: true, align: 'center'},
+            {field: 'number', title: '获得投票数', sortable: true, align: 'center'},
+            {field: 'status', title: '状态', align: 'center'},
+            {
+                field: 'action',
+                title: '操作',
+                align: 'center',
+//                 formatter: 'actionFormatter',
+//                 events: 'actionEvents',
+                clickToSelect: false,
+                switchable: true,
+            }
+
+        ],
+        queryParams: function (params) {
+            return {
+                size: params.limit,
+                page: params.offset / params.limit,
+                sort: params.sort + ',' + params.order,
+                name: params.search,
+            };
+        },
+        responseHandler: function (data) {
+            if (data.status == "SUCCESS") {
+                data = data.content;
+                return {total: data.totalElements, rows: data.content};
+            } else {
+                $.confirm({
+                    type: 'red',
+                    title: false,
+                    content: '请求数据失败',
+                    autoClose: 'cancel|3000',
+                    backgroundDismiss: true,
+                    buttons: {
+                        confirm: {
+                            text: '确定',
+                            btnClass: 'waves-effect waves-button'
+                        }
+                    }
+                });
+                return {total: 0, rows: []};
+            }
+        }
+    }).on('all.bs.table', function (e, name, args) {
+        $('[data-toggle="tooltip"]').tooltip();
+        $('[data-toggle="popover"]').popover();
+    });
+});
+</script>

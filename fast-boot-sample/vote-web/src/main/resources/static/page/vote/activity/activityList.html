@@ -160,9 +160,11 @@ function dateFormatter(date) {
 //格式化操作按钮列
 function actionFormatter(value, row, index) {
     return [
+    	'<a class="candidate ml10" href="javascript:void(0)" data-toggle="tooltip" title="管理候选人"><i class="glyphicon glyphicon-user"></i></a>　',
         '<a class="edit ml10" href="javascript:void(0)" data-toggle="tooltip" title="编辑"><i class="glyphicon glyphicon-edit"></i></a>　',
         '<a class="closebt ml10" href="javascript:void(0)" data-toggle="tooltip" title="关闭"><i class="glyphicon glyphicon-off"></i></a>　',
         '<a class="remove ml10" href="javascript:void(0)" data-toggle="tooltip" title="删除"><i class="glyphicon glyphicon-remove"></i></a>'
+        
     ].join('');
 }
 //格式化状态列
@@ -399,7 +401,17 @@ function closeActAction(rows){
     	});
     }
 }
+//导航到候选人管理页面
+function routeCandidatePage(rows){
+	$(location).attr('href', '/page/vote/candidate/candidateList.html');
+}
+
 window.actionEvents = {
+	'click .candidate': function (e, value, row, index) {
+	        var rows = [];
+	        rows.push(row);
+	        routeCandidatePage(rows);
+	 },
     'click .edit': function (e, value, row, index) {
         var rows = [];
         rows.push(row);

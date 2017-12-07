@@ -1,4 +1,4 @@
-package com.lish.dongfang.vote.web;
+package com.lish.dongfang.vote.web.impl;
 
 import com.lish.dongfang.core.FastBaseController;
 

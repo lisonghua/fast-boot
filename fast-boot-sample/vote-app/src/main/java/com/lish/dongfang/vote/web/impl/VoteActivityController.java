@@ -1,4 +1,4 @@
-package com.lish.dongfang.vote.web;
+package com.lish.dongfang.vote.web.impl;
 
 
 import java.util.ArrayList;
@@ -15,13 +15,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.util.StringUtils;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.lish.dongfang.core.FastBaseController;
@@ -31,6 +26,7 @@ import com.lish.dongfang.vote.common.VoteActivityStatus;
 import com.lish.dongfang.vote.model.VoteActivity;
 import com.lish.dongfang.vote.service.VoteActivityService;
 import com.lish.dongfang.vote.utils.DateUtils;
+import com.lish.dongfang.vote.web.IVoteActivityController;
 
 /**
  * 投票活动rest服务接口类
@@ -38,18 +34,23 @@ import com.lish.dongfang.vote.utils.DateUtils;
  *
  */
 @RestController
-@RequestMapping(value="/api/vote/activity")
-public class VoteActivityController extends FastBaseController {
+public class VoteActivityController extends FastBaseController implements IVoteActivityController {
 	
 	@Autowired
 	private VoteActivityService activityService;
 	
-	@GetMapping("{id}")
+	/* (non-Javadoc)
+	 * @see com.lish.dongfang.vote.web.IVoteActivityController#getOne(long)
+	 */
+	@Override
 	public Result<VoteActivity> getOne(@PathVariable long id){
 		return ResultGenerator.ok(activityService.getOneById(id));
 	}
 	
-	@GetMapping
+	/* (non-Javadoc)
+	 * @see com.lish.dongfang.vote.web.IVoteActivityController#getAll(com.lish.dongfang.vote.model.VoteActivity, org.springframework.data.domain.Pageable)
+	 */
+	@Override
 	public Result<Page<VoteActivity>> getAll(VoteActivity activity, Pageable pageable){
 		Page<VoteActivity> page = activityService.getPageBySpeci(new Specification<VoteActivity>() {
 			
@@ -73,13 +74,19 @@ public class VoteActivityController extends FastBaseController {
 		return ResultGenerator.ok(page);
 	}
 	
-	@PostMapping
+	/* (non-Javadoc)
+	 * @see com.lish.dongfang.vote.web.IVoteActivityController#add(com.lish.dongfang.vote.model.VoteActivity)
+	 */
+	@Override
 	public Result<VoteActivity> add(@RequestBody VoteActivity activity){
 		activity.setStatus((byte)VoteActivityStatus.calculateStatus(activity.getStartDate(), activity.getEndDate()));
 		return ResultGenerator.ok(activityService.create(activity));
 	}
 	
-	@PutMapping("{id}")
+	/* (non-Javadoc)
+	 * @see com.lish.dongfang.vote.web.IVoteActivityController#update(long, com.lish.dongfang.vote.model.VoteActivity)
+	 */
+	@Override
 	public Result<VoteActivity> update(@PathVariable("id") long id,@RequestBody VoteActivity newEntity){
 		VoteActivity old = activityService.getOneById(id);
 		old.setName(newEntity.getName());
@@ -90,7 +97,10 @@ public class VoteActivityController extends FastBaseController {
 		return ResultGenerator.ok(activityService.update(old));
 	}
 	
-	@DeleteMapping
+	/* (non-Javadoc)
+	 * @see com.lish.dongfang.vote.web.IVoteActivityController#delete(java.util.List)
+	 */
+	@Override
 	public Result<String> delete(@RequestBody List<Long> ids){
 		ids.forEach(id->{
 			VoteActivity old = activityService.getOneById(id);
@@ -100,13 +110,10 @@ public class VoteActivityController extends FastBaseController {
         return ResultGenerator.ok();
 	}
 	
-	/**
-	 * 更新活动状态
-	 * @param id
-	 * @param newEntity
-	 * @return
+	/* (non-Javadoc)
+	 * @see com.lish.dongfang.vote.web.IVoteActivityController#updateStatus(long, com.lish.dongfang.vote.model.VoteActivity)
 	 */
-	@PutMapping("{id}/status")
+	@Override
 	public Result<VoteActivity> updateStatus(@PathVariable("id") long id,@RequestBody VoteActivity act){
 		VoteActivity old = activityService.getOneById(id);
 		if(act.getStatus()==VoteActivityStatus.CLOSED.getStatus()) {
