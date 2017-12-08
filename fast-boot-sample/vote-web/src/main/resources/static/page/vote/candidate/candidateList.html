@@ -26,11 +26,45 @@
 <body>
 <div id="main">
     <div id="toolbar">
-        <a class="waves-effect waves-button" href="javascript:;" onclick="createAction()"><i class="zmdi zmdi-plus"></i>
-            新增候选人</a>
-
-        <a class="waves-effect waves-button" href="javascript:;" onclick="deleteAction()"><i
-                class="zmdi zmdi-close"></i> 删除候选人</a>
+        <a class="waves-effect waves-button" href="javascript:;" onclick="createAction()">
+        	<i class="zmdi zmdi-plus"></i>新增候选人
+        </a>
+        <a class="waves-effect waves-button" href="javascript:;" onclick="deleteAction()">
+        	<i class="zmdi zmdi-close"></i> 删除候选人
+        </a>
+        <a class="waves-effect waves-button" href="javascript:;" onclick="searchAction()">
+        	<i class="zmdi zmdi-search"></i> 搜索候选人
+        </a>
+    </div>
+    <div id="searchBar" class="container-fluid">
+    	<div class="row">
+    		<div class="col-md-4">
+    			<label for="name">姓名</label>
+    			<input id="name" type="text" class="form-control">
+    		</div>
+  			<div class="col-md-4">
+  				<label for="birthday">生日</label>
+    			<input id="birthday" type="text" class="form-control" data-inputmask="'alias': 'yyyy-mm-dd'" data-mask />
+  			</div>
+  			<div class="col-md-4">
+  				<label for="sex">性别</label>
+  				<select class="form-control" id="sex">
+				  <option value=""></option>
+				  <option value="1">男</option>
+				  <option value="2">女</option>
+				</select>
+  			</div>
+    	</div>
+    	<div class="row">
+    		<div class="col-md-4">
+  				<label for="status">状态</label>
+  				<select class="form-control" id="status">
+				  <option value=""></option>
+				  <option value="00">无效</option>
+				  <option value="01">有效</option>
+				</select>
+  			</div>
+    	</div>
     </div>
     <table id="table"></table>
 </div>
@@ -59,17 +93,23 @@
 <script src="/app/js/i-ajax.js"></script>
 <script type="text/javascript">
 var $table = $('#table');
+var actId=0;
 $(function () {
+	if (location.href.indexOf('#') > 0) {
+		actId = location.href.split("#")[1];
+		console.log("actId="+actId);
+	}
 	jconfirm.defaults = {
 	        theme: 'material',
 	};
+	$("[data-mask]").inputmask();
 	// bootstrap table初始化
     // http://bootstrap-table.wenzhixin.net.cn/zh-cn/documentation/
     $table.bootstrapTable({
-        url: '',
+        url: '/api/vote/candidate/'+actId,
         height: getHeight(),
         striped: true,
-        search: true,
+//         search: true,
 //         filterControl: true,
 //         filterShowClear: true,
         searchOnEnterKey: true,
@@ -119,7 +159,10 @@ $(function () {
                 size: params.limit,
                 page: params.offset / params.limit,
                 sort: params.sort + ',' + params.order,
-                name: params.search,
+                name: $('#name').val(),
+                birthday: $('#birthday').val(),
+                sex: $('#sex').val(),
+                status: $('#status').val()
             };
         },
         responseHandler: function (data) {
@@ -148,4 +191,8 @@ $(function () {
         $('[data-toggle="popover"]').popover();
     });
 });
+//查询列表
+function searchAction(){
+	$table.bootstrapTable('refresh');
+}
 </script>

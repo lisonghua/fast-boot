@@ -1,6 +1,7 @@
 package com.lish.dongfang.vote.model;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -34,6 +35,12 @@ public class VoteCandidate extends FastBaseEntity<VoteCandidate> implements Seri
 	
 	@Column(length=20)
 	private String name;
+	
+	private Date birthday;
+	
+	private byte sex;
+	
+	private int age;
 
 	/**
 	 * 编号
@@ -83,6 +90,30 @@ public class VoteCandidate extends FastBaseEntity<VoteCandidate> implements Seri
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public Date getBirthday() {
+		return birthday;
+	}
+
+	public void setBirthday(Date birthday) {
+		this.birthday = birthday;
+	}
+
+	public byte getSex() {
+		return sex;
+	}
+
+	public void setSex(byte sex) {
+		this.sex = sex;
+	}
+
+	public int getAge() {
+		return age;
+	}
+
+	public void setAge(int age) {
+		this.age = age;
 	}
 
 	public String getNumber() {

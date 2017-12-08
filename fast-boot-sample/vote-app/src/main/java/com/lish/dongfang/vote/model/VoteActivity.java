@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Lob;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -43,7 +44,7 @@ public class VoteActivity extends FastBaseEntity<VoteActivity> implements Serial
 	private byte status;
 
 	//bi-directional many-to-one association to VoteCandidate
-	@OneToMany(mappedBy="voteActivity")
+	@OneToMany(mappedBy="voteActivity",fetch=FetchType.LAZY)
 	private List<VoteCandidate> voteCandidates;
 
 	//bi-directional many-to-one association to VotePageConfig
