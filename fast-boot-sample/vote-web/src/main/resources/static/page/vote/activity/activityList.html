@@ -403,7 +403,7 @@ function closeActAction(rows){
 }
 //导航到候选人管理页面
 function routeCandidatePage(rows){
-	$(location).attr('href', '/page/vote/candidate/candidateList.html#'+ rows[0].id);
+	$(location).attr('href', '/page/vote/candidate/candidateList.html#'+ rows[0].id+'#'+rows[0].name);
 }
 
 window.actionEvents = {

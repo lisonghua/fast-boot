@@ -14,8 +14,11 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
  * @author lisong
  *
  */
-@SpringBootApplication(scanBasePackages= {"com.lish.dongfang.security","com.lish.dongfang.vote"})
-@ServletComponentScan(basePackages= {"com.lish.dongfang.security"})
+@SpringBootApplication(scanBasePackages= {
+		"com.lish.dongfang.core",
+		"com.lish.dongfang.security",
+		"com.lish.dongfang.vote"})
+@ServletComponentScan(basePackages= {"com.lish.dongfang.core"})//加载数据源监控模块
 @EntityScan(basePackages= {"com.lish.dongfang.security","com.lish.dongfang.vote"})
 @EnableJpaRepositories(basePackages= {
 		"com.lish.dongfang.security",

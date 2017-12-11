@@ -1,4 +1,4 @@
-package com.lish.dongfang.security.config.druid;
+package com.lish.dongfang.core.druid;
 
 import java.sql.SQLException;
 

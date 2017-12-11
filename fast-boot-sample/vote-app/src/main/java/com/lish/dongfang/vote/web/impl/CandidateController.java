@@ -22,6 +22,7 @@ import com.lish.dongfang.core.web.ResultGenerator;
 import com.lish.dongfang.vote.model.VoteActivity;
 import com.lish.dongfang.vote.model.VoteCandidate;
 import com.lish.dongfang.vote.service.CandidateService;
+import com.lish.dongfang.vote.service.VoteActivityService;
 import com.lish.dongfang.vote.web.ICandidateController;
 
 @RestController
@@ -29,6 +30,9 @@ public class CandidateController extends FastBaseController implements ICandidat
 	
 	@Autowired
 	private CandidateService candidateService;
+	
+	@Autowired
+	private VoteActivityService activityService;
 	
 	@Override
 	public Result<Page<VoteCandidate>> getCandidatesOfActivity(@PathVariable("actId") long actId, VoteCandidate candidate, Pageable pageable) {
@@ -55,5 +59,29 @@ public class CandidateController extends FastBaseController implements ICandidat
 			}
 		},pageable);
 		return ResultGenerator.ok(page);
+	}
+
+	@Override
+	public Result<VoteCandidate> getOne(long actId,long id) {
+		return ResultGenerator.ok(candidateService.getOneById(id));
+	}
+
+	@Override
+	public Result<VoteCandidate> add(long actId,VoteCandidate candidate) {
+		VoteActivity activity = activityService.getOneById(actId);
+		candidate.setVoteActivity(activity);
+		return ResultGenerator.ok(candidateService.create(candidate));
+	}
+
+	@Override
+	public Result<VoteCandidate> update(long id, VoteCandidate newEntity) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Result<String> delete(List<Long> ids) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }
