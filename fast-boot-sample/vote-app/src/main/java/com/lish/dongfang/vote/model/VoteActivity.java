@@ -48,23 +48,23 @@ public class VoteActivity extends FastBaseEntity<VoteActivity> implements Serial
 	private List<VoteCandidate> voteCandidates;
 
 	//bi-directional many-to-one association to VotePageConfig
-	@OneToMany(mappedBy="voteActivity")
+	@OneToMany(mappedBy="voteActivity",fetch=FetchType.LAZY)
 	private List<VotePageConfig> votePageConfigs;
 
 	//bi-directional many-to-one association to VotePageEnrollConfig
-	@OneToMany(mappedBy="voteActivity")
+	@OneToMany(mappedBy="voteActivity",fetch=FetchType.LAZY)
 	private List<VotePageEnrollConfig> votePageEnrollConfigs;
 
 	//bi-directional many-to-one association to VotePageFooter
-	@OneToMany(mappedBy="voteActivity")
+	@OneToMany(mappedBy="voteActivity",fetch=FetchType.LAZY)
 	private List<VotePageFooter> votePageFooters;
 
 	//bi-directional many-to-one association to VotePageHeader
-	@OneToMany(mappedBy="voteActivity")
+	@OneToMany(mappedBy="voteActivity",fetch=FetchType.LAZY)
 	private List<VotePageHeader> votePageHeaders;
 
 	//bi-directional many-to-one association to VotePageTheme
-	@OneToMany(mappedBy="voteActivity")
+	@OneToMany(mappedBy="voteActivity",fetch=FetchType.LAZY)
 	private List<VotePageTheme> votePageThemes;
 
 	public VoteActivity() {

@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
@@ -45,7 +46,7 @@ public class VotePageEnrollCustomize extends FastBaseEntity<VotePageEnrollCustom
 	private byte required;
 
 	//bi-directional many-to-one association to VotePageEnrollConfig
-	@ManyToOne
+	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="enroll_config_id")
 	private VotePageEnrollConfig votePageEnrollConfig;
 

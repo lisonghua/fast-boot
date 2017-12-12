@@ -18,11 +18,6 @@
 			<scope>test</scope>
 		</dependency>
 		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-devtools</artifactId>
-			<optional>true</optional> <!-- 这个需要为 true 热部署才有效 -->
-		</dependency>
-		<dependency>
 			<groupId>com.lish.dongfang.core</groupId>
 			<artifactId>fast-boot-core</artifactId>
 			<version>0.0.1-SNAPSHOT</version>

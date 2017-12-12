@@ -24,6 +24,12 @@
 			<artifactId>fast-boot-security-app</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
+		<!-- spring boot调试工具生成环境需要注释掉 -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-devtools</artifactId>
+			<optional>true</optional> <!-- 这个需要为 true 热部署才有效 -->
+		</dependency>
 	</dependencies>
 	<build>
 		<plugins>

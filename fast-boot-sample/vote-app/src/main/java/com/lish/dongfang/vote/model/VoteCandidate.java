@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
@@ -13,7 +14,10 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.lish.dongfang.core.FastBaseEntity;
 
 
@@ -36,6 +40,7 @@ public class VoteCandidate extends FastBaseEntity<VoteCandidate> implements Seri
 	@Column(length=20)
 	private String name;
 	
+	@Temporal(TemporalType.DATE)
 	private Date birthday;
 	
 	private byte sex;
@@ -53,16 +58,19 @@ public class VoteCandidate extends FastBaseEntity<VoteCandidate> implements Seri
 	private int voteCount;
 
 	//bi-directional many-to-one association to VoteActivity
-	@ManyToOne
+	@JsonIgnore//忽略jackson转json发生时对象有关联关系造成无限循环堆栈溢出错误
+	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="vote_activity_id")
 	private VoteActivity voteActivity;
 
 	//bi-directional many-to-one association to VoteCandidateDetail
-	@OneToOne(mappedBy="voteCandidate")
+	@JsonIgnore//忽略jackson转json发生时对象有关联关系造成无限循环堆栈溢出错误
+	@OneToOne(mappedBy="voteCandidate",fetch=FetchType.LAZY)
 	private VoteCandidateDetail voteCandidateDetail;
 	
 	//bi-directional many-to-one association to VoteCandidateCustomize
-	@OneToMany(mappedBy="voteCandidate")
+	@JsonIgnore//忽略jackson转json发生时对象有关联关系造成无限循环堆栈溢出错误
+	@OneToMany(mappedBy="voteCandidate",fetch=FetchType.LAZY)
 	private List<VoteCandidateCustomize> voteCandidateCustomizes;
 
 	public VoteCandidate() {

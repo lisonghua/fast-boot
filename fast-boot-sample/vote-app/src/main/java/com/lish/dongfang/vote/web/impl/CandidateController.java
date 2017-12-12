@@ -14,6 +14,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.lish.dongfang.core.FastBaseController;
@@ -67,14 +68,14 @@ public class CandidateController extends FastBaseController implements ICandidat
 	}
 
 	@Override
-	public Result<VoteCandidate> add(long actId,VoteCandidate candidate) {
+	public Result<VoteCandidate> add(@PathVariable("actId") long actId,@RequestBody VoteCandidate candidate) {
 		VoteActivity activity = activityService.getOneById(actId);
 		candidate.setVoteActivity(activity);
 		return ResultGenerator.ok(candidateService.create(candidate));
 	}
 
 	@Override
-	public Result<VoteCandidate> update(long id, VoteCandidate newEntity) {
+	public Result<VoteCandidate> update(@PathVariable("id") long id, VoteCandidate newEntity) {
 		// TODO Auto-generated method stub
 		return null;
 	}

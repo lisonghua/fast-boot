@@ -13,9 +13,6 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import com.lish.dongfang.core.web.Result;
 import com.lish.dongfang.core.web.ResultGenerator;
 
-/**
- * Created by yangrd on 2017/7/7.
- */
 @RestControllerAdvice
 public class GlobalDefaultExceptionHandler {
 

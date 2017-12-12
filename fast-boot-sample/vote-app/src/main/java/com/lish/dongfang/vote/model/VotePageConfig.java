@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
@@ -101,7 +102,7 @@ public class VotePageConfig extends FastBaseEntity<VotePageConfig> implements Se
 	private byte voteOnePerson;
 
 	//bi-directional many-to-one association to VoteActivity
-	@ManyToOne
+	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="vote_activity_id")
 	private VoteActivity voteActivity;
 

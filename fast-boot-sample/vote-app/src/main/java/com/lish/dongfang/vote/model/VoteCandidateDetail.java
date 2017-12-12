@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -36,7 +37,7 @@ public class VoteCandidateDetail extends FastBaseEntity<VoteCandidateDetail> imp
 	
 
 	//bi-directional many-to-one association to VoteCandidate
-	@OneToOne
+	@OneToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="vote_candidate_id")
 	private VoteCandidate voteCandidate;
 

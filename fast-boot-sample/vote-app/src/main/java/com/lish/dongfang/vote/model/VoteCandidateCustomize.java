@@ -5,6 +5,7 @@ import java.math.BigInteger;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
@@ -35,7 +36,7 @@ public class VoteCandidateCustomize extends FastBaseEntity<VoteCandidateCustomiz
 	private BigInteger enrollCustomizeId;
 
 	//bi-directional many-to-one association to VoteCandidate
-	@ManyToOne
+	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="vote_candidate_id")
 	private VoteCandidate voteCandidate;
 

@@ -58,3 +58,12 @@ logging:
   file: c:\vote\log\vote-web.log
   
 #    org.springframework.root.security: debug
+
+fast: 
+  boot: 
+    request: #配置是否打印request提交参数
+      log: 
+        enable: true
+    response: #配置是否打印response返回JSON数据
+      log:
+        enable: true

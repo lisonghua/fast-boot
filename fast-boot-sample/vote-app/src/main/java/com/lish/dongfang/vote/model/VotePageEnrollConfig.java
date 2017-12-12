@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
@@ -79,12 +80,12 @@ public class VotePageEnrollConfig extends FastBaseEntity<VotePageEnrollConfig> i
 	private byte telRequired;
 
 	//bi-directional many-to-one association to VoteActivity
-	@ManyToOne
+	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="vote_activity_id")
 	private VoteActivity voteActivity;
 
 	//bi-directional many-to-one association to VotePageEnrollCustomize
-	@OneToMany(mappedBy="votePageEnrollConfig")
+	@OneToMany(mappedBy="votePageEnrollConfig",fetch=FetchType.LAZY)
 	private List<VotePageEnrollCustomize> votePageEnrollCustomizes;
 
 	public VotePageEnrollConfig() {
