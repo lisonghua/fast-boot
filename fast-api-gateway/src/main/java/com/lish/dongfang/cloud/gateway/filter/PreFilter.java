@@ -3,9 +3,9 @@ package com.lish.dongfang.cloud.gateway.filter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public abstract class PreZuulFilter extends BaseZuulFilter {
+public abstract class PreFilter extends BaseZuulFilter {
 	
-	private static Logger logger = LoggerFactory.getLogger(PreZuulFilter.class);
+	private static Logger logger = LoggerFactory.getLogger(PreFilter.class);
 	
 	@Override
 	public String filterType() {
