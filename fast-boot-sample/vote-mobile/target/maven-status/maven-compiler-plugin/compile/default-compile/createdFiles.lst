@@ -1,0 +1,4 @@
+com\lish\dongfang\vote\mobile\client\VoteRemoteServiceClient.class
+com\lish\dongfang\vote\mobile\VoteMobileApplication.class
+com\lish\dongfang\vote\mobile\web\IVoteServiceConsumer.class
+com\lish\dongfang\vote\mobile\web\VoteConsumerController.class

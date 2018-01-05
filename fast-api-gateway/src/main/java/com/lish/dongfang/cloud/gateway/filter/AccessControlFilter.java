@@ -8,7 +8,7 @@ import org.slf4j.LoggerFactory;
  * @author lisong
  *
  */
-public class AccessControlFilter extends PreZuulFilter {
+public class AccessControlFilter extends PreFilter {
 	
 	private static Logger logger = LoggerFactory.getLogger(AccessControlFilter.class);
 

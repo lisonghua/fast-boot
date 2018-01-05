@@ -1,0 +1,7 @@
+fast.boot.swagger.title: Fast boot中使用Swagger2生成Rest Api文档
+fast.boot.swagger.description: 此应用演示使用swagger2生成Fast-Boot微服务的Api文档
+fast.boot.swagger.serviceUrl: https://github.com/lisonghua/fast-boot
+fast.boot.swagger.contact: sngh_lee@sina.com
+fast.boot.swagger.version: 1.0
+#  license: 
+#  licenseUrl: 

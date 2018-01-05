@@ -1,0 +1,11 @@
+Manifest-Version: 1.0
+Implementation-Title: fast-boot-security-web
+Implementation-Version: 0.0.1-SNAPSHOT
+Built-By: lisong
+Implementation-Vendor-Id: com.lish.dongfang.security
+Build-Jdk: 1.8.0_144
+Implementation-URL: http://projects.spring.io/spring-boot/fast-boot/fa
+ st-boot-security-web/
+Created-By: Maven Integration for Eclipse
+Implementation-Vendor: Pivotal Software, Inc.
+

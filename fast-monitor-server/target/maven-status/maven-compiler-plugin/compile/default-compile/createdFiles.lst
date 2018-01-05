@@ -1,0 +1,3 @@
+com\lish\dongfang\cloud\monitor\FastMonitorApplication.class
+com\lish\dongfang\cloud\monitor\notifier\NotifierConfiguration.class
+com\lish\dongfang\cloud\monitor\security\SecurityConfig.class
