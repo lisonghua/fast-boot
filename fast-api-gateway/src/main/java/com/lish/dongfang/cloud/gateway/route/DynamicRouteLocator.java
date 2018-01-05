@@ -14,7 +14,7 @@ import org.springframework.cloud.netflix.zuul.filters.ZuulProperties.ZuulRoute;
 import org.springframework.util.StringUtils;
 
 import com.lish.dongfang.cloud.gateway.db.DBHelper;
-import com.lish.dongfang.cloud.gateway.db.DBHelper.ZuulRouteVO;
+import com.lish.dongfang.cloud.gateway.db.entity.ZuulRouteEntity;
 
 /**
  * 自动路由配置加载类
@@ -71,8 +71,8 @@ public class DynamicRouteLocator extends SimpleRouteLocator implements Refreshab
 	private Map<String, ZuulRoute> locateRoutesFromDB() {
 		logger.info("=====加载数据库中的路由信息=============");
 		Map<String, ZuulRoute> routes = new LinkedHashMap<>();
-		List<ZuulRouteVO> results = dbHelper.getAllRoutes();
-		for (ZuulRouteVO result : results) {
+		List<ZuulRouteEntity> results = dbHelper.getAllRoutes();
+		for (ZuulRouteEntity result : results) {
 			if (org.apache.commons.lang3.StringUtils.isBlank(result.getPath())
 					|| org.apache.commons.lang3.StringUtils.isBlank(result.getUrl())) {
 				continue;

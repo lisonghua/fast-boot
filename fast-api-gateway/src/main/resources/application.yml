@@ -52,3 +52,5 @@ zuul:
 logging:
   level:
     root: debug
+#黑名单功能开关
+fast.gateway.backlist.enable: true
