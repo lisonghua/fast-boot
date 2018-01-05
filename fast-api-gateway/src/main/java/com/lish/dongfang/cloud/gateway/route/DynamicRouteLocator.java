@@ -21,16 +21,16 @@ import com.lish.dongfang.cloud.gateway.db.DBHelper.ZuulRouteVO;
  * @author lisong
  *
  */
-public class AutoRouteLocator extends SimpleRouteLocator implements RefreshableRouteLocator {
+public class DynamicRouteLocator extends SimpleRouteLocator implements RefreshableRouteLocator {
 
-	public final static Logger logger = LoggerFactory.getLogger(AutoRouteLocator.class);
+	public final static Logger logger = LoggerFactory.getLogger(DynamicRouteLocator.class);
 
 	private ZuulProperties properties;
 	
 	@Autowired
 	private DBHelper dbHelper;
 
-	public AutoRouteLocator(String servletPath, ZuulProperties properties) {
+	public DynamicRouteLocator(String servletPath, ZuulProperties properties) {
 		super(servletPath, properties);
         this.properties = properties;
         logger.info("servletPath:{}",servletPath);
@@ -43,6 +43,7 @@ public class AutoRouteLocator extends SimpleRouteLocator implements RefreshableR
 
 	@Override
 	protected Map<String, ZuulRoute> locateRoutes() {
+		logger.info("=====调用自定义AutoRouteLocator=============");
 		LinkedHashMap<String, ZuulRoute> routesMap = new LinkedHashMap<String, ZuulRoute>();
 		// 从application.properties中加载路由信息
 		routesMap.putAll(super.locateRoutes());

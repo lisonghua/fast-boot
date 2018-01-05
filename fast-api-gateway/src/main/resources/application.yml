@@ -51,4 +51,4 @@ zuul:
       service-id: vote-mobile
 logging:
   level:
-    root: info
+    root: debug

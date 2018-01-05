@@ -6,7 +6,7 @@ import org.springframework.cloud.netflix.zuul.filters.ZuulProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import com.lish.dongfang.cloud.gateway.route.AutoRouteLocator;
+import com.lish.dongfang.cloud.gateway.route.DynamicRouteLocator;
 
 /**
  * 自动路由配置
@@ -15,15 +15,15 @@ import com.lish.dongfang.cloud.gateway.route.AutoRouteLocator;
  *
  */
 @Configuration
-public class AutoRouterConfiguration {
+public class DynamicRouterConfiguration {
 	@Autowired
 	ZuulProperties zuulProperties;
 	@Autowired
 	ServerProperties server;
 	
 	@Bean
-	public AutoRouteLocator routeLocator() {
-		AutoRouteLocator routeLocator = new AutoRouteLocator(this.server.getServletPrefix(), this.zuulProperties);
+	public DynamicRouteLocator routeLocator() {
+		DynamicRouteLocator routeLocator = new DynamicRouteLocator(this.server.getServletPrefix(), this.zuulProperties);
 		return routeLocator;
 	}
 }
