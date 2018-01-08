@@ -13,7 +13,12 @@
       <directory></directory>
       <includes>
         <include>.project</include>
-        <include>archetype-catalog.xml</include>
+      </includes>
+    </fileSet>
+    <fileSet encoding="UTF-8">
+      <directory></directory>
+      <includes>
+        <include>fast-boot-security.sql</include>
       </includes>
     </fileSet>
   </fileSets>
@@ -106,6 +111,12 @@
           <includes>
             <include>.classpath</include>
             <include>.project</include>
+          </includes>
+        </fileSet>
+        <fileSet encoding="UTF-8">
+          <directory></directory>
+          <includes>
+            <include>.springBeans</include>
           </includes>
         </fileSet>
       </fileSets>
