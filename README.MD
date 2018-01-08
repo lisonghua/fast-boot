@@ -42,40 +42,6 @@
 ![权限管理3](resources/sanji-boot-security-sec-phone-skin-green.png)
 
 
-[查看详情](sanji-boot-security)
-
-
-## Fast Boot Shiro
-
-**整合 Apache Shiro 提供一下功能：**
-
-* [x] 权限认证 
-
-* [x] 权限管理
-
-* [x] 日志管理
-
-* [ ] 用户管理 
-
-### 页面效果：
-
-![菜单管理](resources/sanji-boot-shiro-menu.png)
-
-![日志管理](resources/sanji-boot-shiro-log.png)
-
-[查看详情](sanji-boot-shiro)
-
-
 ## Fast Utils
 
 一些小工具 后期会逐渐壮大
-
-### 注意事项：
-由于使用了一个自定义的常用功能包需要手动将 [bloom-common.zip](resources/lib/bloom-common.zip)解压后放在本地maven仓库的cn/sunxyz目录下
-
-
-## share
-
-分享一些优秀的类库,及上手demo
-
-正在规划中......

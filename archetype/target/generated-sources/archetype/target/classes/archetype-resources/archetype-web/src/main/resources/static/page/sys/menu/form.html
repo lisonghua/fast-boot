@@ -1,0 +1,258 @@
+#set( $symbol_pound = '#' )
+#set( $symbol_dollar = '$' )
+#set( $symbol_escape = '\' )
+<!-- 新增 -->
+<div id="createOrUpdateDialog" class="crudDialog">
+    <form id="dialog-from">
+        <div class="radio-group update-hidden">
+            <div class="radio radio-inline radio-success">
+                <input id="type_1" type="radio" name="type" value="1" checked>
+                <label for="type_1">系统 </label>
+            </div>
+            <div class="radio radio-inline radio-info">
+                <input id="type_2" type="radio" name="type" value="2">
+                <label for="type_2">目录 </label>
+            </div>
+            <div class="radio radio-inline radio-warning">
+                <input id="type_3" type="radio" name="type" value="3">
+                <label for="type_3">菜单 </label>
+            </div>
+        </div>
+        <div class="form-group update-hidden">
+        	<select id="systemId" name="systemId" class="type2 type3">
+			</select>
+            <select id="directoryId" name="directoryId" class="type3">
+			</select>
+        </div>
+
+        <div class="form-group">
+            <label for="name">名称</label>
+            <input name="name" id="name" type="text" class="form-control">
+        </div>
+        <div class="form-group">
+            <label for="icon">图标</label>
+            <input name="icon" id="icon" type="text" class="form-control">
+        </div>
+        <div class="type1">
+            <label for="skin">主题</label>
+            <div id="skin" class="radio-group">
+                <div class="radio radio-inline radio-skin-green ">
+                    <input id="skin_1" type="radio" name="skin" value="skin-green" checked>
+                    <label for="skin_1">绿 </label>
+                </div>
+                <div class="radio radio-inline radio-skin-dark-blue">
+                    <input id="skin_2" type="radio" name="skin" value="skin-dark-blue">
+                    <label for="skin_2">深蓝</label>
+                </div>
+                <div class="radio radio-inline radio-skin-pink">
+                    <input id="skin_3" type="radio" name="skin" value="skin-pink">
+                    <label for="skin_3">粉紅</label>
+                </div>
+                <div class="radio radio-inline radio-skin-purple">
+                    <input id="skin_4" type="radio" name="skin" value="skin-purple">
+                    <label for="skin_4">紫 </label>
+                </div>
+                <div class="radio radio-inline radio-skin-blue">
+                    <input id="skin_5" type="radio" name="skin" value="skin-blue">
+                    <label for="skin_5">蓝 </label>
+                </div>
+            </div>
+        </div>
+        <div class="form-group type3">
+            <label for="href">路径</label>
+            <input name="url" id="href" type="text" class="form-control">
+        </div>
+        <div class="form-group type3">
+            <label for="permission">权限标识</label>
+            <input name="permission" id="permission" type="text" class="form-control">
+        </div>
+        <div class="form-group text-right dialog-buttons">
+            <a class="waves-effect waves-button" href="javascript:;" onclick="createOrUpdateSubmit();">提交</a>
+            <a class="waves-effect waves-button" href="javascript:;" onclick="createOrUpdateDialog.close();">取消</a>
+        </div>
+
+    </form>
+</div>
+<script>
+    var selfId = 0;
+    var type = 1;
+    var id = updateId;
+    console.log('update:=>',id);
+
+    function getMenu(id,cb) {
+        iGet('/api/menu/'+id,cb,function () {
+            createOrUpdateDialog.close();
+            ${symbol_dollar}.alert({
+                title: false,
+                theme: 'dark',
+                content: '加载数据失败',
+            });
+        });
+    }
+
+    ${symbol_dollar}(function () {
+        // 选择分类
+        ${symbol_dollar}('input:radio[name="type"]').change(function () {
+            type = ${symbol_dollar}(this).val();
+            initType();
+        });
+        // 选择系统
+        ${symbol_dollar}('${symbol_pound}systemId').change(function () {
+//            console.log('---------')
+            selfId = ${symbol_dollar}(this).val();
+            initPid();
+        });
+        initParams();
+        initSystemSelect();
+        initPid();
+        initType();
+    });
+
+    //初始化对话框参数
+    function initParams() {
+        if(id!=0){
+            ${symbol_dollar}('.update-hidden').hide();
+            getMenu(id,function (data) {
+                var menu = data.content;
+                type = menu.depth;
+                for (var p in menu) {
+                    if(p!='skin'){
+                        ${symbol_dollar}("input[name=" + p + "]").val(menu[p]);
+                    }
+                }
+                if(type==1){
+//                    console.log('skin:=>',menu.skin);
+                    ${symbol_dollar}("input:radio[value="+menu.skin+"]").attr("checked",true);
+                }
+            })
+        }
+    }
+
+    function initType() {
+        // 显示对应必填项
+        ${symbol_dollar}('.type2,.type3').prop("disabled",true);
+        ${symbol_dollar}('.type' + type).prop("disabled",false);
+    }
+
+    function initSystemSelect() {
+        ${symbol_dollar}.getJSON('/api/menu/' + 1 + '/child', function (json) {
+            var nodes = json.content;
+            var datas = [{id: 0, text: '请选择系统'}];
+            for (var i = 0; i < nodes.length; i++) {
+                var data = {};
+                data.id = nodes[i].id;
+                data.text = nodes[i].name;
+                datas.push(data);
+            }
+            ${symbol_dollar}('${symbol_pound}systemId').select2({
+                data: datas
+            });
+        });
+
+    }
+
+    function initPid() {
+        if (selfId != 0) {
+            ${symbol_dollar}.getJSON('/api/menu/' + selfId + '/child', function (json) {
+                var nodes = json.content;
+                var datas = [{id: 0, text: '请选择上级'}];
+                for (var i = 0; i < nodes.length; i++) {
+                    var data = {};
+                    data.id = nodes[i].id;
+                    data.text = nodes[i].name;
+                    datas.push(data);
+                }
+                ${symbol_dollar}('${symbol_pound}directoryId').empty();
+                ${symbol_dollar}('${symbol_pound}directoryId').select2({
+                    data: datas
+                });
+            });
+        } else {
+            ${symbol_dollar}('${symbol_pound}directoryId').empty();
+            ${symbol_dollar}('${symbol_pound}directoryId').select2({
+                data: [{id: 0, text: '请选择上级'}]
+            });
+        }
+    }
+
+    function createOrUpdateSubmit() {
+        var data = {};
+        ${symbol_dollar}('${symbol_pound}dialog-from').serializeArray().map(function (x) {
+            data[x.name] = x.value;
+        });
+        console.log(data);
+        var path_id = 0;
+        data.depth = type;
+        if(id!=0){
+            path_id = id;
+        }else if (type == 1) {
+            path_id = 1;
+        } else if (type == 2) {
+            delete data.skin;
+            path_id = data.systemId;
+        } else if (type == 3) {
+            delete data.skin;
+            path_id = data.directoryId;
+        }
+        //数据提交
+        var beforeSend = function () {
+            if (${symbol_dollar}('${symbol_pound}name').val() == '') {
+                ${symbol_dollar}('${symbol_pound}name').focus();
+                return false;
+            }
+            if (${symbol_dollar}('${symbol_pound}roleType').val() == '') {
+                ${symbol_dollar}('${symbol_pound}roleType').focus();
+                return false;
+            }
+        }
+        var success = function (result) {
+            if (result.status != 'SUCCESS') {
+                ${symbol_dollar}.confirm({
+                    theme: result.status == 'SUCCESS' ? 'light' : 'dark',
+                    animation: 'rotateX',
+                    closeAnimation: 'rotateX',
+                    title: false,
+                    content: result.msg,
+                    buttons: {
+                        confirm: {
+                            text: '确认',
+                            btnClass: 'waves-effect waves-button waves-light',
+                        }
+                    }
+                });
+            } else {
+                //更新nextable
+                if (id == 0) {
+                    var ${parentArtifactId}Id = path_id == 1 ? 0 : path_id;
+                    addNestableNode(${parentArtifactId}Id, result.content)
+                } else {
+                    updateNestableNode(result.content)
+                }
+                createOrUpdateDialog.close();
+            }
+        }
+        var error = function (jqXHR, textStatus) {
+            ${symbol_dollar}.confirm({
+                theme: 'dark',
+                animation: 'rotateX',
+                closeAnimation: 'rotateX',
+                title: false,
+                content: textStatus != 'canceled' ? '系统异常' : '请输入',
+                buttons: {
+                    confirm: {
+                        text: '确认',
+                        btnClass: 'waves-effect waves-button waves-light'
+                    }
+                }
+            });
+        }
+        console.log(data);
+        if (id == 0) {
+            data.${parentArtifactId} = {};
+            data.${parentArtifactId}.id = path_id;
+            iPost('/api/menu', data, beforeSend, success, error);
+        } else {
+            iPut('/api/menu/' + path_id, data, beforeSend, success, error);
+        }
+    }
+</script>

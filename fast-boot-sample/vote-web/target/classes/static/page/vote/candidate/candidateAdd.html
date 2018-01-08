@@ -1,0 +1,161 @@
+<div id="createDialog" class="crudDialog">
+	<form id="createForm" method="post">
+		<div>
+			<label for="name">姓名</label><span style="color: red">&nbsp;&nbsp;*</span>
+			<input id="name" type="text" class="form-control" name="name"
+				maxlength="50" />
+		</div>
+		<div>
+			<label for="sex">性别</label> <span style="color: red">&nbsp;&nbsp;*</span>
+			<select class="form-control" id="sex">
+				<option value=""></option>
+				<option value="1">男</option>
+				<option value="2">女</option>
+			</select>
+		</div>
+		<div>
+			<label for="age">年龄</label><span style="color: red">&nbsp;&nbsp;*</span>
+			<input id="age" type="text" class="form-control" name="age"
+				maxlength="10" />
+		</div>
+		<div>
+			<label for="birthday">出生日期</label><span style="color: red">&nbsp;&nbsp;*</span>
+			<input id="birthday" type="text" name="birthday"
+				class="form-control" data-inputmask="'alias': 'yyyy-mm-dd'"
+				data-mask />
+		</div>
+		<div>
+			<label for="remark">个人简介</label>
+			<textarea rows="4" id="remark" name="remark" class="form-control"></textarea>
+		</div>
+		<br />
+		<div class="form-group text-right dialog-buttons">
+			<a class="waves-effect waves-button" href="javascript:;"
+				onclick="createSubmit();">保存</a> <a
+				class="waves-effect waves-button" href="javascript:;"
+				onclick="createDialog.close();">关闭</a>
+		</div>
+
+	</form>
+</div>
+<script>
+	//获得获选人信息
+	function getCandidate(id, fc) {
+		iGet('/api/vote/candidate/' + id, fc)
+	}
+
+	var id = 0;
+	setTimeout(function() {
+		if (location.href.indexOf('#') > 0) {
+			//获得候选人id：url格式http://xxxxxxx#actId#actName#candidateName
+			id = location.href.split("#")[3];
+		}
+		//更新获取用户数据
+		if (id != 0) {
+			getCandidate(id, function(data) {
+				console.log(data);
+				var candidate = data.content;
+				//设置input 此处没有用vue vue与inputmask有兼容性问题
+				for ( var p in activity) {
+					$("input[name=" + p + "]").val(candidate[p]);
+					$("textarea[name=" + p + "]").val(candidate[p]);
+				}
+			});
+		}
+		//去掉有值的input标题效果
+		var inputs = $("#createForm input[type=text]");
+		for (var i = 0; i < inputs.length; i++) {
+			if ($(inputs[i]).val() != '') {
+				$(inputs[i]).parent().find('label').addClass('active');
+			}
+		}
+		//Money Euro
+		$("[data-mask]").inputmask();
+	}, 300)
+
+	function createSubmit() {
+		var data = {};
+		$('#createForm').serializeArray().map(function(x) {
+			data[x.name] = x.value;
+		});
+		var beforeSend = function() {
+			if (id == 0) {
+				//新增时
+				if ($('#name').val() == '') {
+					$('#name').parent().addClass("has-error");
+					return false;
+				}
+				if ($('#birthday').val() == '') {
+					$('#birthday').parent().addClass("has-error");
+					return false;
+				}
+				if ($('#age').val() == '') {
+					$('#age').parent().addClass("has-error");
+					return false;
+				}
+				if ($('#sex').val() == '') {
+					$('#sex').parent().addClass("has-error");
+					return false;
+				}
+			} else {
+				//修改时
+				if ($('#name').val() == '') {
+					$('#name').focus();
+					return false;
+				}
+				if ($('#age').val() == '') {
+					$('#age').focus();
+					return false;
+				}
+				if ($('#birthday').val() == '') {
+					$('#birthday').focus();
+					return false;
+				}
+				if ($('#sex').val() == '') {
+					$('#sex').focus();
+					return false;
+				}
+			}
+		}
+		var success = function(result) {
+			if (result.status != 'SUCCESS') {
+				$.confirm({
+					theme : result.status == 'SUCCESS' ? 'light' : 'dark',
+					animation : 'rotateX',
+					closeAnimation : 'rotateX',
+					title : false,
+					buttons : {
+						confirm : {
+							text : '确认',
+							btnClass : 'waves-effect waves-button waves-light',
+						}
+					}
+				});
+			} else {
+				createDialog.close();
+				$table.bootstrapTable('refresh');
+			}
+		}
+		var error = function(jqXHR, textStatus) {
+			$.confirm({
+				theme : 'dark',
+				animation : 'rotateX',
+				closeAnimation : 'rotateX',
+				title : false,
+				content : textStatus != 'canceled' ? '系统异常！' : '请检必填项是否填写完整！',
+				buttons : {
+					confirm : {
+						text : '确认',
+						btnClass : 'waves-effect waves-button waves-light'
+					}
+				}
+			});
+		}
+		if (id == 0) {
+			iPost('/api/vote/candidate/'+actId, data, beforeSend, success, error);
+		} else {
+			iPut('/api/vote/candidate/' + id, data, beforeSend, success, error);
+		}
+
+	}
+</script>

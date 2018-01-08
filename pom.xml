@@ -42,6 +42,7 @@
 		<module>fast-boot-security-app</module>
 		<module>fast-boot-security-web</module>
 		<module>fast-boot-sample</module>
+		
 	</modules>
 
 	<properties>

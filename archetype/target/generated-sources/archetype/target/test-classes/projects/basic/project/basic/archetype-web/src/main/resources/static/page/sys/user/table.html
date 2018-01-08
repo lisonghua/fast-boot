@@ -1,0 +1,353 @@
+﻿<!DOCTYPE HTML>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>通用增删改查</title>
+
+    <link href="/plugins/bootstrap-3.3.0/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="/plugins/material-design-iconic-font-2.2.0/css/material-design-iconic-font.min.css"
+          rel="stylesheet"/>
+    <link href="/plugins/awesome-bootstrap-checkbox/awesome-bootstrap-checkbox.css" rel="stylesheet"/>
+
+    <link href="/plugins/bootstrap-table-1.11.0/bootstrap-table.min.css" rel="stylesheet"/>
+    <link href="/plugins/waves-0.7.5/waves.min.css" rel="stylesheet"/>
+    <link href="/plugins/jquery-confirm/jquery-confirm.min.css" rel="stylesheet"/>
+
+    <!--select2-->
+    <link href="https://cdn.bootcss.com/select2/4.0.3/css/select2.min.css" rel="stylesheet"/>
+
+    <link href="/app/css/common.css" rel="stylesheet"/>
+</head>
+<body>
+<div id="main">
+    <div id="toolbar">
+        <a class="waves-effect waves-button" href="javascript:;" onclick="createAction()"><i class="zmdi zmdi-plus"></i>
+            新增用户</a>
+
+        <a class="waves-effect waves-button" href="javascript:;" onclick="deleteAction()"><i
+                class="zmdi zmdi-close"></i> 删除用户</a>
+    </div>
+    <table id="table"></table>
+</div>
+
+<script src="/plugins/jquery.1.12.4.min.js"></script>
+<script src="/plugins/bootstrap-3.3.0/js/bootstrap.min.js"></script>
+<script src="/plugins/bootstrap-table-1.11.0/bootstrap-table.min.js"></script>
+<script src="/plugins/bootstrap-table-1.11.0/locale/bootstrap-table-zh-CN.min.js"></script>
+<script src="/plugins/waves-0.7.5/waves.min.js"></script>
+<script src="/plugins/jquery-confirm/jquery-confirm.min.js"></script>
+<script src="https://cdn.bootcss.com/moment.js/2.18.1/moment.min.js"></script>
+
+<!--给form使用-->
+<!-- select2 -->
+<script src="https://cdn.bootcss.com/select2/4.0.3/js/select2.min.js"></script>
+<script src="https://cdn.bootcss.com/select2/4.0.3/js/i18n/zh-CN.js"></script>
+
+<!-- InputMask -->
+<script src="/plugins/input-mask/jquery.inputmask.js"></script>
+<script src="/plugins/input-mask/jquery.inputmask.date.extensions.js"></script>
+<script src="/plugins/input-mask/jquery.inputmask.extensions.js"></script>
+
+<script src="/app/js/common.js"></script>
+<script src="/app/js/i-ajax.js"></script>
+<script>
+    var $table = $('#table');
+    $(function () {
+        jconfirm.defaults = {
+            theme: 'material',
+        };
+        // bootstrap table初始化
+        // http://bootstrap-table.wenzhixin.net.cn/zh-cn/documentation/
+        $table.bootstrapTable({
+            url: '/api/user',
+            height: getHeight(),
+            striped: true,
+            search: true,
+            searchOnEnterKey: true,
+            showRefresh: true,
+            showToggle: true,
+            showColumns: true,
+            minimumCountColumns: 2,
+//            showPaginationSwitch: true,
+            clickToSelect: true,
+            pageSize: 20,
+            pageList: [10, 20, 25, 50, 100],
+//            detailView: true,
+//            detailFormatter: 'detailFormatter',
+            pagination: true,
+            paginationLoop: false,
+            classes: 'table table-hover table-no-bordered',
+            sidePagination: "server",
+            silentSort: false,
+            smartDisplay: false,
+            idField: 'id',
+            sortName: 'id',
+            sortOrder: 'asc',
+            escape: true,
+            maintainSelected: true,
+            toolbar: '#toolbar',
+            columns: [
+                {field: 'state', checkbox: true},
+                //   {field: 'avatar', title: '头像',  formatter: 'avatarFormatter', align: 'center'},
+                {field: 'loginName', title: '账号', sortable: true, align: 'center'},
+                {field: 'nickname', title: '昵称', sortable: true, align: 'center'},
+                {field: 'sex', title: '性别', sortable: true, formatter: 'sexFormatter', align: 'center'},
+                {field: 'birthday', title: '年龄', sortable: true, formatter: 'ageFormatter', align: 'center'},
+                {field: 'phone', title: '手机', sortable: true, align: 'center'},
+                {field: 'email', title: '邮箱', sortable: true, align: 'center'},
+                {field: 'roleSet', title: '角色', sortable: false, formatter: 'roleFormatter', align: 'center'},
+                {field: 'remark', title: '备注', sortable: true, align: 'center'},
+                {field: 'createdTime', title: '注册时间', sortable: true, formatter: 'dateFormatter', align: 'center'},
+                {field: 'status', title: '状态', sortable: true, formatter: 'statusFormatter', align: 'center'},
+                {
+                    field: 'action',
+                    title: '操作',
+                    align: 'center',
+                    formatter: 'actionFormatter',
+                    events: 'actionEvents',
+                    clickToSelect: false,
+                    switchable: true,
+                }
+
+            ],
+            queryParams: function (params) {
+                return {
+                    size: params.limit,
+                    page: params.offset / params.limit,
+                    sort: params.sort + ',' + params.order,
+                    loginName: params.search,
+                };
+            },
+            responseHandler: function (data) {
+                if (data.status == "SUCCESS") {
+                    data = data.content;
+                    return {total: data.totalElements, rows: data.content};
+                } else {
+                    $.confirm({
+                        type: 'red',
+                        title: false,
+                        content: '请求数据失败',
+                        autoClose: 'cancel|3000',
+                        backgroundDismiss: true,
+                        buttons: {
+                            confirm: {
+                                text: '确定',
+                                btnClass: 'waves-effect waves-button'
+                            }
+                        }
+                    });
+                    return {total: 0, rows: []};
+                }
+            }
+        }).on('all.bs.table', function (e, name, args) {
+            $('[data-toggle="tooltip"]').tooltip();
+            $('[data-toggle="popover"]').popover();
+        });
+    });
+    function actionFormatter(value, row, index) {
+        return [
+            '<a class="edit ml10" href="javascript:void(0)" data-toggle="tooltip" title="编辑"><i class="glyphicon glyphicon-edit"></i></a>　',
+            '<a class="chang-password ml10" href="javascript:void(0)" data-toggle="tooltip" title="修改密码"><i class="glyphicon glyphicon-lock"></i></a>   ',
+            '<a class="remove ml10" href="javascript:void(0)" data-toggle="tooltip" title="删除"><i class="glyphicon glyphicon-remove"></i></a>',
+
+        ].join('');
+    }
+
+    window.actionEvents = {
+        'click .edit': function (e, value, row, index) {
+            var rows = [];
+            rows.push(row);
+            updateUserAction(rows);
+        },
+        'click .remove': function (e, value, row, index) {
+            var rows = [];
+            rows.push(row);
+            deleteUserAction(rows);
+        },
+        'click .chang-password': function (e, value, row, index) {
+            changePwsAction(row.id);
+        }
+    };
+
+    function detailFormatter(index, row) {
+        var html = [];
+        $.each(row, function (key, value) {
+            html.push('<p><b>' + key + ':</b> ' + value + '</p>');
+        });
+        return html.join('');
+    }
+
+    function avatarFormatter(val) {
+        return val ? '<img src="' + val + '" style="height: 15px;"/>' : '';
+    }
+
+    function sexFormatter(val) {
+        return val == 'MAN' ? '男' : '女';
+    }
+
+    function ageFormatter(date) {
+        return date ? parseInt(moment(new Date()).format("YYYY")) - parseInt(moment(date).format("YYYY")) : '-';
+    }
+
+    function roleFormatter(roles) {
+        var roleNames = []
+        roles.forEach(function (role) {
+            roleNames.push(role.name);
+        })
+        return roleNames.join(' ,');
+    }
+
+    function dateFormatter(date) {
+        return date ? moment(date).format("YYYY-MM-DD, HH:mm:ss") : '-';
+    }
+
+    function statusFormatter(status) {
+        if (status == 'NORMAL') {
+            return '<span class="label label-success">正常</span>';
+        } else if (status == 'ABNORMAL') {
+            return '<span class="label label-danger">异常</span>';
+        } else if (status == 'FROZEN') {
+            return '<span class="label label-default">冻结</span>';
+        }
+    }
+
+
+    var href = location.href;
+
+    // 新增
+    var createDialog;
+    function createAction() {
+        location.href = href + "#"
+        createDialog = $.dialog({
+            animationSpeed: 300,
+            title: '新增用户',
+            content: 'url:/page/sys/user/form.html',
+            onContentReady: function () {
+                initMaterialInput();
+            }
+        });
+    }
+
+    //修改密码
+    var changePwsDialog;
+    function changePwsAction(userId) {
+        location.href = href + "#" + userId;
+        changePwsDialog = $.dialog({
+            animationSpeed: 300,
+            title: '修改密码',
+            content: 'url:/page/sys/user/chang-password.html',
+            onContentReady: function () {
+                initMaterialInput();
+            }
+        });
+    }
+
+    // 编辑
+    function updateAction() {
+        var rows = $table.bootstrapTable('getSelections');
+        updateUserAction(rows);
+    }
+
+    function updateUserAction(rows) {
+        if (rows.length != 1) {
+            $.confirm({
+                title: false,
+                content: '请选择一条记录！',
+                autoClose: 'cancel|3000',
+                backgroundDismiss: true,
+                buttons: {
+                    cancel: {
+                        text: '取消',
+                        btnClass: 'waves-effect waves-button'
+                    }
+                }
+            });
+        } else {
+            console.log(rows[0].id);
+            location.href = href + "#" + rows[0].id;
+            createDialog = $.dialog({
+                animationSpeed: 300,
+                title: '编辑用户',
+                content: 'url:/page/sys/user/form.html',
+                onContentReady: function () {
+                    initMaterialInput();
+                }
+            });
+        }
+    }
+
+    function deleteUser(ids, cb, ecb) {
+        iDelete('/api/user', ids, null, cb, ecb);
+    }
+
+    // 删除
+    function deleteAction() {
+        var rows = $table.bootstrapTable('getSelections');
+        deleteUserAction(rows);
+    }
+
+    function deleteUserAction(rows) {
+        if (rows.length == 0) {
+            $.confirm({
+                title: false,
+                content: '请至少选择一条记录！',
+                autoClose: 'cancel|3000',
+                backgroundDismiss: true,
+                buttons: {
+                    cancel: {
+                        text: '取消',
+                        btnClass: 'waves-effect waves-button'
+                    }
+                }
+            });
+        } else {
+            $.confirm({
+                type: 'red',
+                animationSpeed: 300,
+                title: false,
+                content: '确认删除？',
+                buttons: {
+                    confirm: {
+                        text: '确认',
+                        btnClass: 'waves-effect waves-button',
+                        action: function () {
+                            var ids = new Array();
+                            for (var i in rows) {
+                                ids.push(rows[i].id);
+                            }
+                            deleteUser(ids, function (data) {
+                                $.confirm({
+                                    theme: data.status == 'SUCCESS' ? 'light' : 'dark',
+                                    animation: 'rotateX',
+                                    closeAnimation: 'rotateX',
+                                    title: false,
+                                    content: data.msg,
+                                    buttons: {
+                                        confirm: {
+                                            text: '确认',
+                                            btnClass: 'waves-effect waves-button waves-light',
+                                            action: function () {
+                                                $table.bootstrapTable('refresh');
+                                            }
+                                        }
+                                    }
+                                });
+
+                            }, function (data) {
+                                console.log(data)
+                            })
+                        }
+                    },
+                    cancel: {
+                        text: '取消',
+                        btnClass: 'waves-effect waves-button'
+                    }
+                }
+            });
+        }
+    }
+</script>
+</body>
+</html>
