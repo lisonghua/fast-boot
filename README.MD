@@ -28,7 +28,7 @@
     基于fast-boot开发非微服务时核心依赖工程
 
 ### 3.fast-boot-sample
-    基于fast-boot开发的应用示例程序
+    基于fast-boot开发的应用示例程序，详见fast-boot-sample模块
 
 ### 4.fast-cloud-core
     开发基于fast-cloud微服务应用核心依赖工程
