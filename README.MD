@@ -66,4 +66,10 @@
 ![日志管理](resources/sanji-boot-security-log.png)
 
 ### archetype
-    生成工程骨架的工程
+    生成工程骨架的工程
+#### fast-boot工程结构说明：
+        基于fast-boot的应用一般分为两个模块：XXX-app和XXX-web，app模块为后台服务应用，web模块为前端页面工程。
+#### 使用方法：
+        1.将fast-boot工程根目录下的archetype-catalog.xml文件拷贝到本地maven的本地仓库的根目录下（一般C:\Users\${当前用户}\.m2目录），如果该目录已存在此文件则将文件内容添加到该文件即可。
+        2.在archetype模块的target\generated-sources\archetype目录下执行，mvn install命令安装archetype。
+        3.使用eclipse创建maven工程，具体过程如下图：
