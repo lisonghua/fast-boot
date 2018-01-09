@@ -86,5 +86,5 @@
 #### 13.2.使用方法：
         1.将fast-boot工程根目录下的archetype-catalog.xml文件拷贝到本地maven的本地仓库的根目录下（一般C:\Users\${当前用户}\.m2目录），如果该目录已存在此文件则将文件内容添加到该文件即可。
         2.在archetype模块的target\generated-sources\archetype目录下执行，mvn install命令安装archetype。
-        3.使用eclipse创建maven工程，具体过程请查看archetype项目
+        3.使用eclipse创建maven工程，具体过程请查看archetype项目
 
