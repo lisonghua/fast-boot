@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="com.lish.dongfang.vote.test.web.VoteActivityControllerTest" time="4.795" tests="7" errors="0" skipped="0" failures="0">
+<testsuite name="com.lish.dongfang.vote.test.web.VoteActivityControllerTest" time="4.543" tests="7" errors="0" skipped="0" failures="0">
   <properties>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
     <property name="sun.boot.library.path" value="C:\Program Files\Java\jdk1.8.0_144\jre\bin"/>
@@ -26,7 +26,7 @@
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
     <property name="user.variant" value=""/>
     <property name="os.name" value="Windows 7"/>
-    <property name="classworlds.conf" value="C:\eclipse-workspace\.metadata\.plugins\org.eclipse.m2e.launching\launches\m2conf2445801213403749444.tmp"/>
+    <property name="classworlds.conf" value="C:\eclipse-workspace\.metadata\.plugins\org.eclipse.m2e.launching\launches\m2conf8397541000275575811.tmp"/>
     <property name="sun.jnu.encoding" value="GBK"/>
     <property name="java.library.path" value="C:\Program Files\Java\jdk1.8.0_144\bin;C:\windows\Sun\Java\bin;C:\windows\system32;C:\windows;C:/Program Files/Java/jdk1.8.0_144/bin/../jre/bin/server;C:/Program Files/Java/jdk1.8.0_144/bin/../jre/bin;C:/Program Files/Java/jdk1.8.0_144/bin/../jre/lib/amd64;C:\ProgramData\Oracle\Java\javapath;C:\windows\system32;C:\windows;C:\windows\System32\Wbem;C:\windows\System32\WindowsPowerShell\v1.0\;C:\windows\System32\WindowsPowerShell\v1.0\;C:\apache-maven-3.5.0\bin;C:\Program Files\nodejs\;C:\windows\System32\WindowsPowerShell\v1.0\;C:\Program Files\MySQL\MySQL Server 5.5\bin;C:\Program Files\Java\jdk1.7.0_80\bin;C:\Program Files\TortoiseGit\bin;C:\Program Files\Git\cmd;C:\gradle-4.3.1\bin;C:\Program Files\TortoiseSVN\bin;C:\Users\lisong\AppData\Roaming\npm;C:\eclipse\eclipse-oxygen;;."/>
     <property name="java.specification.name" value="Java Platform API Specification"/>
@@ -38,7 +38,7 @@
     <property name="user.timezone" value="Asia/Shanghai"/>
     <property name="java.awt.printerjob" value="sun.awt.windows.WPrinterJob"/>
     <property name="java.specification.version" value="1.8"/>
-    <property name="file.encoding" value="GBK"/>
+    <property name="file.encoding" value="UTF-8"/>
     <property name="user.name" value="lisong"/>
     <property name="java.class.path" value="C:\apache-maven-3.5.0\boot\plexus-classworlds-2.5.2.jar"/>
     <property name="java.vm.specification.version" value="1.8"/>
@@ -61,11 +61,11 @@
     <property name="sun.desktop" value="windows"/>
     <property name="sun.cpu.isalist" value="amd64"/>
   </properties>
-  <testcase name="testAddRestApi" classname="com.lish.dongfang.vote.test.web.VoteActivityControllerTest" time="1.795"/>
-  <testcase name="testDeleteRestApi" classname="com.lish.dongfang.vote.test.web.VoteActivityControllerTest" time="0.547"/>
-  <testcase name="testGetAllRestApi" classname="com.lish.dongfang.vote.test.web.VoteActivityControllerTest" time="2.039"/>
-  <testcase name="testGetAll" classname="com.lish.dongfang.vote.test.web.VoteActivityControllerTest" time="0.093"/>
-  <testcase name="testUpdateRestApi" classname="com.lish.dongfang.vote.test.web.VoteActivityControllerTest" time="0.171"/>
-  <testcase name="testUpdateStatusRestApi" classname="com.lish.dongfang.vote.test.web.VoteActivityControllerTest" time="0.143"/>
-  <testcase name="loadContext" classname="com.lish.dongfang.vote.test.web.VoteActivityControllerTest" time="0.007"/>
+  <testcase name="testAddRestApi" classname="com.lish.dongfang.vote.test.web.VoteActivityControllerTest" time="1.331"/>
+  <testcase name="testDeleteRestApi" classname="com.lish.dongfang.vote.test.web.VoteActivityControllerTest" time="0.554"/>
+  <testcase name="testGetAllRestApi" classname="com.lish.dongfang.vote.test.web.VoteActivityControllerTest" time="2.08"/>
+  <testcase name="testGetAll" classname="com.lish.dongfang.vote.test.web.VoteActivityControllerTest" time="0.099"/>
+  <testcase name="testUpdateRestApi" classname="com.lish.dongfang.vote.test.web.VoteActivityControllerTest" time="0.262"/>
+  <testcase name="testUpdateStatusRestApi" classname="com.lish.dongfang.vote.test.web.VoteActivityControllerTest" time="0.202"/>
+  <testcase name="loadContext" classname="com.lish.dongfang.vote.test.web.VoteActivityControllerTest" time="0.015"/>
 </testsuite>

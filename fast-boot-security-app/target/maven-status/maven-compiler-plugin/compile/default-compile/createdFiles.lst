@@ -1,19 +1,15 @@
-com\lish\dongfang\security\config\druid\DruidStatFilter.class
 com\lish\dongfang\security\modules\sys\repository\UserDetailsRepository.class
 com\lish\dongfang\security\modules\sys\domain\Menu.class
 com\lish\dongfang\security\modules\sys\domain\User.class
-com\lish\dongfang\security\config\druid\DruidStatViewServlet.class
 com\lish\dongfang\security\config\security\userdetails\CustomUserDetailsService.class
 com\lish\dongfang\security\modules\sys\view\MenuTreeVO.class
 com\lish\dongfang\security\config\security\handler\AuthenticationSuccessHandler.class
-com\lish\dongfang\security\config\druid\DruidDataSourceConfig.class
 com\lish\dongfang\security\modules\sys\domain\UserDetails.class
 com\lish\dongfang\security\modules\sys\web\MenuController.class
 com\lish\dongfang\security\config\security\handler\AuthenticationFailureHandler.class
 com\lish\dongfang\security\config\security\handler\AuthenticationLogoutSuccessHandler.class
 com\lish\dongfang\security\modules\sys\service\MenuTreeService.class
 com\lish\dongfang\security\config\MVCConfig.class
-com\lish\dongfang\security\interceptor\LogRequestBodyAdvice.class
 com\lish\dongfang\security\modules\sys\repository\MenuRepository.class
 com\lish\dongfang\security\modules\sys\domain\Role.class
 com\lish\dongfang\security\modules\sys\domain\Menu$Type.class
@@ -24,7 +20,6 @@ com\lish\dongfang\security\config\LoggerConfiguration.class
 com\lish\dongfang\security\modules\sys\domain\User$UserStatus.class
 com\lish\dongfang\security\modules\sys\web\RoleController.class
 com\lish\dongfang\security\config\security\handler\utils\ResponseUtils.class
-com\lish\dongfang\security\config\druid\DruidDataSourceConfig$DruidDataSourceProperties.class
 com\lish\dongfang\security\modules\sys\repository\UserRepository.class
 com\lish\dongfang\security\DataInit.class
 com\lish\dongfang\security\modules\sys\repository\RoleRepository.class

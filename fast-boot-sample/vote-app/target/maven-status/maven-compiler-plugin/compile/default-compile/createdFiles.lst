@@ -1,4 +1,3 @@
-com\lish\dongfang\vote\web\VoteActivityController$1.class
 com\lish\dongfang\vote\repository\VoteActivityRepository.class
 com\lish\dongfang\vote\model\VotePageEnrollCustomize.class
 com\lish\dongfang\vote\common\VoteActivityStatus.class
@@ -9,12 +8,16 @@ com\lish\dongfang\vote\model\VotePageFooter.class
 com\lish\dongfang\vote\model\VoteCandidateDetail.class
 com\lish\dongfang\vote\service\VoteActivityService.class
 com\lish\dongfang\vote\model\VoteActivity.class
+com\lish\dongfang\vote\web\impl\VoteActivityController.class
 com\lish\dongfang\vote\model\VoteCandidateCustomize.class
 com\lish\dongfang\vote\model\VoteHistory.class
 com\lish\dongfang\vote\model\VotePageConfig.class
 com\lish\dongfang\vote\model\VotePageEnrollConfig.class
+com\lish\dongfang\vote\web\ICandidateController.class
+com\lish\dongfang\vote\web\impl\VoteActivityController$1.class
 com\lish\dongfang\vote\repository\CandidateRepository.class
-com\lish\dongfang\vote\web\VoteActivityController.class
 com\lish\dongfang\vote\utils\DateUtils.class
+com\lish\dongfang\vote\web\impl\CandidateController$1.class
 com\lish\dongfang\vote\service\CandidateService.class
-com\lish\dongfang\vote\web\CandidateController.class
+com\lish\dongfang\vote\web\impl\CandidateController.class
+com\lish\dongfang\vote\web\IVoteActivityController.class
