@@ -87,11 +87,4 @@
         1.将fast-boot工程根目录下的archetype-catalog.xml文件拷贝到本地maven的本地仓库的根目录下（一般C:\Users\${当前用户}\.m2目录），如果该目录已存在此文件则将文件内容添加到该文件即可。
         2.在archetype模块的target\generated-sources\archetype目录下执行，mvn install命令安装archetype。
         3.使用eclipse创建maven工程，具体过程如下图：
-        * 创建一个maven工程，点击下一步
-        ![创建工程](docs/img/create-mvn-prj.jpg)
-        * 选择一个工程保存目录，点击下一步
-        ![配置工程目录](docs/img/select-prj-folder.jpg)
-        * 点击Catalog选择Default Local，勾选Include snapshot archetypes，然后在窗口中间列表中的选择com.lish.fast并点击下一步
-        ![选择archetype](docs/img/select-arch.jpg)
-        * 填写Group Id（项目目录名），Artifact Id（应用名），点击下一步
-        ![配置工程属性](docs/img/set-prj-prop.jpg)
+
