@@ -73,8 +73,8 @@ public class DynamicRouteLocator extends SimpleRouteLocator implements Refreshab
 		Map<String, ZuulRoute> routes = new LinkedHashMap<>();
 		List<ZuulRouteEntity> results = dbHelper.getAllRoutes();
 		for (ZuulRouteEntity result : results) {
-			if (org.apache.commons.lang3.StringUtils.isBlank(result.getPath())
-					|| org.apache.commons.lang3.StringUtils.isBlank(result.getUrl())) {
+			if (org.apache.commons.lang.StringUtils.isBlank(result.getPath())
+					|| org.apache.commons.lang.StringUtils.isBlank(result.getUrl())) {
 				continue;
 			}
 			ZuulRoute zuulRoute = new ZuulRoute();
