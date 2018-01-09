@@ -8,37 +8,37 @@
 ## 模块说明：
 
 ### fast-boot
-  所有模块的父工程，全局通用配置。
+    所有模块的父工程，全局通用配置。
 
 ### fast-boot-core
-  基于fast-boot开发非微服务时核心依赖工程
+    基于fast-boot开发非微服务时核心依赖工程
 
 ### fast-boot-sample
-  基于fast-boot开发的应用示例程序
+    基于fast-boot开发的应用示例程序
 
 ### fast-cloud-core
-  开发基于fast-cloud微服务应用核心依赖工程
+    开发基于fast-cloud微服务应用核心依赖工程
 
 ### fast-cloud-dependencies
-  开发微服务的依赖工程
+    开发微服务的依赖工程
 ### fast-api-gateway
-  微服务网关应用
+    微服务网关应用
 
 ### fast-config-server
-  微服务配置中心应用
+    微服务配置中心应用
 ### fast-hystrix-server
-  基于hystrix微服务健康检查
+    基于hystrix微服务健康检查
   
 ### fast-monitor-server
-  微服务监控应用
+    微服务监控应用
   
 ### fast-register-server
-  微服务注册和发现应用
+    微服务注册和发现应用
 ### fast-turbine
-  基于turbine实现集群环境微服务健康检查应用
+    基于turbine实现集群环境微服务健康检查应用
 
 ### fast-boot-security:
-  基于fast-boot开发的权限管理应用
+    基于fast-boot开发的权限管理应用
 #### 整合 Spring Security 提供一下功能：
 
 * [x] 前后端分离
@@ -66,3 +66,4 @@
 ![日志管理](resources/sanji-boot-security-log.png)
 
 ### archetype
+    生成工程骨架的工程
