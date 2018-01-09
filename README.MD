@@ -1,6 +1,11 @@
 # Fast Boot
 
-基于Spring Boot 集成一些常用的功能，你只需要基于它做些简单的修改即可，下面是一个功能列表：
+基于Spring Cloud实现微服务平台，支持服务注册、发现、健康检查、网关、断路器、负载均衡等功能。
+
+## 工程结构说明：
+docs/Fast-Boot-reference.jpg
+
+功能列表：
 
 [MENU]
 
@@ -32,16 +37,3 @@
 ![权限编辑](resources/sanji-boot-security-sec-add.png)
 
 ![日志管理](resources/sanji-boot-security-log.png)
-
-**移动端：**
-
-![权限管理1](resources/sanji-boot-security-sec-phone-skin-blue.png)
-
-![权限管理2](resources/sanji-boot-security-sec-phone.png)
-
-![权限管理3](resources/sanji-boot-security-sec-phone-skin-green.png)
-
-
-## Fast Utils
-
-一些小工具 后期会逐渐壮大
