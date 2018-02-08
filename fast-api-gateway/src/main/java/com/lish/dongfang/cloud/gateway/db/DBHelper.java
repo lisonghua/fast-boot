@@ -1,6 +1,5 @@
 package com.lish.dongfang.cloud.gateway.db;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,7 +7,7 @@ import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 
-import com.lish.dongfang.cloud.gateway.db.entity.BacklistEntity;
+import com.lish.dongfang.cloud.gateway.db.entity.BlacklistEntity;
 import com.lish.dongfang.cloud.gateway.db.entity.ZuulRouteEntity;
 
 /**
@@ -33,8 +32,7 @@ public class DBHelper {
 	 * 获得配置的黑名单
 	 * @return
 	 */
-	public List<BacklistEntity> getBacklist(){
-		List<BacklistEntity> backlist = new ArrayList<BacklistEntity>();
-		return backlist;
+	public List<BlacklistEntity> getBacklist(){
+		return jdbcTemplate.query("select * from gateway_blacklist where enabled = true ",new BeanPropertyRowMapper<BlacklistEntity>(BlacklistEntity.class));
 	}
 }

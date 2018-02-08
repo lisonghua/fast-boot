@@ -8,9 +8,10 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 
-import com.lish.dongfang.cloud.gateway.db.DBHelper;
-import com.lish.dongfang.cloud.gateway.db.entity.BacklistEntity;
+import com.lish.dongfang.cloud.gateway.cache.BlacklistCacheHelper;
+import com.lish.dongfang.cloud.gateway.db.entity.BlacklistEntity;
 import com.netflix.zuul.context.RequestContext;
 
 /**
@@ -21,14 +22,14 @@ import com.netflix.zuul.context.RequestContext;
 public class AccessControlFilter extends PreFilter {
 	
 	private static Logger logger = LoggerFactory.getLogger(AccessControlFilter.class);
-
-	public AccessControlFilter(DBHelper dbHelper) {
-		super(dbHelper);
-	}
+	public static final String URL_SEPERATOR=";";
+	private static final int FORBIDDEN_ACCESS_ERROR_CODE=401;
+	
+	@Autowired
+	private BlacklistCacheHelper blacklistCacheHelper;
 	
 	public AccessControlFilter() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override
@@ -38,32 +39,43 @@ public class AccessControlFilter extends PreFilter {
         HttpServletRequest req=ctx.getRequest();
         String accessUrl = req.getRequestURL().toString();
         String ipAddr=this.getIpAddr(req);
-        logger.info("请求IP地址为：[{}]",ipAddr);
-        //获取本地IP黑名单
-        List<BacklistEntity> backlist = dbHelper.getBacklist();
-        for (BacklistEntity backlistEntity : backlist) {
+        logger.info("请求IP地址为：[{0}]",ipAddr);
+        if(!CheckIsAccess(accessUrl, ipAddr)) {
+			ctx.setResponseStatusCode(FORBIDDEN_ACCESS_ERROR_CODE);
+		    ctx.setSendZuulResponse(false);
+		    ctx.setResponseBody("IpAddr is forbidden to access the urls!");
+		}
+        return null;
+	}
+
+	/**
+	 * 判断当前地址是否可以访问
+	 */
+	private boolean CheckIsAccess(String accessUrl,String ipAddr) {
+		//获取本地IP黑名单
+        List<BlacklistEntity> backlist = blacklistCacheHelper.getBlacklist();
+        for (BlacklistEntity backlistEntity : backlist) {
 			if(isMatchIP(ipAddr,backlistEntity.getIpPattern())) {
+				logger.info("当前IP【{0}】在黑名单中！！！",ipAddr);
 				String forbiddenAll = backlistEntity.getForbiddenAll();
+				String[] permitUrls = backlistEntity.getPermitUrlList();
 				if("1".equals(forbiddenAll)) {//禁止访问所有url
-					logger.info("IP地址校验不通过！！！");
-		            ctx.setResponseStatusCode(401);
-		            ctx.setSendZuulResponse(false);
-		            ctx.setResponseBody("IpAddr is forbidden!");
+					logger.info("当前IP【{0}】地址校验不通过，禁止访问所有url！！！",ipAddr);
+				    return false;
 				}else {
-					List<String> permitUrls = backlistEntity.getPermitUrls();
 					for (String pattern : permitUrls) {//只允许访问部分url
 						if(isMatchUrl(accessUrl,pattern)) {
-							logger.info("IP地址校验不通过！！！");
-							ctx.setResponseStatusCode(401);
-				            ctx.setSendZuulResponse(false);
-				            ctx.setResponseBody("IpAddr is forbidden!");
+							logger.info("当前IP【{0}】地址校验通过，允许访问当前地址：{1}！！！",ipAddr,accessUrl);
+				            return true;
 						}
 					}
+					logger.info("当前IP【{0}】地址校验不通过，禁止访问当前地址：{1}！！！",ipAddr,accessUrl);
+					return false;
 				}
 			}
 		}
-        logger.info("IP校验通过。");
-        return null;
+        logger.info("当前IP【{0}】不在黑名单中，允许访问当前地址：{1}！！！",ipAddr,accessUrl);
+        return true;
 	}
 	
 	/**

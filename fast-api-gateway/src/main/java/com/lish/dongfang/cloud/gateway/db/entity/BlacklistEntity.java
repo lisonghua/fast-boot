@@ -1,13 +1,16 @@
 package com.lish.dongfang.cloud.gateway.db.entity;
 
-import java.util.List;
+import org.apache.commons.lang.StringUtils;
+
+import com.lish.dongfang.cloud.gateway.filter.AccessControlFilter;
 
 /**
  * 黑名单实体
  * @author lisong
  *
  */
-public class BacklistEntity {
+public class BlacklistEntity {
+	
 	/**
 	 * 客户端IP地址匹配模式
 	 */
@@ -17,9 +20,11 @@ public class BacklistEntity {
 	 */
 	private String host;
 	/**
-	 * 允许访问的url地址或者正则表达式
+	 * 允许访问的url地址或者正则表达式，多个url用;隔开
 	 */
-	private List<String> permitUrls;
+	private String permitUrls;
+	
+	private String[] permitUrlList;
 	/**
 	 * 禁止访问所有url，1：是；0：否，默认1
 	 */
@@ -36,10 +41,10 @@ public class BacklistEntity {
 	public void setHost(String host) {
 		this.host = host;
 	}
-	public List<String> getPermitUrls() {
+	public String getPermitUrls() {
 		return permitUrls;
 	}
-	public void setPermitUrls(List<String> permitUrls) {
+	public void setPermitUrls(String permitUrls) {
 		this.permitUrls = permitUrls;
 	}
 	public String getForbiddenAll() {
@@ -47,5 +52,13 @@ public class BacklistEntity {
 	}
 	public void setForbiddenAll(String forbiddenAll) {
 		this.forbiddenAll = forbiddenAll;
+	}
+	public String[] getPermitUrlList() {
+		if(!StringUtils.isBlank(permitUrls)) {
+			permitUrlList = permitUrls.split(AccessControlFilter.URL_SEPERATOR);
+		}else {
+			permitUrlList = new String[] {};
+		}
+		return permitUrlList;
 	}
 }

@@ -1,4 +1,4 @@
-package com.lish.dongfang.cloud.gateway.event;
+package com.lish.dongfang.cloud.gateway.route;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.netflix.zuul.RoutesRefreshedEvent;
@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
  *
  */
 @Service
-public class RefreshRouteService {
+public class RefreshRouteEventHelper {
 	@Autowired
     ApplicationEventPublisher publisher;
 

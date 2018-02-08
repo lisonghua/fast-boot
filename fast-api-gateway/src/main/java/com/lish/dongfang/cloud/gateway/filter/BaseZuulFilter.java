@@ -3,14 +3,11 @@ package com.lish.dongfang.cloud.gateway.filter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.lish.dongfang.cloud.gateway.db.DBHelper;
 import com.netflix.zuul.ZuulFilter;
 
 public abstract class BaseZuulFilter extends ZuulFilter {
 	
 	private static Logger logger = LoggerFactory.getLogger(BaseZuulFilter.class);
-	
-	protected DBHelper dbHelper;
 	
 	/**
 	 *  pre：可以在请求被路由之前调用。
@@ -26,11 +23,6 @@ public abstract class BaseZuulFilter extends ZuulFilter {
 
 	public BaseZuulFilter() {
 		super();
-	}
-	
-	public BaseZuulFilter(DBHelper dbHelper) {
-		super();
-		this.dbHelper=dbHelper;
 	}
 
 	@Override

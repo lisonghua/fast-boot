@@ -3,15 +3,9 @@ package com.lish.dongfang.cloud.gateway.filter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.lish.dongfang.cloud.gateway.db.DBHelper;
-
 public abstract class PreFilter extends BaseZuulFilter {
 	
 	private static Logger logger = LoggerFactory.getLogger(PreFilter.class);
-	
-	public PreFilter(DBHelper dbHelper) {
-		super(dbHelper);
-	}
 	
 	
 	public PreFilter() {

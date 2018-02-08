@@ -13,3 +13,14 @@ create table `gateway_api_define` (
 
 INSERT INTO gateway_api_define (id, path, service_id, retryable, strip_prefix, url, enabled) VALUES ('pppp', '/pppp/**', null,0,1, 'http://localhost:8090', 1);
 INSERT INTO gateway_api_define (id, path, service_id, retryable, strip_prefix, url, enabled) VALUES ('xxxx', '/xxxx/**', null,0,1, 'http://localhost:8090', 1);
+
+drop table `gateway_blacklist`;
+create table `gateway_blacklist` (
+  `id` varchar(50) not null,
+  `ip_pattern` varchar(255) not null,
+  `host` varchar(50) default null,
+  `forbiddenAll` varchar(2) default null,
+  `permitUrls` varchar(500) default null,
+  `enabled` tinyint(1) not null,
+  primary key (`id`)
+) engine=innodb default charset=utf8;

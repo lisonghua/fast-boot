@@ -1,0 +1,15 @@
+com\lish\dongfang\cloud\gateway\db\entity\BacklistEntity.class
+com\lish\dongfang\cloud\gateway\filter\BaseZuulFilter$FILTER_TYPE.class
+com\lish\dongfang\cloud\gateway\filter\BaseZuulFilter.class
+com\lish\dongfang\cloud\gateway\event\RefreshRouteService.class
+com\lish\dongfang\cloud\gateway\conf\FilterConfiguration.class
+com\lish\dongfang\cloud\gateway\ApiGatewayApplication.class
+com\lish\dongfang\cloud\gateway\filter\PostFilter.class
+com\lish\dongfang\cloud\gateway\route\DynamicRouteLocator.class
+com\lish\dongfang\cloud\gateway\db\DBHelper.class
+com\lish\dongfang\cloud\gateway\filter\RoutingFilter.class
+com\lish\dongfang\cloud\gateway\filter\ErrorFilter.class
+com\lish\dongfang\cloud\gateway\db\entity\ZuulRouteEntity.class
+com\lish\dongfang\cloud\gateway\filter\AccessControlFilter.class
+com\lish\dongfang\cloud\gateway\conf\DynamicRouterConfiguration.class
+com\lish\dongfang\cloud\gateway\filter\PreFilter.class
