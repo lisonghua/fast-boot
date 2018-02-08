@@ -35,6 +35,12 @@
 			<artifactId>druid</artifactId>
 			<version>1.0.31</version>
 		</dependency>
+		<!-- 限流控制 -->
+		<dependency>
+			<groupId>com.marcosbarbero.cloud</groupId>
+			<artifactId>spring-cloud-zuul-ratelimit</artifactId>
+			<version>1.4.0.RELEASE</version>
+		</dependency>
 	</dependencies>
 	<build>
 		<plugins>

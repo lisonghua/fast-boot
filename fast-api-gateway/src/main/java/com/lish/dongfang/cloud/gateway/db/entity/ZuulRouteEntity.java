@@ -32,10 +32,6 @@ public class ZuulRouteEntity {
 	private String apiName;
 	private Boolean enabled;
 
-	public ZuulRouteEntity(boolean stripPrefix) {
-		this.stripPrefix = stripPrefix;
-	}
-
 	public String getId() {
 		return id;
 	}
