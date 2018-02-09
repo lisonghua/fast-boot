@@ -49,6 +49,9 @@ zuul:
     vote:
       path: /vote/**
       service-id: vote-mobile
+    sec: 
+      path: /sec/**
+      service-id: auth-server
   ratelimit: #限流器配置
     key-prefix: your-prefix 
     enabled: false 
@@ -68,3 +71,13 @@ logging:
     root: debug
 #黑名单功能开关
 fast.gateway.backlist.enable: true
+
+security:
+  oauth2:
+    client:
+      access-token-uri: http://localhost:9999/sec/oauth/token
+      user-authorization-uri: http://localhost:9999/sec/oauth/authorize
+      client-id: webapp
+    resource:
+      user-info-uri: http://localhost:9999/sec/user
+      prefer-token-info: false

@@ -58,7 +58,11 @@ management:
 security:
   basic:
     enabled: false
-    
+  oauth2:
+    resource:
+      id: vote-service
+      user-info-uri: http://localhost:9999/sec/user
+      prefer-token-info: false
 sanji:
   config:
 #  显示异常

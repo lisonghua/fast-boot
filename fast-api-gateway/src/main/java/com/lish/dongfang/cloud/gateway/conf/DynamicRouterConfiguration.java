@@ -26,4 +26,6 @@ public class DynamicRouterConfiguration {
 		DynamicRouteLocator routeLocator = new DynamicRouteLocator(this.server.getServletPrefix(), this.zuulProperties);
 		return routeLocator;
 	}
+	
+	
 }
