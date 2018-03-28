@@ -39,7 +39,7 @@ public class AccessControlFilter extends PreFilter {
         HttpServletRequest req=ctx.getRequest();
         String accessUrl = req.getRequestURL().toString();
         String ipAddr=this.getIpAddr(req);
-        logger.info("请求IP地址为：[{0}]",ipAddr);
+        logger.info("请求IP地址为：[{}]",ipAddr);
         if(!CheckIsAccess(accessUrl, ipAddr)) {
 			ctx.setResponseStatusCode(FORBIDDEN_ACCESS_ERROR_CODE);
 		    ctx.setSendZuulResponse(false);
@@ -56,25 +56,25 @@ public class AccessControlFilter extends PreFilter {
         List<BlacklistEntity> backlist = blacklistCacheHelper.getBlacklist();
         for (BlacklistEntity backlistEntity : backlist) {
 			if(isMatchIP(ipAddr,backlistEntity.getIpPattern())) {
-				logger.info("当前IP【{0}】在黑名单中！！！",ipAddr);
+				logger.info("当前IP【{}】在黑名单中！！！",ipAddr);
 				String forbiddenAll = backlistEntity.getForbiddenAll();
 				String[] permitUrls = backlistEntity.getPermitUrlList();
 				if("1".equals(forbiddenAll)) {//禁止访问所有url
-					logger.info("当前IP【{0}】地址校验不通过，禁止访问所有url！！！",ipAddr);
+					logger.info("当前IP【{}】地址校验不通过，禁止访问所有url！！！",ipAddr);
 				    return false;
 				}else {
 					for (String pattern : permitUrls) {//只允许访问部分url
 						if(isMatchUrl(accessUrl,pattern)) {
-							logger.info("当前IP【{0}】地址校验通过，允许访问当前地址：{1}！！！",ipAddr,accessUrl);
+							logger.info("当前IP【{}】地址校验通过，允许访问当前地址：{}！！！",ipAddr,accessUrl);
 				            return true;
 						}
 					}
-					logger.info("当前IP【{0}】地址校验不通过，禁止访问当前地址：{1}！！！",ipAddr,accessUrl);
+					logger.info("当前IP【{}】地址校验不通过，禁止访问当前地址：{}！！！",ipAddr,accessUrl);
 					return false;
 				}
 			}
 		}
-        logger.info("当前IP【{0}】不在黑名单中，允许访问当前地址：{1}！！！",ipAddr,accessUrl);
+        logger.info("当前IP【{}】不在黑名单中，允许访问当前地址：{}！！！",ipAddr,accessUrl);
         return true;
 	}
 	

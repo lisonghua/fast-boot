@@ -36,7 +36,7 @@
 ### 5.fast-cloud-dependencies
     开发微服务的依赖工程
 ### 6.fast-api-gateway
-    微服务网关应用
+    微服务网关应用，目前支持数据库配置路由规则、黑名单、限流功能，具体查看子工程详细说明
 
 ### 7.fast-config-server
     微服务配置中心应用

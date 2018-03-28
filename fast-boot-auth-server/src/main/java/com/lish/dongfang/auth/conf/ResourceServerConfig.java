@@ -1,4 +1,4 @@
-package com.lish.dongfang.security.config.security;
+package com.lish.dongfang.auth.conf;
 
 import javax.servlet.http.HttpServletResponse;
 

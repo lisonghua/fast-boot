@@ -42,7 +42,8 @@
 		<module>fast-boot-security-app</module>
 		<module>fast-boot-security-web</module>
 		<module>fast-boot-sample</module>
-		
+
+		<module>fast-boot-auth-server</module>
 	</modules>
 
 	<properties>
